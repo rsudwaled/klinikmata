@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 3',
+    'title' => 'Klinik Mata Losari',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -63,8 +63,8 @@ return [
     |
     */
 
-    'logo' => '<b>Admin</b>LTE',
-    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+    'logo' => '<b>Klinik Mata Losari</b>',
+    'logo_img' => 'klinik mata losari/klinik mata losari.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
@@ -383,6 +383,35 @@ return [
             'icon_color' => 'cyan',
             'url'        => '#',
         ],
+               // USER ACCESS CONTROLL
+               [
+                'text'    => 'User Access Control',
+                'icon'    => 'fas fa-users-cog',
+                'can' => 'admin',
+                'submenu' => [
+                    [
+                        'text' => 'User',
+                        'icon'    => 'fas fa-users',
+                        'url'  => 'user',
+                        'shift'   => 'ml-2',
+                        'can' => 'admin',
+                        'active'  => ['user', 'user/create', 'regex:@^user(\/[0-9]+)?+$@', 'regex:@^user(\/[0-9]+)?\/edit+$@',],
+                    ],
+                    [
+                        'text' => 'Role & Permission',
+                        'icon'    => 'fas fa-user-shield',
+                        'url'  => 'role',
+                        'shift'   => 'ml-2',
+                        'active'  => ['role', 'role/create', 'regex:@^role(\/[0-9]+)?+$@', 'regex:@^role(\/[0-9]+)?\/edit+$@', 'regex:@^permission(\/[0-9]+)?\/edit+$@'],
+                        'can' => 'admin',
+                    ],
+                ],
+            ],
+            [
+                'text' => 'profile',
+                'url'  => 'profile',
+                'icon' => 'fas fa-fw fa-user',
+            ],
     ],
 
     /*
