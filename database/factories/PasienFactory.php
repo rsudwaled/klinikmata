@@ -31,6 +31,7 @@ class PasienFactory extends Factory
             'nohp' => fake()->numerify('0895########'),
             'tgl_lahir' => fake()->date('Y-m-d'),
             'alamat' => fake()->streetAddress(),
+            'pic' => 1,
         ];
     }
 }

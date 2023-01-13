@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Pasien extends Model
 {
     use HasFactory;
+
+    public function getPicInputAttribute()
+    {
+        return "Marwan";
+    }
 }

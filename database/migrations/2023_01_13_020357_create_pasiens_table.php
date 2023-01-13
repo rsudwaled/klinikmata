@@ -30,6 +30,10 @@ return new class extends Migration
             $table->string('kabupaten')->nullable();
             $table->string('kecamatan')->nullable();
             $table->string('desa')->nullable();
+
+            $table->string('pic')->nullable();
+            $table->string('status')->default(1);
+            $table->string('tgl_kematian')->nullable();
             $table->timestamps();
         });
     }
