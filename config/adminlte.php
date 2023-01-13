@@ -365,51 +365,48 @@ return [
                 ],
             ],
         ],
-        ['header' => 'labels'],
+        ['header' => 'MENU ADMINISTRATOR'],
         [
-            'text'       => 'important',
-            'icon_color' => 'red',
-            'url'        => '#',
+            'text' => 'Pasien',
+            'url'  => 'administrator/pasien',
+            'icon' => 'fas fa-user-injured',
         ],
         [
-            'text'       => 'warning',
-            'icon_color' => 'yellow',
-            'url'        => '#',
+            'text' => 'Dokter',
+            'url'  => 'administrator/dokter',
+            'icon' => 'fas fa-fw fa-user',
         ],
+
+        // USER ACCESS CONTROLL
+        ['header' => 'MENU USER'],
         [
-            'text'       => 'information',
-            'icon_color' => 'cyan',
-            'url'        => '#',
-        ],
-               // USER ACCESS CONTROLL
-               [
-                'text'    => 'User Access Control',
-                'icon'    => 'fas fa-users-cog',
-                'can' => 'admin',
-                'submenu' => [
-                    [
-                        'text' => 'User',
-                        'icon'    => 'fas fa-users',
-                        'url'  => 'user',
-                        'shift'   => 'ml-2',
-                        'can' => 'admin',
-                        'active'  => ['user', 'user/create', 'regex:@^user(\/[0-9]+)?+$@', 'regex:@^user(\/[0-9]+)?\/edit+$@',],
-                    ],
-                    [
-                        'text' => 'Role & Permission',
-                        'icon'    => 'fas fa-user-shield',
-                        'url'  => 'role',
-                        'shift'   => 'ml-2',
-                        'active'  => ['role', 'role/create', 'regex:@^role(\/[0-9]+)?+$@', 'regex:@^role(\/[0-9]+)?\/edit+$@', 'regex:@^permission(\/[0-9]+)?\/edit+$@'],
-                        'can' => 'admin',
-                    ],
+            'text'    => 'User Access Control',
+            'icon'    => 'fas fa-users-cog',
+            'can' => 'admin',
+            'submenu' => [
+                [
+                    'text' => 'User',
+                    'icon'    => 'fas fa-users',
+                    'url'  => 'user',
+                    'shift'   => 'ml-2',
+                    'can' => 'admin',
+                    'active'  => ['user', 'user/create', 'regex:@^user(\/[0-9]+)?+$@', 'regex:@^user(\/[0-9]+)?\/edit+$@',],
+                ],
+                [
+                    'text' => 'Role & Permission',
+                    'icon'    => 'fas fa-user-shield',
+                    'url'  => 'role',
+                    'shift'   => 'ml-2',
+                    'active'  => ['role', 'role/create', 'regex:@^role(\/[0-9]+)?+$@', 'regex:@^role(\/[0-9]+)?\/edit+$@', 'regex:@^permission(\/[0-9]+)?\/edit+$@'],
+                    'can' => 'admin',
                 ],
             ],
-            [
-                'text' => 'profile',
-                'url'  => 'profile',
-                'icon' => 'fas fa-fw fa-user',
-            ],
+        ],
+        [
+            'text' => 'profile',
+            'url'  => 'profile',
+            'icon' => 'fas fa-fw fa-user',
+        ],
     ],
 
     /*
