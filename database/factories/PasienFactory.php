@@ -16,7 +16,7 @@ class PasienFactory extends Factory
      */
     public function definition()
     {
-        $sex = fake()->randomElements(['male', 'female']);
+        $sex = fake()->randomElement(['male', 'female']);
         if ($sex == 'male') {
             $kodesex = 'L';
         } else {
@@ -30,6 +30,7 @@ class PasienFactory extends Factory
             'nama' => fake()->name($sex),
             'sex' => $kodesex,
             'nohp' => fake()->numerify('0895########'),
+            'tempat_lahir' => "CIREBON",
             'tgl_lahir' => fake()->date('Y-m-d'),
             'alamat' => fake()->streetAddress(),
             'pic' => 1,

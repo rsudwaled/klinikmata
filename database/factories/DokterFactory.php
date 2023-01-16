@@ -23,8 +23,8 @@ class DokterFactory extends Factory
             'nik' => fake()->numerify('3209####4523####'),
 
             'nama' => fake()->name(),
-            'suffix' => 'dr.',
-            'preffix' => ',Sp.M',
+            'suffix' => ',Sp.M',
+            'preffix' =>  'dr.',
             'sip' => '449/SIP.DSp-344/SDK/DINKES/V/2022',
             'poliklinik' => 'MAT',
             'subspesialis' => 'MAT',

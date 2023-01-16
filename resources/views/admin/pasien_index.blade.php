@@ -57,7 +57,7 @@
                             <td>{{ $item->no_bpjs }}</td>
                             <td>{{ $item->nik }}</td>
                             <td>{{ $item->nama }} ({{ $item->sex }})</td>
-                            <td>{{ \Carbon\Carbon::parse($item->tgl_lahir)->format('Y-m-d') }}
+                            <td>{{ $item->tempat_lahir }}, {{ \Carbon\Carbon::parse($item->tgl_lahir)->format('Y-m-d') }}
                                 ({{ \Carbon\Carbon::parse($item->tgl_lahir)->age }})
                             </td>
                             <td>{{ $item->nama_desa }}, {{ $item->nama_kecamatan }}</td>
