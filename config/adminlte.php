@@ -316,55 +316,6 @@ return [
             'url'         => 'erm',
             'icon'        => 'far fa-fw fa-file',
         ],
-        ['header' => 'account_settings'],
-        [
-            'text' => 'profile',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
-        ],
-        [
-            'text' => 'change_password',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
-        ],
-        [
-            'text'    => 'multilevel',
-            'icon'    => 'fas fa-fw fa-share',
-            'submenu' => [
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-                [
-                    'text'    => 'level_one',
-                    'url'     => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'level_two',
-                            'url'  => '#',
-                        ],
-                        [
-                            'text'    => 'level_two',
-                            'url'     => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-            ],
-        ],
         ['header' => 'MENU ADMINISTRATOR'],
         [
             'text' => 'Pasien',
@@ -374,9 +325,8 @@ return [
         [
             'text' => 'Dokter',
             'url'  => 'administrator/dokter',
-            'icon' => 'fas fa-fw fa-user',
+            'icon' => 'fas fa-user-md',
         ],
-
         // USER ACCESS CONTROLL
         ['header' => 'MENU USER'],
         [
