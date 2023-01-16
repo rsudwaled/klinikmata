@@ -145,7 +145,7 @@
 @section('css')
 <style>
     .scroll {
-            max-height: 500px;
+            max-height: 800px;
             overflow-y: auto;
         }
 </style>
