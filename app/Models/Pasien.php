@@ -24,21 +24,21 @@ class Pasien extends Model
     public function getNamaProvinsiAttribute()
     {
         $item = Provinsi::where('code', $this->provinsi)->first();
-        return $item->name;
+        return $item->name ?? null;
     }
     public function getNamaKabupatenAttribute()
     {
         $item = Kabupaten::where('code', $this->kabupaten)->first();
-        return $item->name;
+        return $item->name ?? null;
     }
     public function getNamaKecamatanAttribute()
     {
         $item = Kecamatan::where('code', $this->kecamatan)->first();
-        return $item->name;
+        return $item->name ?? null;
     }
     public function getNamaDesaAttribute()
     {
         $item = Village::where('code', $this->desa)->first();
-        return $item->name;
+        return $item->name ?? null;
     }
 }

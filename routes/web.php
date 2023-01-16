@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\DokterController as ControllersDokterController;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\Erm\DokterController;
 use Illuminate\Support\Facades\Route;
@@ -36,8 +37,6 @@ Route::middleware('auth')->group(function () {
         Route::post('orderfarmasi', [DokterController::class, 'orderFarmasi'])->name('orderfarmasi');
         Route::post('orderpenunjang', [DokterController::class, 'orderPenunjang'])->name('orderpenunjang');
 
-
-
         Route::get('profile', [UserController::class, 'profile'])->name('profile');
         Route::get('user_verifikasi/{user}', [UserController::class, 'user_verifikasi'])->name('user_verifikasi');
         Route::get('delet_verifikasi', [UserController::class, 'delet_verifikasi'])->name('delet_verifikasi');
@@ -45,7 +44,6 @@ Route::middleware('auth')->group(function () {
 
     Route::middleware('permission:admin')->prefix('administrator')->group(function () {
         Route::resource('pasien', PasienController::class);
+        Route::resource('dokter', ControllersDokterController::class);
     });
-
-
 });
