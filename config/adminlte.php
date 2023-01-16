@@ -312,6 +312,11 @@ return [
             'can'  => 'manage-blog',
         ],
         [
+            'text'        => 'Pendaftaran',
+            'url'         => 'pendaftaran',
+            'icon'        => 'far fa-fw fa-file',
+        ],
+        [
             'text'        => 'ERM',
             'url'         => 'erm',
             'icon'        => 'far fa-fw fa-file',

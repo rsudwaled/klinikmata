@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\DokterController as ControllersDokterController;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\Erm\DokterController;
+use App\Http\Controllers\Pendaftaran\PendaftaranController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,6 +37,10 @@ Route::middleware('auth')->group(function () {
         Route::post('inputtindakan', [DokterController::class, 'formTindakan'])->name('inputtindakan');
         Route::post('orderfarmasi', [DokterController::class, 'orderFarmasi'])->name('orderfarmasi');
         Route::post('orderpenunjang', [DokterController::class, 'orderPenunjang'])->name('orderpenunjang');
+
+        Route::get('pendaftaran', [PendaftaranController::class, 'indexPendaftaran'])->name('pendaftaran');
+        Route::post('datapasienbaru', [PendaftaranController::class, 'dataPasienBaru'])->name('datapasienbaru');
+        Route::post('pendaftaranpasien', [PendaftaranController::class, 'formPendaftaran'])->name('pendaftaranpasien');
 
         Route::get('profile', [UserController::class, 'profile'])->name('profile');
         Route::get('user_verifikasi/{user}', [UserController::class, 'user_verifikasi'])->name('user_verifikasi');
