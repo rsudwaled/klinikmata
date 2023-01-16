@@ -22,6 +22,7 @@ class PasienFactory extends Factory
         } else {
             $kodesex = 'P';
         }
+        $kode = fake()->numberBetween(10, 17);
         return [
             'nik' => fake()->numerify('3209####0011####'),
             'no_rm' => fake()->numerify('A######'),
@@ -32,6 +33,10 @@ class PasienFactory extends Factory
             'tgl_lahir' => fake()->date('Y-m-d'),
             'alamat' => fake()->streetAddress(),
             'pic' => 1,
+            'provinsi' => 32,
+            'kabupaten' => 3209,
+            'kecamatan' => 320902,
+            'desa' => "32090220" . $kode,
         ];
     }
 }

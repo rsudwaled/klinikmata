@@ -58,8 +58,9 @@
                             <td>{{ $item->nik }}</td>
                             <td>{{ $item->nama }} ({{ $item->sex }})</td>
                             <td>{{ \Carbon\Carbon::parse($item->tgl_lahir)->format('Y-m-d') }}
-                                ({{ \Carbon\Carbon::parse($item->tgl_lahir)->age }})</td>
-                            <td>{{ $item->kecamatans ? $item->kecamatans->nama_kecamatan : '-' }}</td>
+                                ({{ \Carbon\Carbon::parse($item->tgl_lahir)->age }})
+                            </td>
+                            <td>{{ $item->nama_desa }}, {{ $item->nama_kecamatan }}</td>
                             <td>{{ $item->alamat }}</td>
                             <td>{{ $item->created_at }} ({{ $item->pic }})</td>
                             <td>
