@@ -332,6 +332,16 @@ return [
             'url'  => 'administrator/dokter',
             'icon' => 'fas fa-user-md',
         ],
+        [
+            'text' => 'Diagnosa ICD 10',
+            'url'  => 'administrator/icd10',
+            'icon' => 'fas fa-user-md',
+        ],
+        [
+            'text' => 'Diagnosa ICD 9',
+            'url'  => 'administrator/icd9',
+            'icon' => 'fas fa-user-md',
+        ],
         // USER ACCESS CONTROLL
         ['header' => 'MENU USER'],
         [
