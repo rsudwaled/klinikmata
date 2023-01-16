@@ -14,7 +14,6 @@ class PasienController extends Controller
             ->orWhere('nama', 'LIKE', "%{$request->search}%")
             ->orWhere('nik', 'LIKE', "%{$request->search}%")
             ->simplePaginate(20);
-        // $pasiens = PasienDB::
         $total_pasien = Pasien::count();
         $pasien_jkn = Pasien::where('no_bpjs', '!=', '')->count();
         $pasien_nik = Pasien::where('nik', '!=', '')->count();

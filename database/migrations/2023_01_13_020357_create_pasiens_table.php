@@ -22,6 +22,7 @@ return new class extends Migration
 
             $table->string('nama')->nullable();
             $table->string('sex')->nullable();
+            $table->string('tempat_lahir')->nullable();
             $table->string('tgl_lahir')->nullable();
             $table->string('nohp')->nullable();
 
@@ -30,6 +31,11 @@ return new class extends Migration
             $table->string('kabupaten')->nullable();
             $table->string('kecamatan')->nullable();
             $table->string('desa')->nullable();
+
+            $table->string('menikah')->nullable();
+            $table->string('agama')->nullable();
+            $table->string('pendidikan')->nullable();
+            $table->string('pekerjaan')->nullable();
 
             $table->string('pic')->nullable();
             $table->string('status')->default(1);

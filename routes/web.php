@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\DokterController as ControllersDokterController;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\Erm\DokterController;
 use App\Http\Controllers\Pendaftaran\PendaftaranController;
@@ -24,7 +25,6 @@ Route::get('/', function () {
 });
 Auth::routes();
 
-
 Route::middleware('auth')->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::middleware('permission:admin')->group(function () {
@@ -42,7 +42,6 @@ Route::middleware('auth')->group(function () {
         Route::post('datapasienbaru', [PendaftaranController::class, 'dataPasienBaru'])->name('datapasienbaru');
         Route::post('pendaftaranpasien', [PendaftaranController::class, 'formPendaftaran'])->name('pendaftaranpasien');
 
-
         Route::get('profile', [UserController::class, 'profile'])->name('profile');
         Route::get('user_verifikasi/{user}', [UserController::class, 'user_verifikasi'])->name('user_verifikasi');
         Route::get('delet_verifikasi', [UserController::class, 'delet_verifikasi'])->name('delet_verifikasi');
@@ -50,7 +49,6 @@ Route::middleware('auth')->group(function () {
 
     Route::middleware('permission:admin')->prefix('administrator')->group(function () {
         Route::resource('pasien', PasienController::class);
+        Route::resource('dokter', ControllersDokterController::class);
     });
-
-
 });

@@ -16,12 +16,13 @@ class PasienFactory extends Factory
      */
     public function definition()
     {
-        $sex = fake()->randomElements(['male', 'female']);
+        $sex = fake()->randomElement(['male', 'female']);
         if ($sex == 'male') {
             $kodesex = 'L';
         } else {
             $kodesex = 'P';
         }
+        $kode = fake()->numberBetween(10, 17);
         return [
             'nik' => fake()->numerify('3209####0011####'),
             'no_rm' => fake()->numerify('A######'),
@@ -29,9 +30,14 @@ class PasienFactory extends Factory
             'nama' => fake()->name($sex),
             'sex' => $kodesex,
             'nohp' => fake()->numerify('0895########'),
+            'tempat_lahir' => "CIREBON",
             'tgl_lahir' => fake()->date('Y-m-d'),
             'alamat' => fake()->streetAddress(),
             'pic' => 1,
+            'provinsi' => 32,
+            'kabupaten' => 3209,
+            'kecamatan' => 320902,
+            'desa' => "32090220" . $kode,
         ];
     }
 }
