@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\DiagnosaController;
 use App\Http\Controllers\DokterController as ControllersDokterController;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\Erm\DokterController;
@@ -50,5 +51,7 @@ Route::middleware('auth')->group(function () {
     Route::middleware('permission:admin')->prefix('administrator')->group(function () {
         Route::resource('pasien', PasienController::class);
         Route::resource('dokter', ControllersDokterController::class);
+        Route::get('icd10',  [DiagnosaController::class, 'index_icd10']);
+        Route::get('icd9',  [DiagnosaController::class, 'index_icd9']);
     });
 });
