@@ -16,24 +16,15 @@
             <th>Alamat</th>
         </thead>
         <tbody>
+            @foreach ($kunjungan as $k )
             <tr class="pilihpasien">
-                <td>2300001</td>
-                <td>Lionel Messi</td>
-                <td>Cirebon, 1990-01-01</td>
-                <td>Dusun Kliwon Desa Pabuaran RT 001 RW 002 Kec. Pabuaran Kab. Cirebon Jawa Barat</td>
+                <td>{{ $k->pasien->no_rm }}</td>
+                <td>{{ $k->pasien->nama }}</td>
+                <td>{{ $k->pasien->tempat_lahir }}, {{ \Carbon\Carbon::parse($k->pasien->tgl_lahir)->format('Y-m-d') }}
+                    ( Usia {{ \Carbon\Carbon::parse($k->pasien->tgl_lahir)->age }})</td>
+                <td>{{ $k->pasien->nama_desa }}, {{ $k->pasien->nama_kecamatan }} | {{ $k->pasien->alamat }}</td>
             </tr>
-            <tr>
-                <td>2300002</td>
-                <td>Cristiano Ronaldo</td>
-                <td>Cirebon, 1990-01-02</td>
-                <td>Dusun Kliwon Desa Pabuaran RT 001 RW 002 Kec. Pabuaran Kab. Cirebon Jawa Barat</td>
-            </tr>
-            <tr>
-                <td>2300001</td>
-                <td>Oliver Khan</td>
-                <td>Cirebon, 1990-01-03</td>
-                <td>Dusun Kliwon Desa Pabuaran RT 001 RW 002 Kec. Pabuaran Kab. Cirebon Jawa Barat</td>
-            </tr>
+            @endforeach
         </tbody>
     </table>
 </div>
@@ -156,7 +147,7 @@
             "responsive": true,
             "lengthChange": false,
             "autoWidth": true,
-            "pageLength": 3,
+            "pageLength": 8,
             "searching": true,
             "order": [
                 [1, "desc"]
