@@ -9,6 +9,16 @@ class Kunjungan extends Model
 {
     use HasFactory;
 
+    protected $appends = [
+        'counter',
+    ];
+
+    public function getCounterAttribute()
+    {
+        $item = Kunjungan::where('pasien_id', $this->pasien_id)->whereDate('tgl_masuk', '<=', $this->tgl_masuk)->count();
+        return $item;
+    }
+
 
     public function pasien()
     {
