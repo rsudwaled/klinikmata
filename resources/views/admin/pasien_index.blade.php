@@ -53,8 +53,8 @@
                 @endphp
                 <x-adminlte-datatable id="table1" :heads="$heads" :config="$config" hoverable bordered compressed>
                     @foreach ($pasiens as $item)
-                        <tr class="btnEdit">
-                            <td>{{ $item->no_rm }}</td>
+                        <tr class="btnEdit" data-id="{{ $item->id }}">
+                            <td>{{ $item->id }}</td>
                             <td>{{ $item->no_bpjs }}</td>
                             <td>{{ $item->nik }}</td>
                             <td>{{ $item->nama }} ({{ $item->sex }})</td>
@@ -89,9 +89,50 @@
             </x-adminlte-card>
         </div>
     </div>
-    {{-- <x-adminlte-modal id="modalCustom" title="Tambah User" theme="success" size="lg" v-centered static-backdrop
-        scrollable>
-        <form action="{{ route('simrs.pasien.store') }}" id="myform" method="post">
+    <x-adminlte-modal id="modal" title="Data Pasien" theme="success" size="xl" v-centered>
+        <form action="">
+            @csrf
+            <div class="row">
+                <div class="col-md-4">
+                    <x-adminlte-input name="nik" label="NIK" igroup-size="sm" enable-old-support required />
+                    <x-adminlte-input name="no_rm" label="No RM" igroup-size="sm" enable-old-support required />
+                    <x-adminlte-input name="no_bpjs" label="No BPJS" igroup-size="sm" enable-old-support required />
+                    <x-adminlte-input name="no_ihs" label="No Satu Sehat" igroup-size="sm" enable-old-support required />
+                </div>
+                <div class="col-md-4">
+                    <x-adminlte-input name="nama" label="Nama" igroup-size="sm" enable-old-support required />
+                    <x-adminlte-select name="sex" label="Jenis Kelamin" igroup-size="sm" enable-old-support required>
+                        <option value="L">Laki-laki</option>
+                        <option value="P">Perempuan</option>
+                    </x-adminlte-select>
+                    <div class="row">
+                        <div class="col-md-7">
+                            <x-adminlte-input name="tempat_lahir" label="Tempat Lahir" igroup-size="sm" enable-old-support
+                                required />
+                        </div>
+                        <div class="col-md-5">
+                            <x-adminlte-input name="tgl_lahir" label="Tgl Lahir" igroup-size="sm" enable-old-support
+                                required />
+
+                        </div>
+                    </div>
+                    <x-adminlte-input name="nohp" label="No HP" igroup-size="sm" enable-old-support required />
+
+
+                </div>
+                <div class="col-md-4">
+                    <x-adminlte-input name="alamat" label="Tgl Lahir" igroup-size="sm" enable-old-support required />
+                </div>
+
+            </div>
+
+
+
+
+
+
+        </form>
+        {{-- <form action="{{ route('simrs.pasien.store') }}" id="myform" method="post">
             @csrf
             <div class="row">
                 <div class="col-md-6">
@@ -136,12 +177,13 @@
                     </div>
                 </div>
             </div>
-        </form>
+        </form> --}}
         <x-slot name="footerSlot">
-            <x-adminlte-button form="myform" class="mr-auto" type="submit" theme="success" label="Simpan" />
+            <x-adminlte-button class="mr-auto" type="submit" theme="success" icon="fas fa-save" label="Simpan" />
+            <x-adminlte-button class="mr-auto" type="submit" theme="warning" icon="fas fa-edit" label="Update" />
             <x-adminlte-button theme="danger" label="Kembali" data-dismiss="modal" />
         </x-slot>
-    </x-adminlte-modal> --}}
+    </x-adminlte-modal>
 @stop
 
 @section('plugins.Datatables', true)
@@ -152,7 +194,37 @@
     <script>
         $(function() {
             $('.btnEdit').click(function() {
-                alert('cek');
+                var jadwalid = $(this).data('id');
+                $.LoadingOverlay("show");
+                $.get("{{ route('pasien.index') }}" + '/' + jadwalid + '/edit', function(data) {
+                    console.log(data);
+
+                    $('#nik').val(data.nik);
+                    $('#no_rm').val(data.no_rm);
+                    $('#no_ihs').val(data.no_ihs);
+                    $('#no_bpjs').val(data.no_bpjs);
+
+                    $('#nama').val(data.nama);
+                    $('#sex').val(data.sex).trigger('change');
+                    $('#tempat_lahir').val(data.tempat_lahir);
+                    $('#tgl_lahir').val(data.tgl_lahir);
+                    $('#nohp').val(data.nohp);
+
+
+
+                    // $('#kodesubspesialis').val(data.kodesubspesialis).trigger('change');
+                    // $('#kodedokter').val(data.kodedokter).trigger('change');
+                    // $('#hari').val(data.hari).trigger('change');
+                    // $('#kapasitaspasien').val(data.kapasitaspasien);
+                    // $('#labeljadwal').html("Jadwal ID : " + data.id);
+                    // $('#jadwal').val(data.jadwal);
+                    // $('.idjadwal').val(data.id);
+                    // if (data.libur == 1) {
+                    //     $('#libur').prop('checked', true).trigger('change');
+                    // }
+                    $.LoadingOverlay("hide", true);
+                    $('#modal').modal('show');
+                })
 
             });
         });

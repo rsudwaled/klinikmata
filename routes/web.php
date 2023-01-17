@@ -56,7 +56,6 @@ Route::middleware('auth')->group(function () {
         Route::resource('dokter', ControllersDokterController::class);
         Route::resource('kunjungan', KunjunganController::class);
         Route::resource('poliklinik', PoliklinikController::class);
-        Route::resource('poliklinik', PoliklinikController::class);
         Route::resource('ruangan', RuanganController::class);
         Route::get('icd10',  [DiagnosaController::class, 'index_icd10']);
         Route::get('icd9',  [DiagnosaController::class, 'index_icd9']);
