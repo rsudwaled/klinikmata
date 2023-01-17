@@ -37,6 +37,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('permission', PermissionController::class);
         //apw516
         Route::get('erm', [DokterController::class, 'indexDokter'])->name('erm');
+        Route::post('formcatatanmedis', [DokterController::class, 'formCatatanMedis'])->name('formcatatanmedis');
         Route::post('formpemeriksaan_dokter', [DokterController::class, 'formPemeriksaan'])->name('formpemeriksaan_dokter');
         Route::post('inputtindakan', [DokterController::class, 'formTindakan'])->name('inputtindakan');
         Route::post('orderfarmasi', [DokterController::class, 'orderFarmasi'])->name('orderfarmasi');
@@ -45,6 +46,8 @@ Route::middleware('auth')->group(function () {
         Route::get('pendaftaran', [PendaftaranController::class, 'indexPendaftaran'])->name('pendaftaran');
         Route::post('datapasienbaru', [PendaftaranController::class, 'dataPasienBaru'])->name('datapasienbaru');
         Route::post('pendaftaranpasien', [PendaftaranController::class, 'formPendaftaran'])->name('pendaftaranpasien');
+
+        Route::post('simpanpendaftaran', [PendaftaranController::class, 'simpanPendfataran'])->name('simpanpendaftaran');
 
         Route::get('profile', [UserController::class, 'profile'])->name('profile');
         Route::get('user_verifikasi/{user}', [UserController::class, 'user_verifikasi'])->name('user_verifikasi');
