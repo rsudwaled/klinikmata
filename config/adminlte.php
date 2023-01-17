@@ -321,27 +321,103 @@ return [
             'url'         => 'erm',
             'icon'        => 'far fa-fw fa-file',
         ],
-        ['header' => 'MENU ADMINISTRATOR'],
         [
-            'text' => 'Pasien',
-            'url'  => 'administrator/pasien',
+            'text' => 'Menu Antrian',
             'icon' => 'fas fa-user-injured',
+            'submenu' => [
+                [
+                    'text' => 'Antrian Pasien',
+                    'url'  => 'administrator/pasien',
+                    'icon' => 'fas fa-user-injured',
+                ],
+            ]
         ],
+
         [
-            'text' => 'Dokter',
-            'url'  => 'administrator/dokter',
-            'icon' => 'fas fa-user-md',
+            'text' => 'Menu Administrasi',
+            'icon' => 'fas fa-user-injured',
+            'submenu' => [
+                [
+                    'text' => 'Pasien',
+                    'url'  => 'administrator/pasien',
+                    'icon' => 'fas fa-user-injured',
+                    'shift'   => 'ml-2',
+
+                ],
+                [
+                    'text' => 'Dokter',
+                    'url'  => 'administrator/dokter',
+                    'icon' => 'fas fa-user-md',
+                    'shift'   => 'ml-2',
+
+                ],
+                [
+                    'text' => 'Poliklinik',
+                    'url'  => 'administrator/poliklinik',
+                    'icon' => 'fas fa-clinic-medical',
+                    'shift'   => 'ml-2',
+
+                ],
+                [
+                    'text' => 'Ruangan',
+                    'url'  => 'administrator/ruangan',
+                    'icon' => 'fas fa-clinic-medical',
+                    'shift'   => 'ml-2',
+
+                ],
+                [
+                    'text' => 'Diagnosa ICD 10',
+                    'url'  => 'administrator/icd10',
+                    'icon' => 'fas fa-diagnoses',
+                    'shift'   => 'ml-2',
+
+                ],
+                [
+                    'text' => 'Diagnosa ICD 9',
+                    'url'  => 'administrator/icd9',
+                    'icon' => 'fas fa-diagnoses',
+                    'shift'   => 'ml-2',
+
+                ],
+                [
+                    'text' => 'Obat',
+                    'url'  => 'administrator/obat',
+                    'icon' => 'fas fa-pills',
+                    'shift'   => 'ml-2',
+
+                ],
+                [
+                    'text' => 'Kunjungan',
+                    'url'  => 'administrator/kunjungan',
+                    'icon' => 'fas fa-hospital-user',
+                    'shift'   => 'ml-2',
+
+                ],
+                [
+                    'text' => 'Resume Medis',
+                    'url'  => 'administrator/resumemedis',
+                    'icon' => 'fas fa-notes-medical',
+                    'shift'   => 'ml-2',
+
+                ],
+                [
+                    'text' => 'Farmasi',
+                    'url'  => 'administrator/farmasi',
+                    'icon' => 'fas fa-prescription-bottle',
+                    'shift'   => 'ml-2',
+
+                ],
+                [
+                    'text' => 'Keuangan',
+                    'url'  => 'administrator/keuangan',
+                    'icon' => 'fas fa-money-bill',
+                    'shift'   => 'ml-2',
+
+                ],
+            ]
         ],
-        [
-            'text' => 'Diagnosa ICD 10',
-            'url'  => 'administrator/icd10',
-            'icon' => 'fas fa-user-md',
-        ],
-        [
-            'text' => 'Diagnosa ICD 9',
-            'url'  => 'administrator/icd9',
-            'icon' => 'fas fa-user-md',
-        ],
+
+
         // USER ACCESS CONTROLL
         ['header' => 'MENU USER'],
         [
@@ -434,13 +510,18 @@ return [
             'files' => [
                 [
                     'type' => 'js',
-                    'asset' => false,
-                    'location' => '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js',
+                    'asset' => true,
+                    'location' => 'vendor/select2/js/select2.full.min.js',
                 ],
                 [
                     'type' => 'css',
-                    'asset' => false,
-                    'location' => '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.css',
+                    'asset' => true,
+                    'location' => 'vendor/select2/css/select2.min.css',
+                ],
+                [
+                    'type' => 'css',
+                    'asset' => true,
+                    'location' => 'vendor/select2-bootstrap4-theme/select2-bootstrap4.min.css',
                 ],
             ],
         ],

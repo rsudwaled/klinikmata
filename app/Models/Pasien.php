@@ -19,6 +19,7 @@ class Pasien extends Model
         'nama_kabupaten',
         'nama_kecamatan',
         'nama_desa',
+        'user_entry',
     ];
 
     public function getNamaProvinsiAttribute()
@@ -39,6 +40,11 @@ class Pasien extends Model
     public function getNamaDesaAttribute()
     {
         $item = Village::where('code', $this->desa)->first();
+        return $item->name ?? null;
+    }
+    public function getUserEntryAttribute()
+    {
+        $item = User::find($this->pic)->first();
         return $item->name ?? null;
     }
 }
