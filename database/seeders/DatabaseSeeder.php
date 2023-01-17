@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Dokter;
+use App\Models\Kunjungan;
 use App\Models\Pasien;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -23,6 +24,7 @@ class DatabaseSeeder extends Seeder
 
         Pasien::factory(50)->create();
         Dokter::factory(10)->create();
+        Kunjungan::factory(20)->create();
 
         $this->command->info('Loading ICD 9 table seed');
         $path = 'public/sql/icd9.sql';
