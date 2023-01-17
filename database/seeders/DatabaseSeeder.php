@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
         $this->call(RoleSeeder::class);
         $this->call(UserSeeder::class);
 
-        Pasien::factory(10)->create();
+        Pasien::factory(50)->create();
         Dokter::factory(10)->create();
 
         $this->command->info('Loading ICD 9 table seed');

@@ -16,6 +16,11 @@
             <x-adminlte-small-box title="{{ $pasien_nik }} {{ round(($pasien_jkn / $total_pasien) * 100) }}%"
                 text="Pasien memiliki NIK" theme="warning" icon="fas fa-users" />
         </div>
+        <div class="col-md-4">
+            <x-adminlte-select2 name="kodepoli" label="Poliklinik">
+                <option value="">SEMUA POLIKLINIK (-)</option>
+            </x-adminlte-select2>
+        </div>
         <div class="col-12">
             <x-adminlte-card title="Grafik Pasien" theme="secondary" collapsible="collapsed">
                 asdasd
@@ -62,7 +67,7 @@
                             </td>
                             <td>{{ $item->nama_desa }}, {{ $item->nama_kecamatan }}</td>
                             <td>{{ $item->alamat }}</td>
-                            <td>{{ $item->created_at }} ({{ $item->pic }})</td>
+                            <td>{{ $item->created_at }} ({{ $item->user_entry }})</td>
                             <td>
                                 {{-- <form action="{{ route('administrator.pasien.destroy', $item->no_rm) }}" method="POST">
                                     <x-adminlte-button class="btn-xs" theme="warning" icon="fas fa-edit"
