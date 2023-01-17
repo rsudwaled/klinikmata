@@ -10,7 +10,7 @@
              </thead>
              <tbody>
                  @foreach ($datapasien as $d)
-                     <tr class="pilihpasien" nomorrm="{{ $d->no_rm }}">
+                     <tr class="pilihpasien" nomorrm="{{ $d->no_rm }}" idpasien="{{ $d->id }}">
                          <td>{{ $d->no_rm }}</td>
                          <td>{{ $d->nama }} | {{ $d->sex }}</td>
                          <td>{{ $d->tempat_lahir }}, {{ \Carbon\Carbon::parse($d->tgl_lahir)->format('Y-m-d') }}
@@ -39,11 +39,13 @@
             $(".slide2").removeAttr('hidden', true);
             $(".slide1").attr('hidden', true);
             nomorrm = $(this).attr('nomorrm')
+            id = $(this).attr('idpasien')
             $.ajax({
                 type: 'post',
                 data: {
                     _token: "{{ csrf_token() }}",
-                    nomorrm
+                    nomorrm,
+                    id
                 },
                 url: '<?= route('pendaftaranpasien') ?>',
                 success: function(response) {

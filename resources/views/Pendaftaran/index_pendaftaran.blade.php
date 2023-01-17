@@ -3,6 +3,12 @@
 @section('title', 'ERM')
 
 @section('content_header')
+    <div class="preloader2" id="loader2">
+        <div class="loading">
+            <img src="{{ asset('klinik mata losari/fb.gif') }}" width="80">
+            <p>Harap Tunggu</p>
+        </div>
+    </div>
     <h1 class="text-bold">Pendaftaran</h1>
 @stop
 
@@ -72,6 +78,25 @@
 @section('plugins.TempusDominusBs4', true)
 @section('css')
     <style>
+        .preloader2 {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            background-color: #fff;
+            opacity: 0.9;
+        }
+
+        .preloader2 .loading {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            font: 14px arial;
+        }
+
         .scroll {
             max-height: 800px;
             overflow-y: auto;
@@ -80,6 +105,7 @@
 @stop
 @section('js')
     <script>
+        $(".preloader2").fadeOut();
         function batalpilih() {
             $(".slide2").attr('hidden', true);
             $(".slide1").removeAttr('hidden', true);

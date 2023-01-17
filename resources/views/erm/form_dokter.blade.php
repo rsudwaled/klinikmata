@@ -226,13 +226,35 @@
                 <tr>
                     <td>Diagnosa banding</td>
                     <td colspan="2">
-                        <textarea class="form-control" id="diagnosapembanding" name="diagnosapembanding"></textarea>
+                        {{-- <textarea class="form-control" id="diagnosapembanding" name="diagnosapembanding"></textarea> --}}
+                        @php
+                        $config = [
+                            'placeholder' => 'Select multiple options...',
+                            'allowClear' => true,
+                        ];
+                    @endphp
+                    <x-adminlte-select2 id="sel2Category" name="sel2Category[]" label="Categories" label-class="text-danger"
+                        igroup-size="sm" :config="$config" multiple>
+                        <x-slot name="prependSlot">
+                            <div class="input-group-text bg-gradient-red">
+                                <i class="fas fa-tag"></i>
+                            </div>
+                        </x-slot>
+                        <x-slot nam>
+                            <x-adminlte-button theme="outline-dark" label="Clear" icon="fas fa-lg fa-ban text-danger" />
+                        </x-slot>
+                        <option>Sports</option>
+                        <option>News</option>
+                        <option>Games</option>
+                        <option>Science</option>
+                        <option>Maths</option>
+                    </x-adminlte-select2>
                     </td>
                     <td><button type="button" class="btn btn-warning showmodalicd" data-toggle="modal"
                             data-target="#modalicd">ICD 10</button>
-                            <button type="button" class="btn btn-danger showmodalicd9" data-toggle="modal"
-                            data-target="#modalicd">ICD 9</button>
-                        </td>
+                        <button type="button" class="btn btn-danger showmodalicd9" data-toggle="modal"
+                            data-target="#modalicd9">ICD 9</button>
+                    </td>
                 </tr>
                 <tr>
                     <td>Rencana Kerja</td>
@@ -265,15 +287,29 @@
         </form>
     </div><!-- /.card-body -->
 </div>
-
-<x-adminlte-modal id="modalicd" title="Daftar Diagnosa ICD 10" theme="red" icon="fas fa-bolt" size='lg'
+<x-adminlte-modal id="modalicd" title="Daftar Diagnosa ICD 10" theme="yellow" icon="fas fa-bolt" size='lg'
     enable-animations>
 
 </x-adminlte-modal>
 <x-adminlte-modal id="modalicd9" title="Daftar Diagnosa ICD 9" theme="red" icon="fas fa-bolt" size='lg'
     enable-animations>
-
+    <table id="tabelicd9" class="table table-sm table-bordered">
+        <thead>
+            <th>Kode</th>
+            <th>Nama</th>
+            <th>Alias</th>
+        </thead>
+        <tbody>
+            @foreach ($Icd9 as $i9)
+                <tr>
+                    <td>{{ $i9->diag }}</td>
+                    <td>{{ $i9->nama_panjang }}</td>
+                    <td>{{ $i9->nama_pendek }}</td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
 </x-adminlte-modal>
 
-
-
+@section('plugins.Datatables', true)
+@section('plugins.Select2', true)
