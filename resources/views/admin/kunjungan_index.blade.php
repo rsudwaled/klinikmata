@@ -38,7 +38,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             @php
-                                $heads = ['ID', 'Kode Kunjungan', 'Tgl Masuk', 'Tgl Keluar', 'Pasien', 'Dokter', 'Tujuan', 'Status'];
+                                $heads = ['ID', 'Kode Kunjungan', 'Counter', 'Tgl Masuk', 'Tgl Keluar', 'Pasien', 'Dokter', 'Tujuan', 'Status'];
                                 $config['paging'] = false;
                                 $config['lengthMenu'] = false;
                                 $config['searching'] = false;
@@ -51,10 +51,12 @@
                                     <tr>
                                         <td>{{ $item->id }}</td>
                                         <td>{{ $item->kode }}</td>
+                                        <td>{{ $item->counter }}</td>
                                         <td>{{ $item->tgl_masuk }}</td>
                                         <td>{{ $item->tgl_keluar }}</td>
                                         <td>{{ $item->pasien->nama }} ({{ $item->pasien->no_rm }})</td>
-                                        <td>{{ $item->dokter->preffix }} {{ $item->dokter->nama }} {{ $item->dokter->suffix }}</td>
+                                        <td>{{ $item->dokter->preffix }} {{ $item->dokter->nama }}
+                                            {{ $item->dokter->suffix }}</td>
                                         <td>{{ $item->tujuan }}</td>
                                         <td>{{ $item->status }}</td>
                                     </tr>

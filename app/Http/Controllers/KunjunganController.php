@@ -23,7 +23,9 @@ class KunjunganController extends Controller
         // $status_kunjungan = StatusKunjunganDB::pluck('status_kunjungan', 'id');
         // $alasan_masuk = AlasanMasukDB::pluck('alasan_masuk', 'id');
         // $alasan_pulang = AlasanPulangDB::pluck('alasan_pulang', 'kode');
+
         $kunjungans = Kunjungan::simplePaginate();
+        // dd($kunjungans->first(), $kunjungans->first()->counter);
 
         return view('admin.kunjungan_index', [
             'request' => $request,

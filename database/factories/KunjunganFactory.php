@@ -20,7 +20,7 @@ class KunjunganFactory extends Factory
 
             'kode' => "MAT" . fake()->numerify('####'),
             'kode_ihs' =>  fake()->numerify('######'),
-            'tgl_masuk' =>  now(),
+            'tgl_masuk' =>  fake()->dateTime(),
             'pasien_id' =>  fake()->numberBetween(1, 10),
             'dokter_id' =>  fake()->numberBetween(1, 2),
             'penjamin_id' =>  fake()->numberBetween(1, 2),

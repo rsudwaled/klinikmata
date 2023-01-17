@@ -9,6 +9,8 @@ use App\Http\Controllers\PasienController;
 use App\Http\Controllers\Erm\DokterController;
 use App\Http\Controllers\KunjunganController;
 use App\Http\Controllers\Pendaftaran\PendaftaranController;
+use App\Http\Controllers\PoliklinikController;
+use App\Http\Controllers\RuanganController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -56,6 +58,8 @@ Route::middleware('auth')->group(function () {
         Route::resource('pasien', PasienController::class);
         Route::resource('dokter', ControllersDokterController::class);
         Route::resource('kunjungan', KunjunganController::class);
+        Route::resource('poliklinik', PoliklinikController::class);
+        Route::resource('ruangan', RuanganController::class);
         Route::get('icd10',  [DiagnosaController::class, 'index_icd10']);
         Route::get('icd9',  [DiagnosaController::class, 'index_icd9']);
     });

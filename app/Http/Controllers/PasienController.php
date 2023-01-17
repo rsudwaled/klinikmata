@@ -29,4 +29,9 @@ class PasienController extends Controller
             'pasien_perempuan',
         ]));
     }
+    public function edit($id)
+    {
+        $pasien = Pasien::find($id);
+        return response()->json($pasien);
+    }
 }
