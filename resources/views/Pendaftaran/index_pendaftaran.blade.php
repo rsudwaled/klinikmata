@@ -37,13 +37,18 @@
         <div id="hasilpencarianpasien" class="hasilpencarianpasien mt-2">
 
         </div>
+        <div class="form-group">
+            <select class="form-control select2" style="width: 100%;">
+              <option selected="selected">dr. mata A</option>
+              <option>dr. mata B</option>
+            </select>
+          </div>
     </div>
     <div hidden class="slide2 text-sm">
         <div class="formpendaftaran">
 
         </div>
     </div>
-
     <!-- Modal -->
     <div class="modal fade" id="modalPasienBaru" data-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
@@ -70,7 +75,7 @@
 @stop
 @section('plugins.Datatables', true)
 @section('plugins.Select2', true)
-@section('plugins.TempusDominusBs4', true)
+{{-- @section('plugins.TempusDominusBs4', true) --}}
 @section('css')
     <style>
         .scroll {

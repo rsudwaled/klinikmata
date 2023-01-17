@@ -2,7 +2,7 @@
      <div class="card-header text-bold text-lg"><i class="fas fa-procedures mr-2"></i> Tabel Pasien Baru</div>
      <div class="card-body">
          <table id="tabelpasienbaru" class="table table-sm table-hover table-bordered">
-             <thead class="bg-info text-bold">
+             <thead class="bg-primary text-bold">
                  <th>Nomor RM</th>
                  <th>Nama Pasien</th>
                  <th>Tempat, Tanggal Lahir</th>
@@ -12,9 +12,10 @@
                  @foreach ($datapasien as $d)
                      <tr class="pilihpasien" nomorrm="{{ $d->no_rm }}">
                          <td>{{ $d->no_rm }}</td>
-                         <td>{{ $d->nama }}</td>
-                         <td>{{ $d->tgl_lahir }}</td>
-                         <td>{{ $d->alamat }}</td>
+                         <td>{{ $d->nama }} | {{ $d->sex }}</td>
+                         <td>{{ $d->tempat_lahir }}, {{ \Carbon\Carbon::parse($d->tgl_lahir)->format('Y-m-d') }}
+                            ( Usia {{ \Carbon\Carbon::parse($d->tgl_lahir)->age }})</td>
+                         <td>{{ $d->nama_desa }}, {{ $d->nama_kecamatan }} | {{ $d->alamat }}</td>
                      </tr>
                  @endforeach
              </tbody>

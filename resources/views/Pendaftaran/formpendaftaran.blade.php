@@ -13,17 +13,18 @@
                                 src="{{ asset('vendor/adminlte/dist/img/pasien.jpg') }}" alt="User profile picture">
                         </div>
 
-                        <h3 class="profile-username text-center text-md">{{ strtoupper($datapasien[0]->nama) }}</h3>
+                        <h3 class="profile-username text-center text-md">{{ strtoupper($pasiens->nama) }}</h3>
 
-                        <p class="text-muted text-center text-xs">Software Engineer</p>
-                        <a href="#" class="btn btn-primary btn-block"><b>Catatan Medis</b></a>
+                        <p class="text-center text-xs">{{ $pasiens->no_rm }}</p>
+                        <p class="text-center text-xs">{{ $pasiens->nama_desa }}, {{ $pasiens->nama_kecamatan }} | {{ $pasiens->alamat }}</p>
+                        {{-- <a href="#" class="btn btn-primary btn-block"><b>Catatan Medis</b></a> --}}
 
                     </div>
                     <!-- /.card-body -->
                 </div>
                 <!-- /.card -->
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header bg-primary">
                         <h3 class="card-title">Riwayat Kunjungan</h3>
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -47,9 +48,9 @@
             <div class="col-md-9">
                 <div class="slide3">
                     <div class="card">
-                        <div class="card-header p-2">
+                        <div class="card-header p-2 bg-primary">
                             <h5 class="mr-2">
-                                Form Pendaftaran
+                                <i class="fas fa-notes-medical mr-2 ml-2"></i> Form Pendaftaran
                             </h5>
                         </div><!-- /.card-header -->
                         <div class="card-body">
@@ -57,17 +58,36 @@
                             <form class="form-horizontal">
                                 <div class="card-body">
                                     <div class="form-group row">
+                                        <label for="inputEmail3" class="col-sm-2 col-form-label">Tujuan Kunjungan</label>
+                                        <div class="col-sm-10">
+                                            <div class="form-group">
+                                                <select class="form-control" id="exampleFormControlSelect1">
+                                                  <option>Klinik Mata</option>
+                                                </select>
+                                              </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
                                         <label for="inputEmail3" class="col-sm-2 col-form-label">Pilih Dokter</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="">
+                                            <div class="form-group">
+                                                <select class="form-control select2" style="width: 100%;">
+                                                  <option selected="selected">dr. mata A</option>
+                                                  <option>dr. mata B</option>
+                                                </select>
+                                              </div>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label for="inputPassword3" class="col-sm-2 col-form-label">Jenis
                                             Penjamin</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="inputPassword3">
-                                        </div>
+                                            <div class="col-sm-10">
+                                                <div class="form-group">
+                                                    <select class="form-control" id="exampleFormControlSelect1">
+                                                      <option>Pribadi</option>
+                                                    </select>
+                                                  </div>
+                                            </div>
                                     </div>
                                 </div>
                                 <!-- /.card-body -->
@@ -89,3 +109,5 @@
         <!-- /.row -->
     </div><!-- /.container-fluid -->
 </section>
+
+
