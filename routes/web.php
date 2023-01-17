@@ -34,6 +34,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('permission', PermissionController::class);
         //apw516
         Route::get('erm', [DokterController::class, 'indexDokter'])->name('erm');
+        Route::post('formcatatanmedis', [DokterController::class, 'formCatatanMedis'])->name('formcatatanmedis');
         Route::post('formpemeriksaan_dokter', [DokterController::class, 'formPemeriksaan'])->name('formpemeriksaan_dokter');
         Route::post('inputtindakan', [DokterController::class, 'formTindakan'])->name('inputtindakan');
         Route::post('orderfarmasi', [DokterController::class, 'orderFarmasi'])->name('orderfarmasi');

@@ -69,7 +69,7 @@
                             <h3 class="profile-username text-center text-xs">Nina Mcintire</h3>
 
                             <p class="text-muted text-center text-xs">Software Engineer</p>
-                            <a href="#" class="btn btn-primary btn-block"><b>Catatan Medis</b></a>
+                            <a href="#" onclick="formcatatanmedis()" class="btn btn-primary btn-block"><b>Catatan Medis</b></a>
 
                         </div>
                         <!-- /.card-body -->
@@ -119,18 +119,17 @@
                 <!-- /.col -->
                 <div class="col-md-9">
                     <div class="slide3">
-                        <div class="card">
+                        {{-- <div class="card">
                             <div class="card-header p-2">
                                 <h5 class="mr-2">
                                     Catatan Medis
                                 </h5>
-                            </div><!-- /.card-header -->
+                            </div>
                             <div class="card-body">
 
-                            </div><!-- /.card-body -->
-                        </div>
+                            </div>
+                        </div> --}}
                     </div>
-                    <!-- /.card -->
                 </div>
                 <!-- /.col -->
             </div>
@@ -171,6 +170,26 @@
     function batalpilih() {
         $(".slide2").attr('hidden', true);
         $(".slide1").removeAttr('hidden', true);
+    }
+    $(document).ready(function() {
+        formcatatanmedis()
+    })
+    function formcatatanmedis() {
+       var element = document.getElementById("pemeriksaan");
+        element.classList.add("active");
+        $.ajax({
+            type: 'post',
+            data: {
+                _token: "{{ csrf_token() }}",
+            },
+            url: '<?= route('formcatatanmedis') ?>',
+            error: function(data) {
+               alert('ok')
+            },
+            success: function(response) {
+                $('.slide3').html(response)
+            }
+        });
     }
     function formpemeriksaan() {
        var element = document.getElementById("pemeriksaan");

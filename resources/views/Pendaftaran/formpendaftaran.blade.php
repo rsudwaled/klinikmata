@@ -1,5 +1,3 @@
-
-
 <!-- Main content -->
 <section class="content mt-2">
     <div class="container-fluid">
@@ -16,7 +14,8 @@
                         <h3 class="profile-username text-center text-md">{{ strtoupper($pasiens->nama) }}</h3>
 
                         <p class="text-center text-xs">{{ $pasiens->no_rm }}</p>
-                        <p class="text-center text-xs">{{ $pasiens->nama_desa }}, {{ $pasiens->nama_kecamatan }} | {{ $pasiens->alamat }}</p>
+                        <p class="text-center text-xs">{{ $pasiens->nama_desa }}, {{ $pasiens->nama_kecamatan }} |
+                            {{ $pasiens->alamat }}</p>
                         {{-- <a href="#" class="btn btn-primary btn-block"><b>Catatan Medis</b></a> --}}
 
                     </div>
@@ -58,13 +57,14 @@
                             <form class="form-horizontal">
                                 <div class="card-body">
                                     <div class="form-group row">
-                                        <label for="inputEmail3" class="col-sm-2 col-form-label">Tujuan Kunjungan</label>
+                                        <label for="inputEmail3" class="col-sm-2 col-form-label">Tujuan
+                                            Kunjungan</label>
                                         <div class="col-sm-10">
                                             <div class="form-group">
                                                 <select class="form-control" id="exampleFormControlSelect1">
-                                                  <option>Klinik Mata</option>
+                                                    <option>Klinik Mata</option>
                                                 </select>
-                                              </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -72,22 +72,24 @@
                                         <div class="col-sm-10">
                                             <div class="form-group">
                                                 <select class="form-control select2" style="width: 100%;">
-                                                  <option selected="selected">dr. mata A</option>
-                                                  <option>dr. mata B</option>
+                                                    <option value="">Silahkan Pilih Dokter</option>
+                                                    @foreach ($dokter as $d )
+                                                    <option value="{{ $d->kode }}">{{ $d->nama }}</option>
+                                                    @endforeach
                                                 </select>
-                                              </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label for="inputPassword3" class="col-sm-2 col-form-label">Jenis
                                             Penjamin</label>
-                                            <div class="col-sm-10">
-                                                <div class="form-group">
-                                                    <select class="form-control" id="exampleFormControlSelect1">
-                                                      <option>Pribadi</option>
-                                                    </select>
-                                                  </div>
+                                        <div class="col-sm-10">
+                                            <div class="form-group">
+                                                <select class="form-control" id="exampleFormControlSelect1">
+                                                    <option>Pribadi</option>
+                                                </select>
                                             </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <!-- /.card-body -->
@@ -110,4 +112,8 @@
     </div><!-- /.container-fluid -->
 </section>
 
-
+<script>
+    $(document).ready(function() {
+        $('.select2').select2();
+    })
+</script>

@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\DB;
 // use RealRashid\SweetAlert\Facades\Alert;
 // use Spatie\Permission\Models\Role;
 use App\Models\Pasien;
+use App\Models\Dokter;
 
 class PendaftaranController extends Controller
 {
@@ -31,8 +32,10 @@ class PendaftaranController extends Controller
     public function formPendaftaran(Request $request)
     {
         $pasiens = Pasien::where('no_rm', $request->nomorrm)->first();
+        $dokter = Dokter::get();
         return view('Pendaftaran.formpendaftaran',compact([
-            'pasiens'
+            'pasiens',
+            'dokter'
         ]));
     }
 }

@@ -1,7 +1,7 @@
 <div class="card">
-    <div class="card-header p-2">
+    <div class="card-header p-2 bg-success">
         <h5 class="mr-2">
-            Hasil Pemeriksaan
+            <i class="fas fa-notes-medical mr-2 ml-2"></i> Hasil Pemeriksaan
         </h5>
     </div><!-- /.card-header -->
     <div class="card-body scroll">
@@ -111,8 +111,8 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group form-check">
-                                    <input type="checkbox" class="form-check-input" id="hipertensi" name="hipertensi"
-                                        value="1">
+                                    <input type="checkbox" class="form-check-input" id="hipertensi"
+                                        name="hipertensi" value="1">
                                     <label class="form-check-label" for="exampleCheck1">Hipertensi</label>
                                 </div>
                             </div>
@@ -228,8 +228,11 @@
                     <td colspan="2">
                         <textarea class="form-control" id="diagnosapembanding" name="diagnosapembanding"></textarea>
                     </td>
-                    <td><button type="button" class="btn btn-info showmodalicd" data-toggle="modal"
-                            data-target="#modalicd">ICD 10</button></td>
+                    <td><button type="button" class="btn btn-warning showmodalicd" data-toggle="modal"
+                            data-target="#modalicd">ICD 10</button>
+                            <button type="button" class="btn btn-danger showmodalicd9" data-toggle="modal"
+                            data-target="#modalicd">ICD 9</button>
+                        </td>
                 </tr>
                 <tr>
                     <td>Rencana Kerja</td>
@@ -262,3 +265,15 @@
         </form>
     </div><!-- /.card-body -->
 </div>
+
+<x-adminlte-modal id="modalicd" title="Daftar Diagnosa ICD 10" theme="red" icon="fas fa-bolt" size='lg'
+    enable-animations>
+
+</x-adminlte-modal>
+<x-adminlte-modal id="modalicd9" title="Daftar Diagnosa ICD 9" theme="red" icon="fas fa-bolt" size='lg'
+    enable-animations>
+
+</x-adminlte-modal>
+
+
+
