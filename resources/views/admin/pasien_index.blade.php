@@ -16,11 +16,6 @@
             <x-adminlte-small-box title="{{ $pasien_nik }} {{ round(($pasien_jkn / $total_pasien) * 100) }}%"
                 text="Pasien memiliki NIK" theme="warning" icon="fas fa-users" />
         </div>
-        <div class="col-md-4">
-            <x-adminlte-select2 name="kodepoli" label="Poliklinik">
-                <option value="">SEMUA POLIKLINIK (-)</option>
-            </x-adminlte-select2>
-        </div>
         <div class="col-12">
             <x-adminlte-card title="Grafik Pasien" theme="secondary" collapsible="collapsed">
                 asdasd
@@ -30,6 +25,7 @@
                     <div class="col-md-8">
                         <x-adminlte-button label="Tambah" class="btn-sm" theme="success" title="Tambah Pasien"
                             icon="fas fa-plus" data-toggle="modal" data-target="#modalCustom" />
+                        <a href="{{ route('pasien.index') }}" class="btn btn-sm btn-warning">Refresh</a>
                     </div>
                     <div class="col-md-4">
                         <form action="" method="get">
@@ -48,7 +44,7 @@
                     </div>
                 </div>
                 @php
-                    $heads = ['Kode RM', 'BPJS', 'NIK', 'Nama Pasien (Sex)', 'Tanggal Lahir (Umur)', 'Kecamatan', 'Alamat', 'Tgl Entry', 'Action'];
+                    $heads = ['Kode RM', 'BPJS', 'NIK', 'Nama Pasien (Sex)', 'Tanggal Lahir (Umur)', 'Kecamatan', 'Alamat', 'Tgl Entry'];
                     $config['paging'] = false;
                     $config['lengthMenu'] = false;
                     $config['searching'] = false;
@@ -57,7 +53,7 @@
                 @endphp
                 <x-adminlte-datatable id="table1" :heads="$heads" :config="$config" hoverable bordered compressed>
                     @foreach ($pasiens as $item)
-                        <tr>
+                        <tr class="btnEdit">
                             <td>{{ $item->no_rm }}</td>
                             <td>{{ $item->no_bpjs }}</td>
                             <td>{{ $item->nik }}</td>
@@ -68,8 +64,7 @@
                             <td>{{ $item->nama_desa }}, {{ $item->nama_kecamatan }}</td>
                             <td>{{ $item->alamat }}</td>
                             <td>{{ $item->created_at }} ({{ $item->user_entry }})</td>
-                            <td>
-                                {{-- <form action="{{ route('administrator.pasien.destroy', $item->no_rm) }}" method="POST">
+                            {{-- <form action="{{ route('administrator.pasien.destroy', $item->no_rm) }}" method="POST">
                                     <x-adminlte-button class="btn-xs" theme="warning" icon="fas fa-edit"
                                         onclick="window.location='{{ route('simrs.pasien.edit', $item->no_rm) }}'" />
                                     @csrf
@@ -77,7 +72,6 @@
                                     <x-adminlte-button class="btn-xs" theme="danger" icon="fas fa-trash-alt" type="submit"
                                         onclick="return confirm('Apakah anda akan menghapus {{ $item->no_rm }} ?')" />
                                 </form> --}}
-                            </td>
                         </tr>
                     @endforeach
                 </x-adminlte-datatable>
@@ -153,3 +147,14 @@
 @section('plugins.Datatables', true)
 @section('plugins.Select2', true)
 @section('plugins.TempusDominusBs4', true)
+
+@section('js')
+    <script>
+        $(function() {
+            $('.btnEdit').click(function() {
+                alert('cek');
+
+            });
+        });
+    </script>
+@endsection
