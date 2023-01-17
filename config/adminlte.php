@@ -186,7 +186,7 @@ return [
     |
     */
 
-    'classes_body' => 'sidebar-collapse text-sm',
+    'classes_body' => 'sidebar-collapse text-xs',
     'classes_brand' => '',
     'classes_brand_text' => '',
     'classes_content_wrapper' => '',
