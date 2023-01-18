@@ -399,6 +399,13 @@ return [
 
                 ],
                 [
+                    'text' => 'Tarif Pelayanan',
+                    'url'  => 'administrator/tarif',
+                    'icon' => 'fas fa-hand-holding-medical',
+                    'shift'   => 'ml-2',
+
+                ],
+                [
                     'text' => 'Keuangan',
                     'url'  => 'administrator/keuangan',
                     'icon' => 'fas fa-money-bill',
