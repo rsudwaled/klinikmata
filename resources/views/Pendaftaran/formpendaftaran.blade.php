@@ -33,12 +33,14 @@
                     </div>
                     <div class="card-body p-0">
                         <ul class="nav nav-pills flex-column">
-                            @foreach ($kunjungan as $k )
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <i class="fas fa-inbox mr-2"></i>{{ $k->counter }} | {{ \Carbon\Carbon::parse($k->tgl_masuk)->format('Y-m-d') }} | {{ $k->dokter ?  $k->dokter->nama : '-' }} | {{ $k->tujuan }}
-                                </a>
-                            </li>
+                            @foreach ($kunjungan as $k)
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="fas fa-inbox mr-2"></i>{{ $k->counter }} |
+                                        {{ \Carbon\Carbon::parse($k->tgl_masuk)->format('Y-m-d') }} |
+                                        {{ $k->dokter ? $k->dokter->nama : '-' }} | {{ $k->tujuan }}
+                                    </a>
+                                </li>
                             @endforeach
                         </ul>
                     </div>
@@ -78,7 +80,8 @@
                                                     style="width: 100%;">
                                                     <option value="">Silahkan Pilih Dokter</option>
                                                     @foreach ($dokter as $d)
-                                                        <option value="{{ $d->id }}">{{ $d->nama }}</option>
+                                                        <option value="{{ $d->id }}">{{ $d->nama }}
+                                                        </option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -123,7 +126,6 @@
         <!-- /.row -->
     </div><!-- /.container-fluid -->
 </section>
-
 <script>
     $(document).ready(function() {
         $('.select2').select2();
@@ -143,13 +145,34 @@
             },
             url: '<?= route('simpanpendaftaran') ?>',
             error: function(data) {
-                alert('error')
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Something went wrong!',
+                    footer: 'Klinikmatalosari2023'
+                })
                 spinner.hide();
             },
             success: function(data) {
                 spinner.hide();
-                alert(data.message)
-                location.reload()
+                if(data.kode == '502'){
+                    Swal.fire({
+                    icon: 'error',
+                    title: 'Oops',
+                    text: data.message,
+                    footer: 'Klinikmatalosari2023'
+                })
+                }else{
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'OK',
+                        text: data.message,
+                        footer: 'Klinikmatalosari2023'
+                    })
+                    setTimeout(function() {
+                        window.location.reload();
+                    }, 2000);
+                }
             }
         });
     }

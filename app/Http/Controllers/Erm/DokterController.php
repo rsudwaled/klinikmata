@@ -15,12 +15,25 @@ use Spatie\Permission\Models\Role;
 use App\Models\Icd10;
 use App\Models\Icd9;
 use App\Models\Dokter;
+use App\Models\Kunjungan;
 
 class DokterController extends Controller
 {
     public function indexDokter(Request $request)
     {
-        return view('erm.index_dokter');
+        $kunjungan = Kunjungan::where('status', 1)->get();
+        return view('erm.index_dokter',compact([
+            'kunjungan'
+        ]));
+    }
+    public function indexErm(Request $request)
+    {
+        // kodekunjungan
+        // idkunjungan
+        $kunjungan = Kunjungan::where('kode', $request->kodekunjungan)->first();
+        return view('erm.index_erm_dokter',compact([
+            'kunjungan'
+        ]));
     }
     public function formPemeriksaan(Request $request)
     {

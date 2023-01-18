@@ -313,6 +313,11 @@ return [
             'icon'        => 'far fa-fw fa-file',
         ],
         [
+            'text'        => 'ERM Perawat',
+            'url'         => 'ermperawat',
+            'icon'        => 'far fa-fw fa-file',
+        ],
+        [
             'text' => 'Menu Antrian',
             'icon' => 'fas fa-user-injured',
             'submenu' => [
@@ -559,7 +564,7 @@ return [
             ],
         ],
         'Sweetalert2' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',

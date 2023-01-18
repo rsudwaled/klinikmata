@@ -7,6 +7,7 @@ use App\Http\Controllers\DiagnosaController;
 use App\Http\Controllers\DokterController as ControllersDokterController;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\Erm\DokterController;
+use App\Http\Controllers\Erm\PerawatController;
 use App\Http\Controllers\KunjunganController;
 use App\Http\Controllers\Pendaftaran\PendaftaranController;
 use App\Http\Controllers\PoliklinikController;
@@ -38,11 +39,17 @@ Route::middleware('auth')->group(function () {
         Route::resource('permission', PermissionController::class);
         //apw516
         Route::get('erm', [DokterController::class, 'indexDokter'])->name('erm');
+        Route::post('indexerm', [DokterController::class, 'indexErm'])->name('indexerm');
         Route::post('formcatatanmedis', [DokterController::class, 'formCatatanMedis'])->name('formcatatanmedis');
         Route::post('formpemeriksaan_dokter', [DokterController::class, 'formPemeriksaan'])->name('formpemeriksaan_dokter');
         Route::post('inputtindakan', [DokterController::class, 'formTindakan'])->name('inputtindakan');
         Route::post('orderfarmasi', [DokterController::class, 'orderFarmasi'])->name('orderfarmasi');
         Route::post('orderpenunjang', [DokterController::class, 'orderPenunjang'])->name('orderpenunjang');
+
+        Route::get('ermperawat', [PerawatController::class, 'indexPerawat'])->name('ermperawat');
+        Route::post('indexermperawat', [PerawatController::class, 'indexErmPerawat'])->name('indexermperawat');
+        Route::post('formcatatanmedis_perawat', [PerawatController::class, 'formCatatanMedis'])->name('formcatatanmedis_perawat');
+        Route::post('formpemeriksaan_perawat', [PerawatController::class, 'formPemeriksaan'])->name('formpemeriksaan_perawat');
 
         Route::get('pendaftaran', [PendaftaranController::class, 'indexPendaftaran'])->name('pendaftaran');
         Route::post('datapasienbaru', [PendaftaranController::class, 'dataPasienBaru'])->name('datapasienbaru');

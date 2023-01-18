@@ -53,6 +53,22 @@ class PendaftaranController extends Controller
             $value =  $nama['value'];
             $dataSet[$index] = $value;
         }
+        if($dataSet['dokter'] == ""){
+            $data = [
+                'kode' => 502,
+                'message' => 'Dokter belum dipilih !'
+            ];
+            echo json_encode($data);
+            die;
+        }
+        if($dataSet['keluhan'] == ""){
+            $data = [
+                'kode' => 502,
+                'message' => 'Silahkan isi keluhan pasien !'
+            ];
+            echo json_encode($data);
+            die;
+        }
         $arr = [
             'kode' => $this->kodeRegistrasi(),
             'tgl_masuk' => $now,
