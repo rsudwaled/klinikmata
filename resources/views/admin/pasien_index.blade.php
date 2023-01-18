@@ -23,8 +23,8 @@
             <x-adminlte-card title="Data Pasien" theme="secondary" collapsible>
                 <div class="row">
                     <div class="col-md-8">
-                        <x-adminlte-button label="Tambah" class="btn-sm" theme="success" title="Tambah Pasien"
-                            icon="fas fa-plus" data-toggle="modal" data-target="#modalCustom" />
+                        <x-adminlte-button label="Tambah" class="btn-sm btnTambah" theme="success" title="Tambah Pasien"
+                            icon="fas fa-plus" />
                         <a href="{{ route('pasien.index') }}" class="btn btn-sm btn-warning">Refresh</a>
                     </div>
                     <div class="col-md-4">
@@ -54,7 +54,7 @@
                 <x-adminlte-datatable id="table1" :heads="$heads" :config="$config" hoverable bordered compressed>
                     @foreach ($pasiens as $item)
                         <tr class="btnEdit" data-id="{{ $item->id }}">
-                            <td>{{ $item->id }}</td>
+                            <td>{{ $item->no_rm }}</td>
                             <td>{{ $item->no_bpjs }}</td>
                             <td>{{ $item->nik }}</td>
                             <td>{{ $item->nama }} ({{ $item->sex }})</td>
@@ -114,24 +114,45 @@
                         <div class="col-md-5">
                             <x-adminlte-input name="tgl_lahir" label="Tgl Lahir" igroup-size="sm" enable-old-support
                                 required />
-
                         </div>
                     </div>
                     <x-adminlte-input name="nohp" label="No HP" igroup-size="sm" enable-old-support required />
-
-
                 </div>
                 <div class="col-md-4">
+                    <x-adminlte-select2 name="provinsi" label="Provinsi">
+                        <option value="" selected disabled>PILIH PROVINSI</option>
+                        @foreach ($provinsi as $code => $name)
+                            <option value="{{ $code }}">{{ $name }}</option>
+                        @endforeach
+                    </x-adminlte-select2>
+                    <x-adminlte-select2 name="kabupaten" label="Kabupaten">
+                        <option value="" selected disabled>PILIH KABUPATEN</option>
+                        @foreach ($provinsi as $code => $name)
+                            <option value="{{ $code }}">{{ $name }}</option>
+                        @endforeach
+                    </x-adminlte-select2>
+                    <x-adminlte-select2 name="kecamatan" label="Kecamatan">
+                        <option value="" selected disabled>PILIH KECAMATAN</option>
+                        @foreach ($provinsi as $code => $name)
+                            <option value="{{ $code }}">{{ $name }}</option>
+                        @endforeach
+                    </x-adminlte-select2>
+                    <x-adminlte-select2 name="desa" label="Desa">
+                        <option value="" selected disabled>PILIH DESA</option>
+                        @foreach ($provinsi as $code => $name)
+                            <option value="{{ $code }}">{{ $name }}</option>
+                        @endforeach
+                    </x-adminlte-select2>
+
                     <x-adminlte-input name="alamat" label="Tgl Lahir" igroup-size="sm" enable-old-support required />
                 </div>
             </div>
         </form>
         <x-slot name="footerSlot">
-            <x-adminlte-button class="mr-auto " id="btnStore" type="submit" theme="success" icon="fas fa-save"
-                label="Simpan" />
-            <x-adminlte-button class="mr-auto" id="btnUpdate" type="submit" theme="warning" icon="fas fa-edit"
-                label="Update" />
-            <x-adminlte-button theme="danger" label="Kembali" data-dismiss="modal" />
+            <x-adminlte-button class="mr-auto " id="btnStore" theme="success" icon="fas fa-save" label="Simpan" />
+            <x-adminlte-button class="mr-auto" id="btnUpdate" theme="warning" icon="fas fa-edit" label="Update" />
+            <x-adminlte-button id="btnDelete" theme="danger" icon="fas fa-trash-alt" label="Delete" />
+            <x-adminlte-button theme="secondary" icon="fas fa-arrow-left" label="Kembali" data-dismiss="modal" />
         </x-slot>
     </x-adminlte-modal>
 @stop
@@ -144,6 +165,13 @@
 @section('js')
     <script>
         $(function() {
+            $('.btnTambah').click(function() {
+                $('#form').trigger("reset");
+                $('#modal').modal('show');
+                $('#btnUpdate').hide();
+                $('#btnStore').show();
+            });
+
             $('.btnEdit').click(function() {
                 var jadwalid = $(this).data('id');
                 $.LoadingOverlay("show");
@@ -163,6 +191,9 @@
                     $('#nohp').val(data.nohp);
 
                     $.LoadingOverlay("hide", true);
+
+                    $('#btnUpdate').show();
+                    $('#btnStore').hide();
                     $('#modal').modal('show');
                 })
 
@@ -195,8 +226,8 @@
                         console.log(data);
                         swal.fire({
                             icon: 'error',
-                            title: 'Error ' + data.status,
-                            text: data.statusText,
+                            title: 'Error ' + data.statusText,
+                            text: data.responseJSON.metadata.message,
                         });
                         $.LoadingOverlay("hide");
                     }
@@ -208,7 +239,6 @@
                 $.LoadingOverlay("show");
                 e.preventDefault();
                 var url = "{{ route('pasien.index') }}/" + id;
-                alert(url);
                 $.LoadingOverlay("hide");
                 $.ajax({
                     data: $('#form').serialize(),
@@ -239,6 +269,24 @@
                         $.LoadingOverlay("hide");
                     }
                 });
+            });
+
+            $('#btnDelete').click(function(e) {
+                Swal.fire({
+                    title: 'Konfirmasi Hapus Data',
+                    text: 'Apakah anda akan menghapus data ini ?',
+                    showDenyButton: true,
+                    showCancelButton: true,
+                    confirmButtonText: 'Ya,  Hapus',
+                    denyButtonText: `Tidak`,
+                }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {
+                        Swal.fire('Data berhasil dihapus', '', 'success')
+                    } else if (result.isDenied) {
+                        Swal.fire('Data tidak jadi dihapus', '', 'info')
+                    }
+                })
             });
         });
     </script>

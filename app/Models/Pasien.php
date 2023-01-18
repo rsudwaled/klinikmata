@@ -48,7 +48,7 @@ class Pasien extends Model
     }
     public function getUserEntryAttribute()
     {
-        $item = User::find($this->pic ?? 1)->first();
-        return $item->name ?? null;
+        $item = User::find($this->pic);
+        return  $item->name ?? '-';
     }
 }
