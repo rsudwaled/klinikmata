@@ -22,9 +22,13 @@ class Pasien extends Model
         'user_entry',
     ];
 
+    protected $guarded = [
+        'id',
+    ];
+
     public function getNamaProvinsiAttribute()
     {
-        $item = Provinsi::where('code', $this->provinsi)->first();
+        $item = Provinsi::where('code', $this->provinsi ?? 11)->first();
         return $item->name ?? null;
     }
     public function getNamaKabupatenAttribute()
@@ -44,7 +48,7 @@ class Pasien extends Model
     }
     public function getUserEntryAttribute()
     {
-        $item = User::find($this->pic)->first();
+        $item = User::find($this->pic ?? 1)->first();
         return $item->name ?? null;
     }
 }

@@ -90,7 +90,7 @@
         </div>
     </div>
     <x-adminlte-modal id="modal" title="Data Pasien" theme="success" size="xl" v-centered>
-        <form action="">
+        <form action="" id="form">
             @csrf
             <div class="row">
                 <div class="col-md-4">
@@ -100,6 +100,7 @@
                     <x-adminlte-input name="no_ihs" label="No Satu Sehat" igroup-size="sm" enable-old-support required />
                 </div>
                 <div class="col-md-4">
+                    <input id="id" type="hidden" name="id">
                     <x-adminlte-input name="nama" label="Nama" igroup-size="sm" enable-old-support required />
                     <x-adminlte-select name="sex" label="Jenis Kelamin" igroup-size="sm" enable-old-support required>
                         <option value="L">Laki-laki</option>
@@ -123,64 +124,13 @@
                 <div class="col-md-4">
                     <x-adminlte-input name="alamat" label="Tgl Lahir" igroup-size="sm" enable-old-support required />
                 </div>
-
             </div>
-
-
-
-
-
-
         </form>
-        {{-- <form action="{{ route('simrs.pasien.store') }}" id="myform" method="post">
-            @csrf
-            <div class="row">
-                <div class="col-md-6">
-                    <x-adminlte-input name="nik" label="NIK" placeholder="Nomor Induk Kependudukan"
-                        enable-old-support required />
-                    <x-adminlte-input name="name" label="Nama" placeholder="Nama Lengkap" enable-old-support
-                        required />
-                    <div class="row">
-                        <div class="col-md-6">
-                            <x-adminlte-input name="tempat_lahir" label="Tempat Lahir" placeholder="Tempat Lahir"
-                                enable-old-support required />
-                        </div>
-                        <div class="col-md-6">
-                            @php
-                                $config = ['format' => 'DD-MM-YYYY'];
-                            @endphp
-                            <x-adminlte-input-date name="tanggal_lahir" label="Tanggal Lahir" placeholder="Tanggal Lahir"
-                                :config="$config" enable-old-support required />
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <x-adminlte-select name="gender" label="Jenis Kelamin" enable-old-support>
-                                <x-adminlte-options :options="['Laki-Laki', 'Perempuan']" placeholder="Jenis Kelamin" />
-                            </x-adminlte-select>
-                            <x-adminlte-select name="Agama" label="Agama" enable-old-support>
-                                <x-adminlte-options :options="['Islam', 'Perempuan']" placeholder="Agama" />
-                            </x-adminlte-select>
-                            <x-adminlte-select name="perkawinan" label="Status Perkawinan" enable-old-support>
-                                <x-adminlte-options :options="['Islam', 'Perempuan']" placeholder="Status Perkawinan" />
-                            </x-adminlte-select>
-                        </div>
-                        <div class="col-md-6">
-                            <x-adminlte-input name="pekerjaan" label="Pekerjaan" placeholder="Pekerjaan"
-                                enable-old-support />
-                            <x-adminlte-input name="kewarganegaraan" label="Kewarganegaraan"
-                                placeholder="Kewarganegaraan" enable-old-support />
-                            <x-adminlte-select name="darah" label="Golongan Darah" enable-old-support>
-                                <x-adminlte-options :options="['A', 'B', 'AB', 'O']" placeholder="Golongan Darah" />
-                            </x-adminlte-select>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </form> --}}
         <x-slot name="footerSlot">
-            <x-adminlte-button class="mr-auto" type="submit" theme="success" icon="fas fa-save" label="Simpan" />
-            <x-adminlte-button class="mr-auto" type="submit" theme="warning" icon="fas fa-edit" label="Update" />
+            <x-adminlte-button class="mr-auto " id="btnStore" type="submit" theme="success" icon="fas fa-save"
+                label="Simpan" />
+            <x-adminlte-button class="mr-auto" id="btnUpdate" type="submit" theme="warning" icon="fas fa-edit"
+                label="Update" />
             <x-adminlte-button theme="danger" label="Kembali" data-dismiss="modal" />
         </x-slot>
     </x-adminlte-modal>
@@ -188,6 +138,7 @@
 
 @section('plugins.Datatables', true)
 @section('plugins.Select2', true)
+@section('plugins.Sweetalert2', true)
 @section('plugins.TempusDominusBs4', true)
 
 @section('js')
@@ -198,6 +149,7 @@
                 $.LoadingOverlay("show");
                 $.get("{{ route('pasien.index') }}" + '/' + jadwalid + '/edit', function(data) {
                     console.log(data);
+                    $('#id').val(data.id);
 
                     $('#nik').val(data.nik);
                     $('#no_rm').val(data.no_rm);
@@ -210,22 +162,83 @@
                     $('#tgl_lahir').val(data.tgl_lahir);
                     $('#nohp').val(data.nohp);
 
-
-
-                    // $('#kodesubspesialis').val(data.kodesubspesialis).trigger('change');
-                    // $('#kodedokter').val(data.kodedokter).trigger('change');
-                    // $('#hari').val(data.hari).trigger('change');
-                    // $('#kapasitaspasien').val(data.kapasitaspasien);
-                    // $('#labeljadwal').html("Jadwal ID : " + data.id);
-                    // $('#jadwal').val(data.jadwal);
-                    // $('.idjadwal').val(data.id);
-                    // if (data.libur == 1) {
-                    //     $('#libur').prop('checked', true).trigger('change');
-                    // }
                     $.LoadingOverlay("hide", true);
                     $('#modal').modal('show');
                 })
 
+            });
+
+            $('#btnStore').click(function(e) {
+                $.LoadingOverlay("show");
+                e.preventDefault();
+                var url = "{{ route('pasien.store') }}";
+                $.ajax({
+                    data: $('#form').serialize(),
+                    url: url,
+                    type: "POST",
+                    dataType: 'json',
+                    success: function(data) {
+                        console.log(data);
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success',
+                            text: 'Data berhasil disimpan',
+                        }).then(okay => {
+                            if (okay) {
+                                $.LoadingOverlay("show");
+                                location.reload();
+                            }
+                        });
+                        $.LoadingOverlay("hide");
+                    },
+                    error: function(data) {
+                        console.log(data);
+                        swal.fire({
+                            icon: 'error',
+                            title: 'Error ' + data.status,
+                            text: data.statusText,
+                        });
+                        $.LoadingOverlay("hide");
+                    }
+                });
+            });
+
+            $('#btnUpdate').click(function(e) {
+                var id = $("#id").val()
+                $.LoadingOverlay("show");
+                e.preventDefault();
+                var url = "{{ route('pasien.index') }}/" + id;
+                alert(url);
+                $.LoadingOverlay("hide");
+                $.ajax({
+                    data: $('#form').serialize(),
+                    url: url,
+                    type: "PUT",
+                    dataType: 'json',
+                    success: function(data) {
+                        console.log(data);
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success',
+                            text: 'Data berhasil disimpan',
+                        }).then(okay => {
+                            if (okay) {
+                                $.LoadingOverlay("show");
+                                location.reload();
+                            }
+                        });
+                        $.LoadingOverlay("hide");
+                    },
+                    error: function(data) {
+                        console.log(data);
+                        swal.fire({
+                            icon: 'error',
+                            title: 'Error ' + data.status,
+                            text: data.statusText,
+                        });
+                        $.LoadingOverlay("hide");
+                    }
+                });
             });
         });
     </script>
