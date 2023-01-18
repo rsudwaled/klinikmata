@@ -26,6 +26,15 @@ class DokterController extends Controller
             'kunjungan'
         ]));
     }
+    public function indexErm(Request $request)
+    {
+        // kodekunjungan
+        // idkunjungan
+        $kunjungan = Kunjungan::where('kode', $request->kodekunjungan)->first();
+        return view('erm.index_erm_dokter',compact([
+            'kunjungan'
+        ]));
+    }
     public function formPemeriksaan(Request $request)
     {
         $Icd10 = Icd10::get();

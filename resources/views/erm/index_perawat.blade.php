@@ -126,7 +126,7 @@
                     kodekunjungan,
                     idkunjungan
                 },
-                url: '<?= route('indexerm') ?>',
+                url: '<?= route('indexermperawat') ?>',
                 success: function(response) {
                     spinner.hide();
                     $('.erm2').html(response);
@@ -138,10 +138,6 @@
             $(".slide2").attr('hidden', true);
             $(".slide1").removeAttr('hidden', true);
         }
-        $(document).ready(function() {
-            formcatatanmedis()
-        })
-
         function formcatatanmedis() {
             var element = document.getElementById("pemeriksaan");
             element.classList.add("active");
@@ -152,7 +148,7 @@
                 data: {
                     _token: "{{ csrf_token() }}",
                 },
-                url: '<?= route('formcatatanmedis') ?>',
+                url: '<?= route('formcatatanmedis_perawat') ?>',
                 error: function(data) {
                     alert('ok')
                 },
@@ -173,70 +169,7 @@
                 data: {
                     _token: "{{ csrf_token() }}",
                 },
-                url: '<?= route('formpemeriksaan_dokter') ?>',
-                error: function(data) {
-                    alert('ok')
-                },
-                success: function(response) {
-                    spinner.hide()
-                    $('.slide3').html(response)
-                }
-            });
-        }
-
-        function forminputtindakan() {
-            var element = document.getElementById("pemeriksaan");
-            element.classList.add("active");
-            spinner = $('#loader2');
-            spinner.show();
-            $.ajax({
-                type: 'post',
-                data: {
-                    _token: "{{ csrf_token() }}",
-                },
-                url: '<?= route('inputtindakan') ?>',
-                error: function(data) {
-                    alert('ok')
-                },
-                success: function(response) {
-                    spinner.hide()
-                    $('.slide3').html(response)
-                }
-            });
-        }
-
-        function orderfarmasi() {
-            var element = document.getElementById("pemeriksaan");
-            element.classList.add("active");
-            spinner = $('#loader2');
-            spinner.show();
-            $.ajax({
-                type: 'post',
-                data: {
-                    _token: "{{ csrf_token() }}",
-                },
-                url: '<?= route('orderfarmasi') ?>',
-                error: function(data) {
-                    alert('ok')
-                },
-                success: function(response) {
-                    spinner.hide()
-                    $('.slide3').html(response)
-                }
-            });
-        }
-
-        function orderpenunjang() {
-            var element = document.getElementById("pemeriksaan");
-            element.classList.add("active");
-            spinner = $('#loader2');
-            spinner.show();
-            $.ajax({
-                type: 'post',
-                data: {
-                    _token: "{{ csrf_token() }}",
-                },
-                url: '<?= route('orderpenunjang') ?>',
+                url: '<?= route('formpemeriksaan_perawat') ?>',
                 error: function(data) {
                     alert('ok')
                 },
