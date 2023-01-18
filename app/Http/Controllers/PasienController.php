@@ -9,7 +9,7 @@ class PasienController extends Controller
 {
     public function index(Request $request)
     {
-        $pasiens = Pasien::latest()
+        $pasiens = Pasien::orderBy('id', 'desc')
             ->where('no_rm', 'LIKE', "%{$request->search}%")
             ->orWhere('nama', 'LIKE', "%{$request->search}%")
             ->orWhere('nik', 'LIKE', "%{$request->search}%")
@@ -32,6 +32,17 @@ class PasienController extends Controller
     public function edit($id)
     {
         $pasien = Pasien::find($id);
+        return response()->json($pasien);
+    }
+    public function store(Request $request)
+    {
+        Pasien::create($request->except('_token'));
+        return response()->json($request);
+    }
+    public function update(Request $request)
+    {
+        $pasien = Pasien::find($request->id);
+        $pasien->update($request->except('_token'));
         return response()->json($pasien);
     }
 }
