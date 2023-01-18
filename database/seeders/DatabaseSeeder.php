@@ -28,6 +28,11 @@ class DatabaseSeeder extends Seeder
         Dokter::factory(10)->create();
         Kunjungan::factory(20)->create();
 
+        $this->command->info('Loading Tarif table seed');
+        $path = 'public/sql/tarif.sql';
+        DB::unprepared(file_get_contents($path));
+        $this->command->info('Tarif table seeded');
+
         // $this->command->info('Loading ICD 9 table seed');
         // $path = 'public/sql/icd9.sql';
         // DB::unprepared(file_get_contents($path));

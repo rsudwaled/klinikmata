@@ -15,20 +15,20 @@ return new class extends Migration
     {
         Schema::create('dokters', function (Blueprint $table) {
             $table->id();
-            $table->string('kode')->nullable();
-            $table->string('kode_jkn')->nullable();
-            $table->string('kode_ihs')->nullable();
-            $table->string('nik')->nullable();
+            $table->string('kode')->unique();
+            $table->string('kode_jkn')->nullable()->unique();
+            $table->string('kode_ihs')->nullable()->unique();
+            $table->string('nik')->unique();
 
-            $table->string('nama')->nullable();
+            $table->string('nama');
             $table->string('suffix')->nullable();
             $table->string('preffix')->nullable();
             $table->string('sip')->nullable();
             $table->string('poliklinik')->nullable();
             $table->string('subspesialis')->nullable();
 
-            $table->string('nohp')->nullable();
-            $table->string('pic')->nullable();
+            $table->string('nohp');
+            $table->string('pic');
             $table->string('status')->default(1);
             $table->timestamps();
         });

@@ -15,16 +15,16 @@ return new class extends Migration
     {
         Schema::create('pasiens', function (Blueprint $table) {
             $table->id();
-            $table->string('nik')->nullable();
-            $table->string('no_rm')->nullable();
-            $table->string('no_bpjs')->nullable();
-            $table->string('no_ihs')->nullable();
+            $table->string('nik')->unique();
+            $table->string('no_rm')->unique();
+            $table->string('no_bpjs')->nullable()->unique();
+            $table->string('no_ihs')->nullable()->unique();
 
-            $table->string('nama')->nullable();
-            $table->string('sex')->nullable();
-            $table->string('tempat_lahir')->nullable();
-            $table->string('tgl_lahir')->nullable();
-            $table->string('nohp')->nullable();
+            $table->string('nama');
+            $table->string('sex');
+            $table->string('tempat_lahir');
+            $table->string('tgl_lahir');
+            $table->string('nohp');
 
             $table->string('alamat')->nullable();
             $table->string('provinsi')->nullable();
@@ -37,7 +37,7 @@ return new class extends Migration
             $table->string('pendidikan')->nullable();
             $table->string('pekerjaan')->nullable();
 
-            $table->string('pic')->nullable();
+            $table->string('pic');
             $table->string('status')->default(1);
             $table->string('tgl_kematian')->nullable();
             $table->timestamps();
