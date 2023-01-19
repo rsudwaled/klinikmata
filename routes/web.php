@@ -8,6 +8,7 @@ use App\Http\Controllers\DokterController as ControllersDokterController;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\Erm\DokterController;
 use App\Http\Controllers\Erm\PerawatController;
+use App\Http\Controllers\JadwalDokterController;
 use App\Http\Controllers\KunjunganController;
 use App\Http\Controllers\Pendaftaran\PendaftaranController;
 use App\Http\Controllers\PoliklinikController;
@@ -27,7 +28,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('landingpage');
 });
 Auth::routes();
 
@@ -70,6 +71,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('dokter', ControllersDokterController::class);
         Route::resource('kunjungan', KunjunganController::class);
         Route::resource('poliklinik', PoliklinikController::class);
+        Route::resource('jadwaldokter', JadwalDokterController::class);
         Route::resource('ruangan', RuanganController::class);
         Route::resource('tarif', TarifController::class);
         Route::post('tarif/import',  [TarifController::class, 'import'])->name('tarif.import');

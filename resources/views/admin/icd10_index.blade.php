@@ -40,7 +40,7 @@
                     </div>
                 </div>
                 @php
-                    $heads = ['Kode Diagnosa', 'Nama ', 'Kode DTD'];
+                    $heads = ['Kode Diagnosa', 'Nama Panjang', 'Nama Pendek'];
                     $config['paging'] = false;
                     $config['lengthMenu'] = false;
                     $config['searching'] = false;
@@ -57,13 +57,13 @@
                     @endforeach
                 </x-adminlte-datatable>
                 <div class="row">
-                    {{-- <div class="col-md-5">
-                        Tampil data {{ $pasiens->firstItem() }} sampai {{ $pasiens->lastItem() }} dari total
-                        {{ $total_pasien }}
-                    </div> --}}
+                    <div class="col-md-5">
+                        Tampil data {{ $icd->firstItem() }} sampai {{ $icd->lastItem() }} dari total
+                        {{ $total_icd }}
+                    </div>
                     <div class="col-md-7">
                         <div class="float-right pagination-sm">
-                            {{ $icd->links() }}
+                            {{ $icd->appends($request->all())->links() }}
                         </div>
                     </div>
                 </div>

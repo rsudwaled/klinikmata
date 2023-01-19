@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Dokter;
+use App\Models\JadwalDokter;
 use App\Models\Kunjungan;
 use App\Models\Pasien;
 use Illuminate\Database\Seeder;
@@ -27,6 +28,7 @@ class DatabaseSeeder extends Seeder
         Pasien::factory(50)->create();
         Dokter::factory(10)->create();
         Kunjungan::factory(20)->create();
+        JadwalDokter::factory(1)->create();
 
         $this->command->info('Loading Tarif table seed');
         $path = 'public/sql/tarif.sql';

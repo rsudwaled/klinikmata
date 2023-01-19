@@ -30,7 +30,7 @@ return [
     |
     */
 
-    'use_ico_only' => false,
+    'use_ico_only' => true,
     'use_full_favicon' => false,
 
     /*
@@ -65,7 +65,7 @@ return [
 
     'logo' => '<b>Klinik Mata Losari</b>',
     'logo_img' => 'klinik mata losari/klinik mata losari.png',
-    'logo_img_class' => 'brand-image img-circle elevation-3',
+    'logo_img_class' => 'brand-image img-circle',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
     'logo_img_alt' => 'Admin Logo',
@@ -345,42 +345,42 @@ return [
                     'url'  => 'administrator/dokter',
                     'icon' => 'fas fa-user-md',
                     'shift'   => 'ml-2',
-
                 ],
                 [
                     'text' => 'Poliklinik',
                     'url'  => 'administrator/poliklinik',
                     'icon' => 'fas fa-clinic-medical',
                     'shift'   => 'ml-2',
-
                 ],
                 [
                     'text' => 'Ruangan',
                     'url'  => 'administrator/ruangan',
                     'icon' => 'fas fa-clinic-medical',
                     'shift'   => 'ml-2',
-
+                ],
+                [
+                    'text' => 'Jadwal Dokter',
+                    'url'  => 'administrator/jadwaldokter',
+                    'icon' => 'fas fa-calendar-alt',
+                    'shift'   => 'ml-2',
                 ],
                 [
                     'text' => 'Diagnosa ICD 10',
                     'url'  => 'administrator/icd10',
                     'icon' => 'fas fa-diagnoses',
                     'shift'   => 'ml-2',
-
                 ],
                 [
                     'text' => 'Diagnosa ICD 9',
                     'url'  => 'administrator/icd9',
                     'icon' => 'fas fa-diagnoses',
                     'shift'   => 'ml-2',
-
                 ],
                 [
                     'text' => 'Obat',
                     'url'  => 'administrator/obat',
                     'icon' => 'fas fa-pills',
                     'shift'   => 'ml-2',
-
                 ],
                 [
                     'text' => 'Kunjungan',
@@ -389,34 +389,30 @@ return [
                     'shift'   => 'ml-2',
 
                 ],
-                [
-                    'text' => 'Resume Medis',
-                    'url'  => 'administrator/resumemedis',
-                    'icon' => 'fas fa-notes-medical',
-                    'shift'   => 'ml-2',
-
-                ],
-                [
-                    'text' => 'Farmasi',
-                    'url'  => 'administrator/farmasi',
-                    'icon' => 'fas fa-prescription-bottle',
-                    'shift'   => 'ml-2',
-
-                ],
+                // [
+                //     'text' => 'Resume Medis',
+                //     'url'  => 'administrator/resumemedis',
+                //     'icon' => 'fas fa-notes-medical',
+                //     'shift'   => 'ml-2',
+                // ],
+                // [
+                //     'text' => 'Farmasi',
+                //     'url'  => 'administrator/farmasi',
+                //     'icon' => 'fas fa-prescription-bottle',
+                //     'shift'   => 'ml-2',
+                // ],
                 [
                     'text' => 'Tarif Pelayanan',
                     'url'  => 'administrator/tarif',
                     'icon' => 'fas fa-hand-holding-medical',
                     'shift'   => 'ml-2',
-
                 ],
-                [
-                    'text' => 'Keuangan',
-                    'url'  => 'administrator/keuangan',
-                    'icon' => 'fas fa-money-bill',
-                    'shift'   => 'ml-2',
-
-                ],
+                // [
+                //     'text' => 'Keuangan',
+                //     'url'  => 'administrator/keuangan',
+                //     'icon' => 'fas fa-money-bill',
+                //     'shift'   => 'ml-2',
+                // ],
             ]
         ],
 

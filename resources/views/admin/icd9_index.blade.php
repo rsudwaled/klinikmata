@@ -8,14 +8,25 @@
         <div class="col-12">
             <x-adminlte-card title="Data ICD 9" theme="secondary" collapsible>
                 <div class="row">
-                    <div class="col-md-8">
-                        <x-adminlte-button label="Tambah" class="btn-sm" theme="success" title="Tambah Pasien"
-                            icon="fas fa-plus" data-toggle="modal" data-target="#modalCustom" />
-                    </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <form action="" method="get">
-                            <x-adminlte-input name="search" placeholder="Pencarian Kode / Nama" igroup-size="sm"
-                                value="{{ $request->search }}">
+                            <x-adminlte-input name="kode" placeholder="Pencarian Berdasarkan Kode" igroup-size="sm"
+                                value="{{ $request->kode }}">
+                                <x-slot name="appendSlot">
+                                    <x-adminlte-button type="submit" theme="outline-primary" label="Cari" />
+                                </x-slot>
+                                <x-slot name="prependSlot">
+                                    <div class="input-group-text text-primary">
+                                        <i class="fas fa-search"></i>
+                                    </div>
+                                </x-slot>
+                            </x-adminlte-input>
+                        </form>
+                    </div>
+                    <div class="col-md-3">
+                        <form action="" method="get">
+                            <x-adminlte-input name="nama" placeholder="Pencarian Berdasarkan Nama" igroup-size="sm"
+                                value="{{ $request->nama }}">
                                 <x-slot name="appendSlot">
                                     <x-adminlte-button type="submit" theme="outline-primary" label="Cari" />
                                 </x-slot>
@@ -45,17 +56,17 @@
                         </tr>
                     @endforeach
                 </x-adminlte-datatable>
-                {{-- <div class="row">
+                <div class="row">
                     <div class="col-md-5">
-                        Tampil data {{ $pasiens->firstItem() }} sampai {{ $pasiens->lastItem() }} dari total
-                        {{ $total_pasien }}
+                        Tampil data {{ $icd->firstItem() }} sampai {{ $icd->lastItem() }} dari total
+                        {{ $total_icd }}
                     </div>
                     <div class="col-md-7">
                         <div class="float-right pagination-sm">
-                            {{ $pasiens->links() }}
+                            {{ $icd->appends($request->all())->links() }}
                         </div>
                     </div>
-                </div> --}}
+                </div>
             </x-adminlte-card>
         </div>
     </div>
