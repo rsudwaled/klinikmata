@@ -21,10 +21,11 @@
                 <th>Tempat, Tanggal Lahir</th>
                 <th>Alamat</th>
                 <th>Keluhan</th>
+                <th>status</th>
             </thead>
             <tbody>
                 @foreach ($kunjungan as $k)
-                    <tr class="pilihpasien" kodekunjungan="{{ $k->kode }}" idkunjungan="{{ $k->id }}">
+                    <tr class="pilihpasien" idpasien="{{ $k->pasien_id }}" kodekunjungan="{{ $k->kode }}" idkunjungan="{{ $k->id }}">
                         <td>{{ $k->pasien->no_rm }}</td>
                         <td>{{ $k->pasien->nama }}</td>
                         <td>{{ $k->pasien->tempat_lahir }},
@@ -33,6 +34,7 @@
                         </td>
                         <td>{{ $k->pasien->nama_desa }}, {{ $k->pasien->nama_kecamatan }} | {{ $k->pasien->alamat }}</td>
                         <td>{{ $k->keluhan }}</td>
+                        <td>{{ $k->assesmenperawat? $k->assesmenperawat->status : 'none' }}</td>
                     </tr>
                 @endforeach
             </tbody>
@@ -68,7 +70,7 @@
 @endsection
 @section('plugins.DateRangePicker', true)
 @section('plugins.Datatables', true)
-@section('plugins.Select2', true)
+@section('plugins.Select2', true)22222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222
 @section('plugins.Sweetalert2', true)
 @section('plugins.TempusDominusBs4', true)
 @section('css')
@@ -120,12 +122,14 @@
             spinner.show();
             kodekunjungan = $(this).attr('kodekunjungan')
             idkunjungan = $(this).attr('idkunjungan')
+            idpasien = $(this).attr('idpasien')
             $.ajax({
                 type: 'post',
                 data: {
                     _token: "{{ csrf_token() }}",
                     kodekunjungan,
-                    idkunjungan
+                    idkunjungan,
+                    idpasien
                 },
                 url: '<?= route('indexermperawat') ?>',
                 success: function(response) {
@@ -139,7 +143,7 @@
             $(".slide2").attr('hidden', true);
             $(".slide1").removeAttr('hidden', true);
         }
-        function formcatatanmedis() {
+        function formcatatanmedis(idpasien) {
             var element = document.getElementById("pemeriksaan");
             element.classList.add("active");
             spinner = $('#loader2');
@@ -148,6 +152,7 @@
                 type: 'post',
                 data: {
                     _token: "{{ csrf_token() }}",
+                    idpasien
                 },
                 url: '<?= route('formcatatanmedis_perawat') ?>',
                 error: function(data) {

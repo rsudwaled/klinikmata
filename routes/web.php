@@ -59,6 +59,7 @@ Route::middleware('auth')->group(function () {
         Route::get('pendaftaran', [PendaftaranController::class, 'indexPendaftaran'])->name('pendaftaran');
         Route::post('datapasienbaru', [PendaftaranController::class, 'dataPasienBaru'])->name('datapasienbaru');
         Route::post('pendaftaranpasien', [PendaftaranController::class, 'formPendaftaran'])->name('pendaftaranpasien');
+        Route::post('pencaripasien', [PendaftaranController::class, 'pencarianPasien'])->name('pencaripasien');
 
         Route::post('simpanpendaftaran', [PendaftaranController::class, 'simpanPendfataran'])->name('simpanpendaftaran');
 

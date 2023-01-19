@@ -28,8 +28,6 @@ class DokterController extends Controller
     }
     public function indexErm(Request $request)
     {
-        // kodekunjungan
-        // idkunjungan
         $kunjungan = Kunjungan::where('kode', $request->kodekunjungan)->first();
         return view('erm.index_erm_dokter',compact([
             'kunjungan'

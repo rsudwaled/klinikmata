@@ -15,18 +15,33 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Pasien;
 use App\Models\Dokter;
 use App\Models\Kunjungan;
+use Laravolt\Indonesia\Models\Provinsi;
 
 class PendaftaranController extends Controller
 {
     public function indexPendaftaran(Request $request)
     {
-        return view('Pendaftaran.index_pendaftaran');
+        $provinsi = Provinsi::pluck('name', 'code');
+        return view('Pendaftaran.index_pendaftaran', compact([
+            'provinsi'
+        ]));
     }
     public function dataPasienBaru(Request $request)
     {
 
         $pasiens = Pasien::get();
-        return view('Pendaftaran.datapasienbaru',[
+        return view('Pendaftaran.datapasienbaru', [
+            'datapasien' => $pasiens
+        ]);
+    }
+    public function pencarianPasien(Request $request)
+    {
+        $pasiens = Pasien::orderBy('id', 'desc')
+            ->where('no_rm', 'LIKE', "%{$request->search}%")
+            ->orWhere('nama', 'LIKE', "%{$request->search}%")
+            ->orWhere('nik', 'LIKE', "%{$request->search}%")
+            ->get();
+        return view('Pendaftaran.datapasienbaru', [
             'datapasien' => $pasiens
         ]);
     }
@@ -35,7 +50,7 @@ class PendaftaranController extends Controller
         $pasiens = Pasien::where('no_rm', $request->nomorrm)->first();
         $kunjungan = Kunjungan::where('pasien_id', $request->id)->get();
         $dokter = Dokter::get();
-        return view('Pendaftaran.formpendaftaran',compact([
+        return view('Pendaftaran.formpendaftaran', compact([
             'pasiens',
             'dokter',
             'kunjungan'
@@ -53,7 +68,7 @@ class PendaftaranController extends Controller
             $value =  $nama['value'];
             $dataSet[$index] = $value;
         }
-        if($dataSet['dokter'] == ""){
+        if ($dataSet['dokter'] == "") {
             $data = [
                 'kode' => 502,
                 'message' => 'Dokter belum dipilih !'
@@ -61,7 +76,7 @@ class PendaftaranController extends Controller
             echo json_encode($data);
             die;
         }
-        if($dataSet['keluhan'] == ""){
+        if ($dataSet['keluhan'] == "") {
             $data = [
                 'kode' => 502,
                 'message' => 'Silahkan isi keluhan pasien !'
@@ -81,7 +96,7 @@ class PendaftaranController extends Controller
             'tujuan' => 'POLIKLINIK',
             'keluhan' => $dataSet['keluhan']
         ];
-        try{
+        try {
             $kunjungans = Kunjungan::create($arr);
             $data = [
                 'kode' => 200,
@@ -89,7 +104,7 @@ class PendaftaranController extends Controller
             ];
             echo json_encode($data);
             die;
-        }catch (\Exception $e) {
+        } catch (\Exception $e) {
             $data = [
                 'kode' => 502,
                 'message' => $e->getMessage()
@@ -105,7 +120,7 @@ class PendaftaranController extends Controller
         $q = DB::select('SELECT id,kode,RIGHT(kode,3) AS kd_max  FROM kunjungans
         WHERE DATE(tgl_masuk) = ?
         ORDER BY id DESC
-        LIMIT 1',[$date]);
+        LIMIT 1', [$date]);
         $kd = "";
         if (count($q) > 0) {
             foreach ($q as $k) {
@@ -116,6 +131,6 @@ class PendaftaranController extends Controller
             $kd = "001";
         }
         date_default_timezone_set('Asia/Jakarta');
-        return 'MAT'. date('ymd') . $kd;
+        return 'MAT' . date('ymd') . $kd;
     }
 }

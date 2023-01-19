@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Kunjungan extends Model
 {
     use HasFactory;
-  
+
     protected $guarded = ['id'];
     protected $appends = [
         'counter',
@@ -25,5 +25,9 @@ class Kunjungan extends Model
     public function dokter()
     {
         return $this->belongsTo(Dokter::class);
+    }
+    public function assesmenperawat()
+    {
+        return $this->hasOne(AssesmenPerawat::class,'id_kunjungan','id');
     }
 }
