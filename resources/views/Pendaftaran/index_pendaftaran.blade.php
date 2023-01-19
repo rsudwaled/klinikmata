@@ -19,21 +19,9 @@
         <div class="container-fluid mt-3">
             <div class="row">
                 <div class="col-sm-2">
-                    <input type="text" class="form-control" id="cari_nomorrm" placeholder="nomor RM ..">
+                    <input type="text" class="form-control" id="cari_nomorrm" placeholder="cari nomor RM / nik / nama">
                 </div>
-                <div class="col-sm-2">
-                    <input type="text" class="form-control" id="cari_nomorktp" placeholder="nomor KTP ..">
-                </div>
-                <div class="col-sm-2">
-                    <input type="text" class="form-control" id="cari_namapasien" placeholder="Nama pasien ..">
-                </div>
-                <div class="col-sm-2">
-                    <input type="text" class="form-control" id="cari_nomorbpjs" placeholder="nomor BPJS ..">
-                </div>
-                <div class="col-sm-2">
-                    <input type="text" class="form-control" id="cari_alamat" placeholder="Alamat ..">
-                </div>
-                <div class="col-sm-2">
+                <div class="col-sm-4">
                     <button type="submit" class="btn btn-primary mb-2" onclick="caripasien()"> <i
                             class="bi bi-search-heart"></i> Cari Pasien</button>
 
@@ -41,6 +29,9 @@
             </div>
         </div>
         <div id="hasilpencarianpasien" class="hasilpencarianpasien mt-2">
+
+        </div>
+        <div id="hasilpencarianpasien2" class="hasilpencarianpasien mt-2">
 
         </div>
     </div>
@@ -62,7 +53,70 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    ...
+                    <form action="" id="form">
+                        @csrf
+                        <div class="row">
+                            <div class="col-md-4">
+                                <x-adminlte-input name="nik" label="NIK" igroup-size="sm" enable-old-support required />
+                                <x-adminlte-input name="no_rm" label="No RM" igroup-size="sm" enable-old-support required />
+                                <x-adminlte-input name="no_bpjs" label="No BPJS" igroup-size="sm" enable-old-support required />
+                                <x-adminlte-input name="no_ihs" label="No Satu Sehat" igroup-size="sm" enable-old-support required />
+                            </div>
+                            <div class="col-md-4">
+                                <input id="id" type="hidden" name="id">
+                                <x-adminlte-input name="nama" label="Nama" igroup-size="sm" enable-old-support required />
+                                <x-adminlte-select name="sex" label="Jenis Kelamin" igroup-size="sm" enable-old-support required>
+                                    <option value="L">Laki-laki</option>
+                                    <option value="P">Perempuan</option>
+                                </x-adminlte-select>
+                                <div class="row">
+                                    <div class="col-md-7">
+                                        <x-adminlte-input name="tempat_lahir" label="Tempat Lahir" igroup-size="sm" enable-old-support
+                                            required />
+                                    </div>
+                                    <div class="col-md-5">
+                                        <x-adminlte-input name="tgl_lahir" label="Tgl Lahir" igroup-size="sm" enable-old-support
+                                            required />
+                                    </div>
+                                </div>
+                                <x-adminlte-input name="nohp" label="No HP" igroup-size="sm" enable-old-support required />
+                            </div>
+                            <div class="col-md-4">
+                                <x-adminlte-select2 name="provinsi" label="Provinsi">
+                                    <option value="" selected disabled>PILIH PROVINSI</option>
+                                    @foreach ($provinsi as $code => $name)
+                                        <option value="{{ $code }}">{{ $name }}</option>
+                                    @endforeach
+                                </x-adminlte-select2>
+                                <x-adminlte-select2 name="kabupaten" label="Kabupaten">
+                                    <option value="" selected disabled>PILIH KABUPATEN</option>
+                                    @foreach ($provinsi as $code => $name)
+                                        <option value="{{ $code }}">{{ $name }}</option>
+                                    @endforeach
+                                </x-adminlte-select2>
+                                <x-adminlte-select2 name="kecamatan" label="Kecamatan">
+                                    <option value="" selected disabled>PILIH KECAMATAN</option>
+                                    @foreach ($provinsi as $code => $name)
+                                        <option value="{{ $code }}">{{ $name }}</option>
+                                    @endforeach
+                                </x-adminlte-select2>
+                                <x-adminlte-select2 name="desa" label="Desa">
+                                    <option value="" selected disabled>PILIH DESA</option>
+                                    @foreach ($provinsi as $code => $name)
+                                        <option value="{{ $code }}">{{ $name }}</option>
+                                    @endforeach
+                                </x-adminlte-select2>
+
+                                <x-adminlte-input name="alamat" label="Tgl Lahir" igroup-size="sm" enable-old-support required />
+                            </div>
+                        </div>
+                    </form>
+                    <x-slot name="footerSlot">
+                        <x-adminlte-button class="mr-auto " id="btnStore" theme="success" icon="fas fa-save" label="Simpan" />
+                        <x-adminlte-button class="mr-auto" id="btnUpdate" theme="warning" icon="fas fa-edit" label="Update" />
+                        <x-adminlte-button id="btnDelete" theme="danger" icon="fas fa-trash-alt" label="Delete" />
+                        <x-adminlte-button theme="secondary" icon="fas fa-arrow-left" label="Kembali" data-dismiss="modal" />
+                    </x-slot>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -71,7 +125,6 @@
             </div>
         </div>
     </div>
-
 @stop
 @section('plugins.Datatables', true)
 @section('plugins.Select2', true)
@@ -125,5 +178,21 @@
                 }
             });
         });
+        function caripasien()
+        {
+
+            $.ajax({
+                type: 'post',
+                data: {
+                    _token: "{{ csrf_token() }}",
+                   search : $('#cari_nomorrm').val()
+                },
+                url: '<?= route('pencaripasien') ?>',
+                success: function(response) {
+                    $('#hasilpencarianpasien').html(response);
+                    // $('#daftarpxumum').attr('disabled', true);
+                }
+            });
+        }
     </script>
 @stop

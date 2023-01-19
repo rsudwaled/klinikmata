@@ -30,15 +30,20 @@ class PerawatController extends Controller
     public function indexErmPerawat(Request $request)
     {
         $kunjungan = Kunjungan::where('kode', $request->kodekunjungan)->first();
+        $idpasien = $request->idpasien;
         return view('erm.index_erm_perawat', compact([
             'kunjungan'
+            ,'idpasien'
         ]));
     }
     public function formCatatanMedis(Request $request)
     {
         $kunjungan = Kunjungan::where('kode', $request->kodekunjungan)->first();
+        $riwayat = DB::select('SELECT * FROM kunjungans a
+        LEFT OUTER JOIN assesmen_perawats b ON a.`id` = b.`id_kunjungan` WHERE a.`pasien_id` = ?',[$request->idpasien]);
         return view('erm.form_catatan_medis_perawat', compact([
-            'kunjungan'
+            'kunjungan',
+            'riwayat'
         ]));
     }
     public function formPemeriksaan(Request $request)

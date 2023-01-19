@@ -137,7 +137,7 @@
                         text: data.message,
                         footer: 'Klinikmatalosari2023'
                     })
-                    formcatatanmedis()
+                    formcatatanmedis($('#idpasien').val())
                 }
             }
         });

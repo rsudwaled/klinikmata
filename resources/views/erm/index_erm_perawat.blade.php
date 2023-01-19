@@ -18,7 +18,7 @@
                 <p class="text-bold text-center text-xs">Alamat : {{ $kunjungan->pasien->alamat }} |
                     {{ $kunjungan->pasien->nama_desa }}, {{ $kunjungan->pasien->nama_kecamatan }}</p>
                 <p class="text-bold text-center text-md">Keluhan : {{ $kunjungan->keluhan }}</p>
-                <a href="#" onclick="formcatatanmedis()" class="btn btn-primary btn-block"><b>Catatan
+                <a href="#" onclick="formcatatanmedis({{ $kunjungan->pasien_id }})" class="btn btn-primary btn-block"><b>Catatan
                         Medis</b></a>
                 <input hidden type="text" id="idkunjungan" value="{{ $kunjungan->id }}">
                 <input hidden type="text" id="kodekunjungan" value="{{ $kunjungan->kode }}">
@@ -63,6 +63,7 @@
 </div>
 <script>
     $(document).ready(function() {
-        formcatatanmedis()
+        idpasien = $('#idpasien').val()
+        formcatatanmedis(idpasien)
     })
 </script>

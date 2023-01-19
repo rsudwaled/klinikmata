@@ -4,6 +4,7 @@
          <table id="tabelpasienbaru" class="table table-sm table-hover table-bordered">
              <thead class="bg-primary text-bold">
                  <th>Nomor RM</th>
+                 <th>Nomor KTP</th>
                  <th>Nama Pasien</th>
                  <th>Tempat, Tanggal Lahir</th>
                  <th>Alamat</th>
@@ -12,6 +13,7 @@
                  @foreach ($datapasien as $d)
                      <tr class="pilihpasien" nomorrm="{{ $d->no_rm }}" idpasien="{{ $d->id }}">
                          <td>{{ $d->no_rm }}</td>
+                         <td>{{ $d->nik }}</td>
                          <td>{{ $d->nama }} | {{ $d->sex }}</td>
                          <td>{{ $d->tempat_lahir }}, {{ \Carbon\Carbon::parse($d->tgl_lahir)->format('Y-m-d') }}
                             ( Usia {{ \Carbon\Carbon::parse($d->tgl_lahir)->age }})</td>
