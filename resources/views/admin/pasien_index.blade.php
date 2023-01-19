@@ -25,7 +25,7 @@
                     <div class="col-md-8">
                         <x-adminlte-button label="Tambah" class="btn-sm btnTambah" theme="success" title="Tambah Pasien"
                             icon="fas fa-plus" />
-                        <a href="{{ route('pasien.index') }}" class="btn btn-sm btn-warning">Refresh</a>
+                        <a href="{{ route('pasien.index') }}" class="btn btn-sm btn-warning"><i class="fas fa-sync"></i>Refresh</a>
                     </div>
                     <div class="col-md-4">
                         <form action="" method="get">

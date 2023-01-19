@@ -14,7 +14,7 @@
                     <div class="col-md-8 mb-2">
                         <x-adminlte-button label="Import" class="btn-sm btnImport" theme="warning" title="Tambah Pasien"
                             icon="fas fa-plus" />
-                        <a href="{{ route('dokter.index') }}" class="btn btn-sm btn-warning"><i class="fas fa-sync"></i>
+                        <a href="{{ route('tarif.index') }}" class="btn btn-sm btn-warning"><i class="fas fa-sync"></i>
                             Refresh</a>
 
                     </div>
