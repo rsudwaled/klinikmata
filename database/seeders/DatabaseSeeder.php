@@ -33,15 +33,15 @@ class DatabaseSeeder extends Seeder
         DB::unprepared(file_get_contents($path));
         $this->command->info('Tarif table seeded');
 
-        // $this->command->info('Loading ICD 9 table seed');
-        // $path = 'public/sql/icd9.sql';
-        // DB::unprepared(file_get_contents($path));
-        // $this->command->info('ICD 9 table seeded');
+        $this->command->info('Loading ICD 9 table seed');
+        $path = 'public/sql/icd9.sql';
+        DB::unprepared(file_get_contents($path));
+        $this->command->info('ICD 9 table seeded');
 
-        // $this->command->info('Loading ICD 10 table seed');
-        // $path = 'public/sql/icd10.sql';
-        // DB::unprepared(file_get_contents($path));
-        // $this->command->info('ICD 10 table seeded');
+        $this->command->info('Loading ICD 10 table seed');
+        $path = 'public/sql/icd10.sql';
+        DB::unprepared(file_get_contents($path));
+        $this->command->info('ICD 10 table seeded');
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',

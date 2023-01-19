@@ -1,3 +1,4 @@
+
 <div class="row">
     <div class="col-md-3">
         <!-- Profile Image -->
@@ -19,7 +20,9 @@
                 <p class="text-bold text-center text-md">Keluhan : {{ $kunjungan->keluhan }}</p>
                 <a href="#" onclick="formcatatanmedis()" class="btn btn-primary btn-block"><b>Catatan
                         Medis</b></a>
-
+                <input hidden type="text" id="idkunjungan" value="{{ $kunjungan->id }}">
+                <input hidden type="text" id="kodekunjungan" value="{{ $kunjungan->kode }}">
+                <input hidden type="text" id="idpasien" value="{{ $kunjungan->pasien_id }}">
             </div>
             <!-- /.card-body -->
         </div>
@@ -41,7 +44,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link" onclick="orderpenunjang()">
+                        <a href="#" class="nav-link" onclick="resume()">
                             <i class="fas fa-filter mr-2"></i> Resume
                         </a>
                     </li>

@@ -65,7 +65,8 @@
             </div><!-- /.container-fluid -->
         </section>
     </div>
-@stop
+@endsection
+@section('plugins.DateRangePicker', true)
 @section('plugins.Datatables', true)
 @section('plugins.Select2', true)
 @section('plugins.Sweetalert2', true)
@@ -158,7 +159,6 @@
                 }
             });
         }
-
         function formpemeriksaan() {
             var element = document.getElementById("pemeriksaan");
             element.classList.add("active");
@@ -168,10 +168,34 @@
                 type: 'post',
                 data: {
                     _token: "{{ csrf_token() }}",
+                    idkunjungan : $('#idkunjungan').val(),
+                    kodekunjungan : $('#kodekunjungan').val()
                 },
                 url: '<?= route('formpemeriksaan_perawat') ?>',
                 error: function(data) {
                     alert('ok')
+                },
+                success: function(response) {
+                    spinner.hide()
+                    $('.slide3').html(response)
+                }
+            });
+        }
+        function resume() {
+            var element = document.getElementById("pemeriksaan");
+            element.classList.add("active");
+            spinner = $('#loader2');
+            spinner.show();
+            $.ajax({
+                type: 'post',
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    idkunjungan : $('#idkunjungan').val(),
+                    kodekunjungan : $('#kodekunjungan').val()
+                },
+                url: '<?= route('resumeperawat') ?>',
+                error: function(data) {
+                    alert('error')
                 },
                 success: function(response) {
                     spinner.hide()

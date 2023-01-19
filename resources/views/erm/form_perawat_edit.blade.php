@@ -14,7 +14,7 @@
                     <td>Tanggal & Jam Pemeriksaan</td>
                     <td>
                         <input type="text" name="tanggalperiksa" class="form-control"
-                            value="{{ $now }}" />
+                            value="{{ $asskep[0]->tgl_pemeriksaan}}" />
                     </td>
                 </tr>
                 <tr>
@@ -22,12 +22,12 @@
                     <td colspan="3">
                         <div class="form-check form-check-inline">
                             <input class="form-check-input ml-2 mr-3" type="radio" name="sumberdataperiksa"
-                                id="sumberdataperiksa" value="Pasien Sendiri" checked>
+                                id="sumberdataperiksa" value="Pasien Sendiri" @if($asskep[0]->sumber_data == 'Pasien Sendiri') checked @endif>
                             <label class="form-check-label" for="inlineRadio1">Pasien Sendiri / Autoanamase </label>
                         </div>
                         <div class="form-check form-check-inline">
                             <input class="form-check-input mr-3" type="radio" name="sumberdataperiksa"
-                                id="sumberdataperiksa" value="Keluarga">
+                                id="sumberdataperiksa" value="Keluarga" @if($asskep[0]->sumber_data == 'Keluarga') checked @endif>
                             <label class="form-check-label" for="inlineRadio2">Keluarga / Alloanamnesa</label>
                         </div>
                     </td>
@@ -35,7 +35,7 @@
                 <tr>
                     <td>Keluhan Pasien</td>
                     <td colspan="3">
-                        <textarea class="form-control" name="keluhanutama" id="">{{ $kunjungan[0]->keluhan }}</textarea>
+                        <textarea class="form-control" name="keluhanutama" id="">{{ $asskep[0]->keluhan_pasien }} </textarea>
                     </td>
                 </tr>
                 <tr class="bg-secondary">
@@ -46,7 +46,7 @@
                     <td>
                         <div class="input-group date" id="reservationdate" data-target-input="nearest">
                             <input type="text" class="form-control form-control-md" name="tekanandarah"
-                                id="tekanandarah" />
+                                id="tekanandarah" value="{{ $asskep[0]->tekanan_darah }}" />
                             <div class="input-group-append">
                                 <div class="input-group-text text-md">mmHg</div>
                             </div>
@@ -56,7 +56,7 @@
                     <td>
                         <div class="input-group date" id="reservationdate" data-target-input="nearest">
                             <input type="text" class="form-control form-control-md" name="frekuensinadi"
-                                id="frekuensinadi" />
+                                id="frekuensinadi" value="{{ $asskep[0]->frekuensi_nadi }}" />
                             <div class="input-group-append">
                                 <div class="input-group-text text-md">X / Menit</div>
                             </div>
@@ -68,7 +68,7 @@
                     <td>
                         <div class="input-group date" id="reservationdate" data-target-input="nearest">
                             <input type="text" class="form-control form-control-md" name="frekuensinapas"
-                                id="frekuensinapas" />
+                                id="frekuensinapas" value="{{ $asskep[0]->frekuensi_nafas }}" />
                             <div class="input-group-append">
                                 <div class="input-group-text text-md">X / Menit</div>
                             </div>
@@ -78,7 +78,7 @@
                     <td>
                         <div class="input-group date" id="reservationdate" data-target-input="nearest">
                             <input type="text" class="form-control form-control-md" name="suhutubuh"
-                                id="suhutubuh" />
+                                id="suhutubuh" value="{{ $asskep[0]->suhu_tubuh }}"/>
                             <div class="input-group-append">
                                 <div class="input-group-text text-md">°C</div>
                             </div>
@@ -91,15 +91,17 @@
                         <div class="row">
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input ml-2 mr-3" type="radio" name="alergi" id="alergi"
-                                    value="Tidak Ada" checked>
+                                    value="Tidak Ada" @if($asskep[0]->riwayat_alergi == 'Tidak Ada') checked @endif>
                                 <label class="form-check-label" for="inlineRadio1">Tidak Ada</label>
                             </div>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input mr-3" type="radio" name="alergi" id="alergi"
-                                    value="Ada">
+                                    value="Ada"  @if($asskep[0]->riwayat_alergi == 'Ada') checked @endif>
                                 <label class="form-check-label" for="inlineRadio2">Ada</label>
                                 <div class="form-group form-check">
-                                    <textarea class="form-control" id="ketalergi" name="ketalergi" placeholder="keterangan alergi ..."></textarea>
+                                    <textarea class="form-control" id="ketalergi" name="ketalergi" placeholder="keterangan alergi ...">
+                                       {{ trim($asskep[0]->keterangan_alergi) }}
+                                    </textarea>
                                 </div>
                             </div>
                         </div>
