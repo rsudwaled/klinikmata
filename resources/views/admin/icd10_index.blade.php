@@ -40,7 +40,7 @@
                     </div>
                 </div>
                 @php
-                    $heads = ['Kode Diagnosa', 'Nama Panjang', 'Nama Pendek'];
+                    $heads = ['Kode Diagnosa', 'Nama Diagnosa', 'Kode DTD'];
                     $config['paging'] = false;
                     $config['lengthMenu'] = false;
                     $config['searching'] = false;
