@@ -51,6 +51,9 @@ Route::middleware('auth')->group(function () {
         Route::post('indexermperawat', [PerawatController::class, 'indexErmPerawat'])->name('indexermperawat');
         Route::post('formcatatanmedis_perawat', [PerawatController::class, 'formCatatanMedis'])->name('formcatatanmedis_perawat');
         Route::post('formpemeriksaan_perawat', [PerawatController::class, 'formPemeriksaan'])->name('formpemeriksaan_perawat');
+        Route::post('simpanpemeriksaanperawat', [PerawatController::class, 'simpanForm'])->name('simpanpemeriksaanperawat');
+        Route::post('resumeperawat', [PerawatController::class, 'resumePerawat'])->name('resumeperawat');
+        Route::post('simpanttdperawat', [PerawatController::class, 'simpanTtdPerawat'])->name('simpanttdperawat');
 
         Route::get('pendaftaran', [PendaftaranController::class, 'indexPendaftaran'])->name('pendaftaran');
         Route::post('datapasienbaru', [PendaftaranController::class, 'dataPasienBaru'])->name('datapasienbaru');
