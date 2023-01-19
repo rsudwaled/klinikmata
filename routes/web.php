@@ -10,6 +10,7 @@ use App\Http\Controllers\Erm\DokterController;
 use App\Http\Controllers\Erm\PerawatController;
 use App\Http\Controllers\JadwalDokterController;
 use App\Http\Controllers\KunjunganController;
+use App\Http\Controllers\ObatController;
 use App\Http\Controllers\Pendaftaran\PendaftaranController;
 use App\Http\Controllers\PoliklinikController;
 use App\Http\Controllers\RuanganController;
@@ -75,7 +76,9 @@ Route::middleware('auth')->group(function () {
         Route::resource('jadwaldokter', JadwalDokterController::class);
         Route::resource('ruangan', RuanganController::class);
         Route::resource('tarif', TarifController::class);
+        Route::resource('obat', ObatController::class);
         Route::post('tarif/import',  [TarifController::class, 'import'])->name('tarif.import');
+        Route::post('obat/import',  [ObatController::class, 'import'])->name('obat.import');
         Route::get('icd10',  [DiagnosaController::class, 'index_icd10']);
         Route::get('icd9',  [DiagnosaController::class, 'index_icd9']);
     });

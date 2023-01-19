@@ -10,6 +10,15 @@
     <div class="row">
         <div class="col-12">
             <x-adminlte-card title="Jadwal Dokter" theme="secondary" collapsible>
+                <div class="row">
+                    <div class="col-md-8">
+                        <x-adminlte-button label="Tambah" class="btn-sm btnTambah" theme="success" title="Tambah Pasien"
+                            icon="fas fa-plus" />
+                        <a href="{{ route('jadwaldokter.index') }}" class="btn btn-sm btn-warning"><i
+                                class="fas fa-sync"></i>Refresh</a>
+
+                    </div>
+                </div>
                 @php
                     $heads = ['Poliklinik', 'Dokter', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
                     $config['paging'] = false;
@@ -25,7 +34,8 @@
                                 <td>
                                     @foreach ($item as $jadwal)
                                         @if ($jadwal->hari == $i)
-                                            <x-adminlte-button label="{{ $jadwal->jampraktek }}" class="btn-xs mb-1 btnJadwal"
+                                            <x-adminlte-button label="{{ $jadwal->jampraktek }} ({{ $jadwal->kapasitaspasien }})"
+                                                class="btn-xs mb-1 btnJadwal"
                                                 theme="{{ $jadwal->libur ? 'danger' : 'warning' }}" data-toggle="tooltip"
                                                 title="Jadwal Dokter" data-id="{{ $jadwal->id }}" />
                                         @endif
@@ -64,7 +74,8 @@
                     </x-adminlte-select2>
                 </div>
                 <div class="col-md-6">
-                    <x-adminlte-input name="jampraktek" label="Jam Praktek" placeholder="Jam Praktek" enable-old-support />
+                    <x-adminlte-input name="jampraktek" label="Jam Praktek" placeholder="Jam Praktek" value="08:00 - 12:00"
+                        enable-old-support />
                 </div>
                 <div class="col-md-6">
                     <x-adminlte-input name="kapasitaspasien" label="Kapasitas Pasien" placeholder="Kapasitas Pasien"
@@ -84,12 +95,13 @@
                 @endforeach
             </x-adminlte-select2>
         </form>
-
         <x-slot name="footerSlot">
-            <x-adminlte-button label="Update" id="btnUpdate" class="mr-auto" type="submit" theme="warning"
-                icon="fas fa-edit" />
-            {{-- <x-adminlte-button label="Hapus" form="formDeleteJadwal" class="withLoad" type="submit" theme="danger"
-                icon="fas fa-trash-alt" /> --}}
+            <x-adminlte-button class="mr-auto " id="btnStore" theme="success" icon="fas fa-save" label="Simpan" />
+            <x-adminlte-button class="mr-auto" id="btnUpdate" theme="warning" icon="fas fa-edit" label="Update" />
+            <x-adminlte-button id="btnDelete" theme="danger" icon="fas fa-trash-alt" label="Delete" />
+
+            {{-- <x-adminlte-button label="Update" id="btnUpdate" class="mr-auto" type="submit" theme="warning"
+                icon="fas fa-edit" /> --}}
             <x-adminlte-button theme="danger" icon="fas fa-times" label="Close" data-dismiss="modal" />
         </x-slot>
     </x-adminlte-modal>
@@ -104,6 +116,12 @@
 @section('js')
     <script>
         $(function() {
+            $('.btnTambah').click(function() {
+                $('#form').trigger("reset");
+                $('#modal').modal('show');
+                $('#btnUpdate').hide();
+                $('#btnStore').show();
+            });
             $('.btnJadwal').click(function() {
                 var id = $(this).data('id');
                 $.LoadingOverlay("show");
@@ -120,10 +138,46 @@
                         $('#libur').prop('checked', true).trigger('change');
                     }
                     $.LoadingOverlay("hide", true);
+
+                    $('#btnUpdate').show();
+                    $('#btnStore').hide();
                     $('#modal').modal('show');
                 })
             });
-
+            $('#btnStore').click(function(e) {
+                $.LoadingOverlay("show");
+                e.preventDefault();
+                var url = "{{ route('jadwaldokter.store') }}";
+                $.ajax({
+                    data: $('#form').serialize(),
+                    url: url,
+                    type: "POST",
+                    dataType: 'json',
+                    success: function(data) {
+                        console.log(data);
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success',
+                            text: 'Data berhasil disimpan',
+                        }).then(okay => {
+                            if (okay) {
+                                $.LoadingOverlay("show");
+                                location.reload();
+                            }
+                        });
+                        $.LoadingOverlay("hide");
+                    },
+                    error: function(data) {
+                        console.log(data);
+                        swal.fire({
+                            icon: 'error',
+                            title: 'Error ' + data.statusText,
+                            text: data.responseJSON.metadata.message,
+                        });
+                        $.LoadingOverlay("hide");
+                    }
+                });
+            });
             $('#btnUpdate').click(function(e) {
                 var id = $("#id").val()
                 $.LoadingOverlay("show");
@@ -158,6 +212,32 @@
                         $.LoadingOverlay("hide");
                     }
                 });
+            });
+            $('#btnDelete').click(function(e) {
+                Swal.fire({
+                    title: 'Konfirmasi Hapus Data',
+                    text: 'Apakah anda akan menghapus data ini ?',
+                    showDenyButton: true,
+                    showCancelButton: true,
+                    confirmButtonText: 'Ya,  Hapus',
+                    denyButtonText: `Tidak`,
+                }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success',
+                            text: 'Data berhasil dihapus',
+                        }).then(okay => {
+                            if (okay) {
+                                $.LoadingOverlay("show");
+                                location.reload();
+                            }
+                        });
+                    } else if (result.isDenied) {
+                        Swal.fire('Data tidak jadi dihapus', '', 'info')
+                    }
+                })
             });
         });
     </script>
