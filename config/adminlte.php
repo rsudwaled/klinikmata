@@ -302,11 +302,7 @@ return [
             'url'  => 'admin/blog',
             'can'  => 'manage-blog',
         ],
-        [
-            'text'        => 'Pendaftaran',
-            'url'         => 'pendaftaran',
-            'icon'        => 'far fa-fw fa-file',
-        ],
+
         [
             'text'        => 'ERM',
             'url'         => 'erm',
@@ -319,12 +315,21 @@ return [
         ],
         [
             'text' => 'Menu Antrian',
-            'icon' => 'fas fa-user-injured',
+            'icon' => 'fas fa-user-plus',
             'submenu' => [
                 [
-                    'text' => 'Antrian Pasien',
-                    'url'  => 'administrator/pasien',
-                    'icon' => 'fas fa-user-injured',
+                    'text'        => 'Pendaftaran Pasien',
+                    'url'         => 'pendaftaran',
+                    'icon'        => 'fas fa-user-plus',
+                    'shift'   => 'ml-2',
+
+                ],
+                [
+                    'text' => 'Kunjungan Pasien',
+                    'url'  => 'pendaftaran/kunjungan',
+                    'icon' => 'fas fa-hospital-user',
+                    'shift'   => 'ml-2',
+
                 ],
             ]
         ],

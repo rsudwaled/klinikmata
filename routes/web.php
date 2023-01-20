@@ -82,4 +82,7 @@ Route::middleware('auth')->group(function () {
         Route::get('icd10',  [DiagnosaController::class, 'index_icd10']);
         Route::get('icd9',  [DiagnosaController::class, 'index_icd9']);
     });
+    Route::middleware('permission:pendaftaran')->prefix('pendaftaran')->group(function () {
+        Route::resource('kunjungan', KunjunganController::class);
+    });
 });
