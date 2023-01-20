@@ -35,11 +35,11 @@ class DokterController extends Controller
     }
     public function formPemeriksaan(Request $request)
     {
-        $Icd10 = Icd10::get();
-        $Icd9 = Icd9::get();
+        // $Icd10 = Icd10::get();
+        // $Icd9 = Icd9::get();
         return view('erm.form_dokter',compact([
-            'Icd10',
-            'Icd9',
+            // 'Icd10',
+            // 'Icd9',
         ]));
     }
     public function formTindakan(Request $request)
