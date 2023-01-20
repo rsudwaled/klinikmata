@@ -34,7 +34,7 @@
                         </td>
                         <td>{{ $k->pasien->nama_desa }}, {{ $k->pasien->nama_kecamatan }} | {{ $k->pasien->alamat }}</td>
                         <td>{{ $k->keluhan }}</td>
-                        <td>{{ $k->assesmenperawat? $k->assesmenperawat->status : 'none' }}</td>
+                        <td>{{ $k->status_assesmen_perawat }}</td>
                     </tr>
                 @endforeach
             </tbody>
