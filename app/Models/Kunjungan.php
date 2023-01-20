@@ -12,11 +12,22 @@ class Kunjungan extends Model
     protected $guarded = ['id'];
     protected $appends = [
         'counter',
+        'status_assesmen_perawat',
     ];
     public function getCounterAttribute()
     {
         $item = Kunjungan::where('pasien_id', $this->pasien_id)->whereDate('tgl_masuk', '<=', $this->tgl_masuk)->count();
         return $item;
+    }
+    public function getStatusAssesmenPerawatAttribute()
+    {
+        $assesmen = AssesmenPerawat::find($this->id);
+        if (isset($assesmen)) {
+            $status = $assesmen->status;
+        } else {
+            $status = null;
+        }
+        return  $status;
     }
     public function pasien()
     {
@@ -28,6 +39,6 @@ class Kunjungan extends Model
     }
     public function assesmenperawat()
     {
-        return $this->hasOne(AssesmenPerawat::class,'id_kunjungan','id');
+        return $this->hasOne(AssesmenPerawat::class, 'id_kunjungan', 'id');
     }
 }
