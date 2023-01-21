@@ -19,6 +19,8 @@ use App\Http\Controllers\SatuanObatController;
 use App\Http\Controllers\StokObatController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\TarifController;
+use App\Http\Controllers\TransaksiController;
+use App\Http\Controllers\UnitController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -79,6 +81,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('poliklinik', PoliklinikController::class);
         Route::resource('jadwaldokter', JadwalDokterController::class);
         Route::resource('ruangan', RuanganController::class);
+        Route::resource('unit', UnitController::class);
         Route::resource('tarif', TarifController::class);
 
         Route::resource('obat', ObatController::class);
@@ -86,7 +89,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('kategoriobat', KategoriObatController::class);
         Route::resource('supplier', SupplierController::class);
         Route::resource('stokobat', StokObatController::class);
-        Route::resource('transaksi', StokObatController::class);
+        Route::resource('transaksi', TransaksiController::class);
 
         Route::post('tarif/import',  [TarifController::class, 'import'])->name('tarif.import');
         Route::post('obat/import',  [ObatController::class, 'import'])->name('obat.import');

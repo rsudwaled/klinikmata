@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('nama')->nullable();
             $table->double('debit')->nullable();
             $table->double('kredit')->nullable();
+            $table->double('tipe')->nullable();
             $table->string('keterangan')->nullable();
             $table->string('pic')->nullable();
             $table->timestamps();

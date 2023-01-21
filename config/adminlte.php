@@ -364,6 +364,12 @@ return [
                     'shift'   => 'ml-2',
                 ],
                 [
+                    'text' => 'Unit',
+                    'url'  => 'administrator/unit',
+                    'icon' => 'fas fa-clinic-medical',
+                    'shift'   => 'ml-2',
+                ],
+                [
                     'text' => 'Jadwal Dokter',
                     'url'  => 'administrator/jadwaldokter',
                     'icon' => 'fas fa-calendar-alt',
