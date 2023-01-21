@@ -683,6 +683,16 @@ return [
         'decimal_mark'        => ',',
         'thousands_separator' => '.',
     ],
+    'IDR2' => [
+        'name'                => 'Rupiah',
+        'code'                => 360,
+        'precision'           => 2,
+        'subunit'             => 1,
+        'symbol'              => 'Rp ',
+        'symbol_first'        => true,
+        'decimal_mark'        => ',',
+        'thousands_separator' => '.',
+    ],
 
     'ILS' => [
         'name'                => 'New Israeli Sheqel',

@@ -24,6 +24,10 @@ class DatabaseSeeder extends Seeder
         $this->call(UserSeeder::class);
         $this->call(PoliklinikSeeder::class);
         $this->call(RuanganSeeder::class);
+        $this->call(UnitSeeder::class);
+        $this->call(KategoriObatSeeder::class);
+        $this->call(SatuanObatSeeder::class);
+        $this->call(SupplierSeeder::class);
 
         Pasien::factory(50)->create();
         Dokter::factory(50)->create();

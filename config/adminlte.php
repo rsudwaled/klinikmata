@@ -314,7 +314,7 @@ return [
             'icon'        => 'far fa-fw fa-file',
         ],
         [
-            'text' => 'Menu Antrian',
+            'text' => 'Menu Pendaftaran',
             'icon' => 'fas fa-user-plus',
             'submenu' => [
                 [
@@ -388,8 +388,39 @@ return [
                     'shift'   => 'ml-2',
                 ],
                 [
+                    'text' => 'Satuan Obat',
+                    'url'  => 'administrator/satuanobat',
+                    'icon' => 'fas fa-pills',
+                    'shift'   => 'ml-2',
+                ],
+                [
+                    'text' => 'Kategori Obat',
+                    'url'  => 'administrator/kategoriobat',
+                    'icon' => 'fas fa-pills',
+                    'shift'   => 'ml-2',
+                ],
+                [
+                    'text' => 'Supplier',
+                    'url'  => 'administrator/supplier',
+                    'icon' => 'fas fa-pills',
+                    'shift'   => 'ml-2',
+                ],
+                [
+                    'text' => 'Stok Obat',
+                    'url'  => 'administrator/stokobat',
+                    'icon' => 'fas fa-pills',
+                    'shift'   => 'ml-2',
+                ],
+                [
                     'text' => 'Kunjungan',
                     'url'  => 'administrator/kunjungan',
+                    'icon' => 'fas fa-hospital-user',
+                    'shift'   => 'ml-2',
+
+                ],
+                [
+                    'text' => 'Transaksi',
+                    'url'  => 'administrator/transaksi',
                     'icon' => 'fas fa-hospital-user',
                     'shift'   => 'ml-2',
 
@@ -489,6 +520,26 @@ return [
     */
 
     'plugins' => [
+        'TempusDominusBs4' => [
+            'active' => false,
+            'files' => [
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/moment/moment.min.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js',
+                ],
+                [
+                    'type' => 'css',
+                    'asset' => true,
+                    'location' => 'vendor/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css',
+                ],
+            ],
+        ],
         'Datatables' => [
             'active' => true,
             'files' => [
