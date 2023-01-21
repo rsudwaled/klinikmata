@@ -12,8 +12,14 @@ class Kunjungan extends Model
     protected $guarded = ['id'];
     protected $appends = [
         'counter',
+        'no_rm',
         'status_assesmen_perawat',
     ];
+    public function getNoRmAttribute()
+    {
+        $pasien = Pasien::find($this->pasien_id);
+        return $pasien->no_rm;
+    }
     public function getCounterAttribute()
     {
         $item = Kunjungan::where('pasien_id', $this->pasien_id)->whereDate('tgl_masuk', '<=', $this->tgl_masuk)->count();

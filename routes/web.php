@@ -9,11 +9,15 @@ use App\Http\Controllers\PasienController;
 use App\Http\Controllers\Erm\DokterController;
 use App\Http\Controllers\Erm\PerawatController;
 use App\Http\Controllers\JadwalDokterController;
+use App\Http\Controllers\KategoriObatController;
 use App\Http\Controllers\KunjunganController;
 use App\Http\Controllers\ObatController;
 use App\Http\Controllers\Pendaftaran\PendaftaranController;
 use App\Http\Controllers\PoliklinikController;
 use App\Http\Controllers\RuanganController;
+use App\Http\Controllers\SatuanObatController;
+use App\Http\Controllers\StokObatController;
+use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\TarifController;
 use Illuminate\Support\Facades\Route;
 
@@ -76,10 +80,20 @@ Route::middleware('auth')->group(function () {
         Route::resource('jadwaldokter', JadwalDokterController::class);
         Route::resource('ruangan', RuanganController::class);
         Route::resource('tarif', TarifController::class);
+
         Route::resource('obat', ObatController::class);
+        Route::resource('satuanobat', SatuanObatController::class);
+        Route::resource('kategoriobat', KategoriObatController::class);
+        Route::resource('supplier', SupplierController::class);
+        Route::resource('stokobat', StokObatController::class);
+        Route::resource('transaksi', StokObatController::class);
+
         Route::post('tarif/import',  [TarifController::class, 'import'])->name('tarif.import');
         Route::post('obat/import',  [ObatController::class, 'import'])->name('obat.import');
         Route::get('icd10',  [DiagnosaController::class, 'index_icd10']);
         Route::get('icd9',  [DiagnosaController::class, 'index_icd9']);
+    });
+    Route::middleware('permission:pendaftaran')->prefix('pendaftaran')->group(function () {
+        Route::resource('kunjungan', KunjunganController::class);
     });
 });

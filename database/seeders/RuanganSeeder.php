@@ -16,6 +16,7 @@ class RuanganSeeder extends Seeder
     public function run()
     {
         Ruangan::create([
+            "kode" => "PR1",
             "nama" => "Periksa 1",
             "deskripsi" => "Ruangan periksa pertama code A",
             "lokasi" => "A",
@@ -23,6 +24,7 @@ class RuanganSeeder extends Seeder
             'status' => 1,
         ]);
         Ruangan::create([
+            "kode" => "PR1",
             "nama" => "Periksa 2",
             "deskripsi" => "Ruangan periksa pertama code B",
             "lokasi" => "B",
@@ -30,6 +32,7 @@ class RuanganSeeder extends Seeder
             'status' => 1,
         ]);
         Ruangan::create([
+            "kode" => "DFTAR",
             "nama" => "Pendaftaran",
             "deskripsi" => "Ruangan pendaftaran pasien",
             "lokasi" => "A",
@@ -37,6 +40,7 @@ class RuanganSeeder extends Seeder
             'status' => 1,
         ]);
         Ruangan::create([
+            "kode" => "PRWAT",
             "nama" => "Ruangan Perawatan",
             "deskripsi" => "Ruangan istirahat perawat",
             "lokasi" => "A",

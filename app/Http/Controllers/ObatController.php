@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\API\APIController;
 use App\Imports\ObatImport;
 use App\Models\Obat;
+use App\Models\SatuanObat;
+use App\Models\StokObat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -16,8 +18,10 @@ class ObatController extends APIController
     public function index(Request $request)
     {
         $obats = Obat::latest()->get();
+        $satuan = SatuanObat::pluck('nama','id');
         return view('admin.obat_index', compact([
-            'obats'
+            'obats',
+            'satuan',
         ]));
     }
     public function edit($id)
@@ -33,15 +37,14 @@ class ObatController extends APIController
         $request['kode'] = $kode;
         $validator = Validator::make(request()->all(), [
             "nama" =>  "required",
-            "jenis" => "required",
-            "bentuk" =>  "required",
+            "satuan_id" => "required",
+            "jenis" =>  "required",
             "kode" =>  "required",
             "pic" =>  "required",
         ]);
         if ($validator->fails()) {
             return $this->sendError($validator->errors()->first(), null, 400);
         }
-
         Obat::create($request->except('_token'));
         return response()->json($request);
     }
@@ -50,8 +53,8 @@ class ObatController extends APIController
         $request['pic'] = Auth::user()->id;
         $validator = Validator::make(request()->all(), [
             "nama" =>  "required",
-            "jenis" => "required",
-            "bentuk" =>  "required",
+            "satuan_id" => "required",
+            "jenis" =>  "required",
             "kode" =>  "required",
             "pic" =>  "required",
         ]);

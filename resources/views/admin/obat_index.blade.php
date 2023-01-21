@@ -18,7 +18,7 @@
                     </div>
                 </div>
                 @php
-                    $heads = ['No', 'Kode', 'Barcode', 'Nama Obat', 'Bentuk', 'Jenis', 'Status', 'Updated at'];
+                    $heads = ['No', 'Kode', 'Barcode', 'Nama Obat', 'Satuan', 'Jenis', 'Stok Now', 'Status', 'Updated at'];
                     $config['scrollY'] = '400px';
                     $config['paging'] = false;
                     $config['scrollCollapse'] = true;
@@ -31,8 +31,9 @@
                             <td>{{ $item->kode }}</td>
                             <td></td>
                             <td>{{ $item->nama }}</td>
-                            <td>{{ $item->bentuk }}</td>
+                            <td>{{ $item->satuan ? $item->satuan->nama : "-" }}</td>
                             <td>{{ $item->jenis }}</td>
+                            <td>{{ $item->stok_current }}</td>
                             <td>
                                 @if ($item->status)
                                     Aktif
@@ -71,11 +72,11 @@
                     <x-adminlte-input name="nama" label="Nama Obat" igroup-size="sm" enable-old-support required />
                 </div>
                 <div class="col-md-6">
-                    <x-adminlte-select name="bentuk" label="Bentuk Obat" igroup-size="sm" enable-old-support required>
-                        <option value="Tablet">Tablet</option>
-                        <option value="Kaplet">Kaplet</option>
-                        <option value="Tube">Tube</option>
-                        <option value="Minidose">Minidose</option>
+                    <x-adminlte-select name="satuan_id" label="Satuan Obat" igroup-size="sm" enable-old-support required>
+                        <option selected disabled>Pilih Satuan Obat</option>
+                        @foreach ($satuan as $id => $nama)
+                            <option value="{{ $id }}">{{ $nama }}</option>
+                        @endforeach
                     </x-adminlte-select>
                     <x-adminlte-select name="jenis" label="Jenis Obat" igroup-size="sm" enable-old-support required>
                         <option value="Oral">Oral</option>
@@ -127,7 +128,7 @@
                     $('#kode').val(data.kode);
                     $('#barcode').val(data.barcode);
                     $('#nama').val(data.nama);
-                    $('#bentuk').val(data.bentuk).trigger('change');
+                    $('#satuan_id').val(data.satuan_id).trigger('change');
                     $('#jenis').val(data.jenis).trigger('change');
                     if (data.status == 1) {
                         $('#status').prop('checked', true).trigger('change');
