@@ -58,4 +58,10 @@ class DokterController extends Controller
     {
         return view('erm.form_catatan_medis');
     }
+    public function gambarMata1(){
+        return view('erm.gambarmata1');
+    }
+    public function gambarMata2(){
+        return view('erm.gambarmata2');
+    }
 }

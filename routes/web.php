@@ -53,6 +53,8 @@ Route::middleware('auth')->group(function () {
         Route::post('inputtindakan', [DokterController::class, 'formTindakan'])->name('inputtindakan');
         Route::post('orderfarmasi', [DokterController::class, 'orderFarmasi'])->name('orderfarmasi');
         Route::post('orderpenunjang', [DokterController::class, 'orderPenunjang'])->name('orderpenunjang');
+        Route::post('gambarmata1', [DokterController::class, 'gambarMata1'])->name('gambarmata1');
+        Route::post('gambarmata2', [DokterController::class, 'gambarMata2'])->name('gambarmata2');
 
         Route::get('ermperawat', [PerawatController::class, 'indexPerawat'])->name('ermperawat');
         Route::post('indexermperawat', [PerawatController::class, 'indexErmPerawat'])->name('indexermperawat');

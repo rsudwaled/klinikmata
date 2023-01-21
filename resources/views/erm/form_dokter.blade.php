@@ -250,7 +250,8 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">OD</span>
                             </div>
-                            <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" id="od_visus_dasar" name="od_visus_dasar" value="">
+                            <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)"
+                                id="od_visus_dasar" name="od_visus_dasar" value="">
                         </div>
                     </td>
                     <td>
@@ -258,7 +259,8 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">PINHOLE</span>
                             </div>
-                            <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" name="od_pinhole_visus_dasar" id="od_pinhole_visus_dasar" value="">
+                            <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)"
+                                name="od_pinhole_visus_dasar" id="od_pinhole_visus_dasar" value="">
                         </div>
                     </td>
                 </tr>
@@ -268,7 +270,8 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">OS</span>
                             </div>
-                            <input name="os_visus_dasar" id="os_visus_dasar" value="" type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+                            <input name="os_visus_dasar" id="os_visus_dasar" value="" type="text"
+                                class="form-control" aria-label="Amount (to the nearest dollar)">
                         </div>
                     </td>
                     <td>
@@ -276,7 +279,8 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">PINHOLE</span>
                             </div>
-                            <input name="os_pinhole_visus_dasar" id="os_pinhole_visus_dasar" type="text" class="form-control" value="" aria-label="Amount (to the nearest dollar)">
+                            <input name="os_pinhole_visus_dasar" id="os_pinhole_visus_dasar" type="text"
+                                class="form-control" value="" aria-label="Amount (to the nearest dollar)">
                         </div>
                     </td>
                 </tr>
@@ -287,7 +291,8 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">OD : Sph</span>
                             </div>
-                            <input name="od_sph_refraktometer" value="" id="od_sph_refraktometer" type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+                            <input name="od_sph_refraktometer" value="" id="od_sph_refraktometer"
+                                type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
                         </div>
                     </td>
                     <td>
@@ -295,7 +300,9 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Cyl</span>
                             </div>
-                            <input type="text" value="" id="od_cyl_refraktometer" name="od_cyl_refraktometer" class="form-control" aria-label="Amount (to the nearest dollar)">
+                            <input type="text" value="" id="od_cyl_refraktometer"
+                                name="od_cyl_refraktometer" class="form-control"
+                                aria-label="Amount (to the nearest dollar)">
                         </div>
                     </td>
                     <td>
@@ -303,7 +310,8 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">X</span>
                             </div>
-                            <input id="od_x_refraktometer" value="" name="od_x_refraktometer" type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+                            <input id="od_x_refraktometer" value="" name="od_x_refraktometer" type="text"
+                                class="form-control" aria-label="Amount (to the nearest dollar)">
                         </div>
                     </td>
                 </tr>
@@ -313,7 +321,8 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">OS : Sph</span>
                             </div>
-                            <input id="os_sph_refraktometer" value="" name="os_sph_refraktometer" type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+                            <input id="os_sph_refraktometer" value="" name="os_sph_refraktometer"
+                                type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
                         </div>
                     </td>
                     <td>
@@ -321,7 +330,8 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Cyl</span>
                             </div>
-                            <input id="os_cyl_refraktometer" value="" name="os_cyl_refraktometer" type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+                            <input id="os_cyl_refraktometer" value="" name="os_cyl_refraktometer"
+                                type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
                         </div>
                     </td>
                     <td>
@@ -329,7 +339,8 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">X</span>
                             </div>
-                            <input id="os_x_refraktometer" value="" name="os_x_refraktometer" type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+                            <input id="os_x_refraktometer" value="" name="os_x_refraktometer" type="text"
+                                class="form-control" aria-label="Amount (to the nearest dollar)">
                         </div>
                     </td>
                 </tr>
@@ -340,7 +351,8 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">OD : Sph</span>
                             </div>
-                            <input id="od_sph_Lensometer" value="" name="od_sph_Lensometer" type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+                            <input id="od_sph_Lensometer" value="" name="od_sph_Lensometer" type="text"
+                                class="form-control" aria-label="Amount (to the nearest dollar)">
                         </div>
                     </td>
                     <td>
@@ -348,7 +360,8 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Cyl</span>
                             </div>
-                            <input id="od_cyl_Lensometer" value="" name="od_cyl_Lensometer" type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+                            <input id="od_cyl_Lensometer" value="" name="od_cyl_Lensometer" type="text"
+                                class="form-control" aria-label="Amount (to the nearest dollar)">
                         </div>
                     </td>
                     <td>
@@ -356,7 +369,8 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">X</span>
                             </div>
-                            <input id="od_x_Lensometer" value="" name="od_x_Lensometer" type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+                            <input id="od_x_Lensometer" value="" name="od_x_Lensometer" type="text"
+                                class="form-control" aria-label="Amount (to the nearest dollar)">
                         </div>
                     </td>
                 </tr>
@@ -366,7 +380,8 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">OS : Sph</span>
                             </div>
-                            <input id="os_sph_Lensometer" value="" name="os_sph_Lensometer" type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+                            <input id="os_sph_Lensometer" value="" name="os_sph_Lensometer" type="text"
+                                class="form-control" aria-label="Amount (to the nearest dollar)">
                         </div>
                     </td>
                     <td>
@@ -374,7 +389,8 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Cyl</span>
                             </div>
-                            <input id="os_cyl_Lensometer" value="" name="os_cyl_Lensometer" type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+                            <input id="os_cyl_Lensometer" value="" name="os_cyl_Lensometer" type="text"
+                                class="form-control" aria-label="Amount (to the nearest dollar)">
                         </div>
                     </td>
                     <td>
@@ -382,7 +398,8 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">X</span>
                             </div>
-                            <input id="os_x_Lensometer" value="" name="os_x_Lensometer" type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+                            <input id="os_x_Lensometer" value="" name="os_x_Lensometer" type="text"
+                                class="form-control" aria-label="Amount (to the nearest dollar)">
                         </div>
                     </td>
                 </tr>
@@ -393,7 +410,8 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">VOD : Sph</span>
                             </div>
-                            <input id="vod_sph_kpj" value="" name="vod_sph_kpj" type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+                            <input id="vod_sph_kpj" value="" name="vod_sph_kpj" type="text"
+                                class="form-control" aria-label="Amount (to the nearest dollar)">
                         </div>
                     </td>
                     <td>
@@ -401,7 +419,8 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Cyl</span>
                             </div>
-                            <input id="vod_cyl_kpj" value="" name="vod_cyl_kpj" type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+                            <input id="vod_cyl_kpj" value="" name="vod_cyl_kpj" type="text"
+                                class="form-control" aria-label="Amount (to the nearest dollar)">
                         </div>
                     </td>
                     <td>
@@ -409,7 +428,8 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">X</span>
                             </div>
-                            <input id="vod_x_kpj" value="" name="vod_x_kpj" type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+                            <input id="vod_x_kpj" value="" name="vod_x_kpj" type="text"
+                                class="form-control" aria-label="Amount (to the nearest dollar)">
                         </div>
                     </td>
                 </tr>
@@ -419,7 +439,8 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">VOS : Sph</span>
                             </div>
-                            <input type="text" id="vos_sph_kpj" value="" name="vos_sph_kpj" class="form-control" aria-label="Amount (to the nearest dollar)">
+                            <input type="text" id="vos_sph_kpj" value="" name="vos_sph_kpj"
+                                class="form-control" aria-label="Amount (to the nearest dollar)">
                         </div>
                     </td>
                     <td>
@@ -427,7 +448,8 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Cyl</span>
                             </div>
-                            <input id="vos_cyl_kpj" value="" name="vos_cyl_kpj" type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+                            <input id="vos_cyl_kpj" value="" name="vos_cyl_kpj" type="text"
+                                class="form-control" aria-label="Amount (to the nearest dollar)">
                         </div>
                     </td>
                     <td>
@@ -435,65 +457,97 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">X</span>
                             </div>
-                            <input id="vos_x_kpj" value="" name="vos_x_kpj" type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+                            <input id="vos_x_kpj" value="" name="vos_x_kpj" type="text"
+                                class="form-control" aria-label="Amount (to the nearest dollar)">
                         </div>
                     </td>
                 </tr>
                 <tr>
                     <td>Tajam penglihatan dekat</td>
-                    <td colspan="3"><textarea class="form-control" value="" id="penglihatan_dekat" name="penglihatan_dekat"></textarea></td>
+                    <td colspan="3">
+                        <textarea class="form-control" value="" id="penglihatan_dekat" name="penglihatan_dekat"></textarea>
+                    </td>
                 </tr>
                 <tr>
                     <td>Tekanan Intra Okular</td>
-                    <td colspan="3"><textarea class="form-control" value="" id="tekanan_intra_okular" name="tekanan_intra_okular"></textarea></td>
+                    <td colspan="3">
+                        <textarea class="form-control" value="" id="tekanan_intra_okular" name="tekanan_intra_okular"></textarea>
+                    </td>
                 </tr>
                 <tr>
                     <td>Catatan Pemeriksaan Lainnya</td>
-                    <td colspan="3"><textarea class="form-control" value="" name="catatan_pemeriksaan_lainnya" id="catatan_pemerikssaan_lainnya"></textarea></td>
+                    <td colspan="3">
+                        <textarea class="form-control" value="" name="catatan_pemeriksaan_lainnya" id="catatan_pemerikssaan_lainnya"></textarea>
+                    </td>
                 </tr>
                 <tr>
                     <td>Palpebra</td>
-                    <td colspan="3"><input class="form-control" value="" id="palpebra" name="palpebra"></input></td>
+                    <td colspan="3"><input class="form-control" value="" id="palpebra"
+                            name="palpebra"></input></td>
                 </tr>
                 <tr>
                     <td>Konjungtiva</td>
-                    <td colspan="3"><input class="form-control" value="" id="konjungtiva" name="konjungtiva"></input></td>
+                    <td colspan="3"><input class="form-control" value="" id="konjungtiva"
+                            name="konjungtiva"></input></td>
                 </tr>
                 <tr>
                     <td>Kornea</td>
-                    <td colspan="3"><input class="form-control" value="" name="kornea" id="kornea"></input></td>
+                    <td colspan="3"><input class="form-control" value="" name="kornea"
+                            id="kornea"></input></td>
                 </tr>
                 <tr>
                     <td>Bilik Mata Depan</td>
-                    <td colspan="3"><input class="form-control" value="" name="bilik_mata_depan" id="bilik_mata_depan"></input></td>
+                    <td colspan="3"><input class="form-control" value="" name="bilik_mata_depan"
+                            id="bilik_mata_depan"></input></td>
                 </tr>
                 <tr>
                     <td>Pupil</td>
-                    <td colspan="3"><input class="form-control" value="" id="pupil" name="pupil"></input></td>
+                    <td colspan="3"><input class="form-control" value="" id="pupil"
+                            name="pupil"></input></td>
                 </tr>
                 <tr>
                     <td>Iris</td>
-                    <td colspan="3"><input class="form-control" value="" name="iris" id="iris"></input></td>
+                    <td colspan="3"><input class="form-control" value="" name="iris"
+                            id="iris"></input></td>
                 </tr>
                 <tr>
                     <td>Lensa</td>
-                    <td colspan="3"><input class="form-control" value="" name="lensa" id="lensa"></input></td>
+                    <td colspan="3"><input class="form-control" value="" name="lensa"
+                            id="lensa"></input></td>
                 </tr>
                 <tr>
                     <td>Funduskopi</td>
-                    <td colspan="3"><input class="form-control" value="" name="funduskopi" id="funduskopi"></input></td>
+                    <td colspan="3"><input class="form-control" value="" name="funduskopi"
+                            id="funduskopi"></input></td>
                 </tr>
                 <tr>
                     <td>Status Oftalmologis Khusus</td>
-                    <td colspan="3"><textarea class="form-control" value="" name="oftamologis" id="oftamologis"></textarea></td>
+                    <td colspan="3">
+                        <textarea class="form-control" value="" name="oftamologis" id="oftamologis"></textarea>
+                    </td>
                 </tr>
                 <tr>
                     <td>Masalah Medis</td>
-                    <td colspan="3"><textarea class="form-control" value="" name="masalahmedis" id="masalahmedis"></textarea></td>
+                    <td colspan="3">
+                        <textarea class="form-control" value="" name="masalahmedis" id="masalahmedis"></textarea>
+                    </td>
                 </tr>
                 <tr>
                     <td>Prognosis</td>
-                    <td colspan="3"><textarea class="form-control" value="" name="prognosis" id="prognosis"></textarea></td>
+                    <td colspan="3">
+                        <textarea class="form-control" value="" name="prognosis" id="prognosis"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Penandaan Gambar</td>
+                    <td colspan="3">
+                        <div class="gambar1">
+
+                        </div>
+                        <div class="gambar2">
+
+                        </div>
+                    </td>
                 </tr>
             </table>
             <table hidden class="table text-bold table-md text-md mt-4">
@@ -515,7 +569,8 @@
             </table>
             <div class="col-md-12 justify-content-end mb-2">
                 <button type="button" class="btn btn-secondary float-right mr-2" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-success float-right mr-2 simpanhasildokter mb-3">Simpan</button>
+                <button type="button" class="btn btn-success float-right mr-2 simpanhasildokter mb-3"
+                    onclick="simpanhasil()">Simpan</button>
             </div>
         </form>
     </div><!-- /.card-body -->
@@ -523,3 +578,64 @@
 
 @section('plugins.Datatables', true)
 @section('plugins.Select2', true)
+<script>
+    $(document).ready(function() {
+        ambilgambar1()
+        ambilgambar2()
+
+        function ambilgambar1() {
+            $.ajax({
+                type: 'post',
+                data: {
+                    _token: "{{ csrf_token() }}",
+                },
+                url: '<?= route('gambarmata1') ?>',
+                error: function(data) {
+                    alert('ok')
+                },
+                success: function(response) {
+                    spinner.hide()
+                    $('.gambar1').html(response)
+                }
+            });
+        }
+
+        function ambilgambar2() {
+            $.ajax({
+                type: 'post',
+                data: {
+                    _token: "{{ csrf_token() }}",
+                },
+                url: '<?= route('gambarmata2') ?>',
+                error: function(data) {
+                    alert('ok')
+                },
+                success: function(response) {
+                    spinner.hide()
+                    $('.gambar2').html(response)
+                }
+            });
+        }
+
+    });
+
+    function simpanhasil() {
+        var canvas = document.getElementById("myCanvas1");
+        var ctx = canvas.getContext("2d");
+        var img = document.getElementById("gambarnya1");
+        ctx.drawImage(img, 10, 10);
+        var canvas = document.getElementById("myCanvas1");
+        var dataUrl = canvas.toDataURL();
+        $('#gambarmata1').val(dataUrl)
+        gambar1 = $('#gambarmata1').val()
+
+        var canvas = document.getElementById("myCanvas2");
+        var ctx = canvas.getContext("2d");
+        var img = document.getElementById("gambarnya2");
+        ctx.drawImage(img, 10, 10);
+        var canvas = document.getElementById("myCanvas2");
+        var dataUrl = canvas.toDataURL();
+        $('#gambarmata2').val(dataUrl)
+        gambar2 = $('#gambarmata2').val()
+    }
+</script>
