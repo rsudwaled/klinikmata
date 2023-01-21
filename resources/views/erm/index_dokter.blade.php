@@ -143,8 +143,6 @@
         })
 
         function formcatatanmedis() {
-            var element = document.getElementById("pemeriksaan");
-            element.classList.add("active");
             spinner = $('#loader2');
             spinner.show();
             $.ajax({

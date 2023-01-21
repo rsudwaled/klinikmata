@@ -144,8 +144,6 @@
             $(".slide1").removeAttr('hidden', true);
         }
         function formcatatanmedis(idpasien) {
-            var element = document.getElementById("pemeriksaan");
-            element.classList.add("active");
             spinner = $('#loader2');
             spinner.show();
             $.ajax({
