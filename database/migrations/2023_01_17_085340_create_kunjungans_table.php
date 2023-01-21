@@ -25,8 +25,8 @@ return new class extends Migration
             $table->string('pasien_id')->nullable();
             $table->string('dokter_id')->nullable();
             $table->string('penjamin_id')->nullable();
-            $table->string('status')->nullable();
-            $table->string('pic')->nullable();
+            $table->string('status')->default(1);
+            $table->string('pic');
 
             $table->string('poliklinik')->nullable();
             $table->string('tujuan')->nullable();
