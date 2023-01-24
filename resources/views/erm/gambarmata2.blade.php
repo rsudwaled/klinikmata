@@ -5,7 +5,7 @@
 <canvas hidden id="myCanvas2" width="500px" height="450px" style="border:1px solid #d3d3d3;">
     Your browser does not support the HTML5 canvas tag.
 </canvas>
-<button class="btn btn-danger mt-2" onclick="batalgambar2()">batal</button>
+<button type="button" class="btn btn-danger mt-2" onclick="batalgambar2()">batal</button>
 
 <script>
     function showMarkerArea(target) {

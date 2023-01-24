@@ -8,17 +8,20 @@
                         src="{{ asset('vendor/adminlte/dist/img/pasien.jpg') }}" alt="User profile picture">
                 </div>
 
-                <h3 class="text-bold profile-username text-center text-md">{{ $kunjungan->pasien->nama}}</h3>
+                <h3 class="text-bold profile-username text-center text-md">{{ $kunjungan->pasien->nama }}</h3>
 
-                <p class="text-bold text-center text-xs">{{ $kunjungan->pasien->no_rm}}</p>
+                <p class="text-bold text-center text-xs">{{ $kunjungan->pasien->no_rm }}</p>
                 <p class="text-bold text-center text-xs">{{ $kunjungan->pasien->tempat_lahir }},
                     {{ \Carbon\Carbon::parse($kunjungan->pasien->tgl_lahir)->format('Y-m-d') }}
                     (Usia {{ \Carbon\Carbon::parse($kunjungan->pasien->tgl_lahir)->age }})</p>
-                <p class="text-bold text-center text-xs">Alamat : {{ $kunjungan->pasien->alamat}} | {{ $kunjungan->pasien->nama_desa }}, {{ $kunjungan->pasien->nama_kecamatan }}</p>
+                <p class="text-bold text-center text-xs">Alamat : {{ $kunjungan->pasien->alamat }} |
+                    {{ $kunjungan->pasien->nama_desa }}, {{ $kunjungan->pasien->nama_kecamatan }}</p>
                 <p class="text-bold text-center text-md">Keluhan : {{ $kunjungan->keluhan }}</p>
-                <a href="#" onclick="formcatatanmedis()" class="btn btn-primary btn-block"><b>Catatan
+                <a href="#" onclick="formcatatanmedis({{ $kunjungan->pasien_id }})" class="btn btn-primary btn-block"><b>Catatan
                         Medis</b></a>
-
+                <input hidden type="text" id="idkunjungan" value="{{ $kunjungan->id }}">
+                <input hidden type="text" id="kodekunjungan" value="{{ $kunjungan->kode }}">
+                <input hidden type="text" id="idpasien" value="{{ $kunjungan->pasien_id }}">
             </div>
             <!-- /.card-body -->
         </div>
@@ -55,7 +58,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link" onclick="orderpenunjang()">
+                        <a href="#" class="nav-link" onclick="resumedokter()">
                             <i class="fas fa-filter mr-2"></i> Resume
                         </a>
                     </li>
@@ -73,7 +76,8 @@
     <!-- /.col -->
 </div>
 <script>
- $(document).ready(function() {
-            formcatatanmedis()
-        })
+    $(document).ready(function() {
+        id = $('#idpasien').val()
+        formcatatanmedis(id)
+    })
 </script>

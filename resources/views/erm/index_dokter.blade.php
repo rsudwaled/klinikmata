@@ -142,13 +142,14 @@
             formcatatanmedis()
         })
 
-        function formcatatanmedis() {
+        function formcatatanmedis(idpasien) {
             spinner = $('#loader2');
             spinner.show();
             $.ajax({
                 type: 'post',
                 data: {
                     _token: "{{ csrf_token() }}",
+                    idpasien
                 },
                 url: '<?= route('formcatatanmedis') ?>',
                 error: function(data) {
@@ -170,6 +171,8 @@
                 type: 'post',
                 data: {
                     _token: "{{ csrf_token() }}",
+                    idkunjungan : $('#idkunjungan').val(),
+                    kodekunjungan : $('#kodekunjungan').val()
                 },
                 url: '<?= route('formpemeriksaan_dokter') ?>',
                 error: function(data) {
@@ -235,6 +238,28 @@
                     _token: "{{ csrf_token() }}",
                 },
                 url: '<?= route('orderpenunjang') ?>',
+                error: function(data) {
+                    alert('ok')
+                },
+                success: function(response) {
+                    spinner.hide()
+                    $('.slide3').html(response)
+                }
+            });
+        }
+        function resumedokter() {
+            var element = document.getElementById("pemeriksaan");
+            element.classList.add("active");
+            spinner = $('#loader2');
+            spinner.show();
+            $.ajax({
+                type: 'post',
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    idkunjungan : $('#idkunjungan').val(),
+                    kodekunjungan : $('#kodekunjungan').val()
+                },
+                url: '<?= route('resumedokter') ?>',
                 error: function(data) {
                     alert('ok')
                 },
