@@ -18,6 +18,7 @@ use App\Models\Dokter;
 use App\Models\Kunjungan;
 use App\Models\AssesmenPerawat;
 use App\Models\AssesmenDokter;
+use App\Models\Tarif;
 
 class DokterController extends Controller
 {
@@ -42,17 +43,32 @@ class DokterController extends Controller
         $now = $this->get_now();
         $kunjungan = Kunjungan::where('id', $request->idkunjungan)->get();
         $asskep = AssesmenPerawat::where('id_kunjungan', $request->idkunjungan)->get();
-        return view('erm.form_dokter',compact([
-            'kunjungan',
-            'asskep',
-            'now'
-            // 'Icd10',
-            // 'Icd9',
-        ]));
+        $assdok = AssesmenDokter::where('id_kunjungan', $request->idkunjungan)->get();
+        if(count($assdok) > 0){
+            return view('erm.form_dokter_edit',compact([
+                'kunjungan',
+                'asskep',
+                'now',
+                'assdok'
+                // 'Icd10',
+                // 'Icd9',
+            ]));
+        }else{
+            return view('erm.form_dokter',compact([
+                'kunjungan',
+                'asskep',
+                'now'
+                // 'Icd10',
+                // 'Icd9',
+            ]));
+        }
     }
     public function formTindakan(Request $request)
     {
-        return view('erm.form_tindakan');
+        $tarif = Tarif::get();
+        return view('erm.form_tindakan',compact([
+            'tarif'
+        ]));
     }
     public function orderFarmasi(Request $request)
     {
@@ -68,6 +84,31 @@ class DokterController extends Controller
         return view('erm.resumedokter',compact([
             'assdok'
         ]));
+    }
+    public function simpanTtdDokter(Request $request)
+    {
+        $assdok = [
+            'signature' => $request->signature,
+            'status' => 1
+        ];
+        try {
+                $kunjungans = DB::table('assesmen_dokters')
+                ->where('id_kunjungan', $request->idkunjungan)
+                ->update($assdok);
+            $data = [
+                'kode' => 200,
+                'message' => 'Tanda tangan berhasil disimpan ...'
+            ];
+            echo json_encode($data);
+            die;
+        } catch (\Exception $e) {
+            $data = [
+                'kode' => 502,
+                'message' => $e->getMessage()
+            ];
+            echo json_encode($data);
+            die;
+        }
     }
     public function formCatatanMedis(Request $request)
     {
@@ -243,7 +284,7 @@ class DokterController extends Controller
             $assdok = [
                 'id_kunjungan' => $request->idkunjungan,
                 'id_pasien' => $request->idpasien,
-                'id_asskep' =>'',
+                'id_asskep' => $request->idaskep,
                 'pic' => auth()->user()->id,
                 'tgl_entry' => $this->get_now(),
                 'tgl_kunjungan' => $dataSet['tgljamkunjungan'],
@@ -338,5 +379,14 @@ class DokterController extends Controller
             echo json_encode($data);
             die;
         }
+    }
+    public function simpanTindakan(Request $request)
+    {
+        $data = [
+            'kode' => 200,
+            'message' => 'Tanda tangan berhasil disimpan ...'
+        ];
+        echo json_encode($data);
+        die;
     }
 }
