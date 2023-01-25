@@ -6,25 +6,29 @@
     </div><!-- /.card-header -->
     <div class="card-body scroll">
         <form action="" class="formpemeriksaan">
-            <input type="text" hidden name="idaskep"  id="idaskep" value="{{ $assdok[0]->id }}">
+            <input hidden type="text" name="idaskep" id="idaskep" value="{{ $asskep[0]->id }}">
             <table class="table table-sm">
                 <tr>
                     <td>Tanggal & Jam Kunjungan</td>
-                    <td><input readonly type="text" class="form-control" value="{{$kunjungan[0]->tgl_masuk }}" name="tgljamkunjungan"></td>
+                    <td><input readonly type="text" class="form-control" value="{{ $assdok[0]->tgl_kunjungan }}"
+                            name="tgljamkunjungan"></td>
                     <td>Tanggal & Jam Pemeriksaan</td>
-                    <td><input type="text" class="form-control" value="{{ $now }}" id="tgljampemeriksaan" name="tgljampemeriksaan"></td>
+                    <td><input type="text" class="form-control" value="{{ $assdok[0]->tgl_pemeriksaan }}"
+                            id="tgljampemeriksaan" name="tgljampemeriksaan"></td>
                 </tr>
                 <tr>
                     <td>Sumber Data</td>
                     <td colspan="2">
                         <div class="form-check form-check-inline">
                             <input class="form-check-input ml-2 mr-3" type="radio" name="sumberdataperiksa"
-                                id="sumberdataperiksa" value="Pasien Sendiri " checked>
+                                id="sumberdataperiksa" value="Pasien Sendiri "
+                                @if ($assdok[0]->sumber_data == 'Pasien Sendiri ') checked @endif>
                             <label class="form-check-label" for="inlineRadio1">Pasien Sendiri / Autoanamase </label>
                         </div>
                         <div class="form-check form-check-inline">
                             <input class="form-check-input mr-3" type="radio" name="sumberdataperiksa"
-                                id="sumberdataperiksa" value="Keluarga">
+                                id="sumberdataperiksa" value="Keluarga"
+                                @if ($assdok[0]->sumber_data == 'Keluarga') checked @endif>
                             <label class="form-check-label" for="inlineRadio2">Keluarga / Alloanamnesa</label>
                         </div>
                     </td>
@@ -40,7 +44,7 @@
                     <td>
                         <div class="input-group date" id="reservationdate" data-target-input="nearest">
                             <input type="text" class="form-control form-control-md" name="tekanandarah"
-                                id="tekanandarah" value="{{ $asskep[0]->tekanan_darah }}"/>
+                                id="tekanandarah" value="{{ $assdok[0]->tekanan_darah }}" />
                             <div class="input-group-append">
                                 <div class="input-group-text text-md">mmHg</div>
                             </div>
@@ -50,7 +54,7 @@
                     <td>
                         <div class="input-group date" id="reservationdate" data-target-input="nearest">
                             <input type="text" class="form-control form-control-md" name="frekuensinadi"
-                                id="frekuensinadi" value="{{ $asskep[0]->frekuensi_nadi }}" />
+                                id="frekuensinadi" value="{{ $assdok[0]->frekuensi_nadi }}" />
                             <div class="input-group-append">
                                 <div class="input-group-text text-md">X / Menit</div>
                             </div>
@@ -62,7 +66,7 @@
                     <td>
                         <div class="input-group date" id="reservationdate" data-target-input="nearest">
                             <input type="text" class="form-control form-control-md" name="frekuensinapas"
-                                id="frekuensinapas" value="{{ $asskep[0]->frekuensi_nafas }}"/>
+                                id="frekuensinapas" value="{{ $assdok[0]->frekuensi_nafas }}" />
                             <div class="input-group-append">
                                 <div class="input-group-text text-md">X / Menit</div>
                             </div>
@@ -71,8 +75,8 @@
                     <td>Suhu</td>
                     <td>
                         <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                            <input type="text" class="form-control form-control-md" name="suhutubuh"
-                                id="suhutubuh" value="{{ $asskep[0]->suhu_tubuh }}" />
+                            <input type="text" class="form-control form-control-md" name="suhutubuh" id="suhutubuh"
+                                value="{{ $assdok[0]->suhu_tubuh }}" />
                             <div class="input-group-append">
                                 <div class="input-group-text text-md">°C</div>
                             </div>
@@ -82,7 +86,7 @@
                 <tr>
                     <td>Keluhan Utama</td>
                     <td colspan="3">
-                        <textarea cols="10" rows="4" class="form-control" name="keluhanutama" id="keluhanutama">{{ $kunjungan[0]->keluhan}}</textarea>
+                        <textarea cols="10" rows="4" class="form-control" name="keluhanutama" id="keluhanutama">{{ $assdok[0]->keluhan_pasien }}</textarea>
                     </td>
                 </tr>
                 <tr>
@@ -91,19 +95,19 @@
                 <tr>
                     <td>Riwayat Kehamilan (bagi pasien wanita) </td>
                     <td colspan="3">
-                        <textarea name="riwayatkehamilan" cols="10" rows="4" class="form-control"></textarea>
+                        <textarea name="riwayatkehamilan" cols="10" rows="4" class="form-control">{{ $assdok[0]->riwayat_kehamillan_pasien_wanita }}</textarea>
                     </td>
                 </tr>
                 <tr>
                     <td>Riwayat Kelahiran (bagi pasien anak) </td>
                     <td colspan="3">
-                        <textarea name="riwayatkelahiran" cols="10" rows="4" class="form-control"></textarea>
+                        <textarea name="riwayatkelahiran" cols="10" rows="4" class="form-control">{{ $assdok[0]->riwayat_kelahiran_pasien_anak }}</textarea>
                     </td>
                 </tr>
                 <tr>
                     <td>Riwayat Penyakit Sekarang</td>
                     <td colspan="3">
-                        <textarea name="riwayatpenyakitsekarang" cols="10" rows="4" class="form-control"></textarea>
+                        <textarea name="riwayatpenyakitsekarang" cols="10" rows="4" class="form-control">{{ $assdok[0]->riwayat_penyakit_sekarang }}</textarea>
                     </td>
                 </tr>
                 <tr>
@@ -113,63 +117,66 @@
                             <div class="col-md-3">
                                 <div class="form-group form-check">
                                     <input type="checkbox" class="form-check-input" id="hipertensi"
-                                        name="hipertensi" value="1">
+                                        name="hipertensi" value="1"
+                                        @if ($assdok[0]->hipertensi == '1') checked @endif>
                                     <label class="form-check-label" for="exampleCheck1">Hipertensi</label>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group form-check">
                                     <input type="checkbox" class="form-check-input" id="kencingmanis"
-                                        name="kencingmanis" value="1">
+                                        name="kencingmanis" value="1"
+                                        @if ($assdok[0]->kencingmanis == '1') checked @endif>
                                     <label class="form-check-label" for="exampleCheck1">Kencing Manis</label>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group form-check">
                                     <input type="checkbox" class="form-check-input" id="jantung" name="jantung"
-                                        value="1">
+                                        value="1" @if ($assdok[0]->jantung == '1') checked @endif>
                                     <label class="form-check-label" for="exampleCheck1">Jantung</label>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group form-check">
                                     <input type="checkbox" class="form-check-input" id="stroke" name="stroke"
-                                        value="1">
+                                        value="1" @if ($assdok[0]->stroke == '1') checked @endif>
                                     <label class="form-check-label" for="exampleCheck1">Stroke</label>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group form-check">
                                     <input type="checkbox" class="form-check-input" id="hepatitis" name="hepatitis"
-                                        value="1">
+                                        value="1" @if ($assdok[0]->hepatitis == '1') checked @endif>
                                     <label class="form-check-label" for="exampleCheck1">Hepatitis</label>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group form-check">
                                     <input type="checkbox" class="form-check-input" id="asthma" name="asthma"
-                                        value="1">
+                                        value="1" @if ($assdok[0]->asthma == '1') checked @endif>
                                     <label class="form-check-label" for="exampleCheck1">Asthma</label>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group form-check">
                                     <input type="checkbox" class="form-check-input" id="ginjal" name="ginjal"
-                                        value="1">
+                                        value="1" @if ($assdok[0]->ginjal == '1') checked @endif>
                                     <label class="form-check-label" for="exampleCheck1">Ginjal</label>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group form-check">
                                     <input type="checkbox" class="form-check-input" id="tb" name="tb"
-                                        value="1">
+                                        value="1" @if ($assdok[0]->tbparu == '1') checked @endif>
                                     <label class="form-check-label" for="exampleCheck1">TB Paru</label>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group form-check">
                                     <input type="checkbox" class="form-check-input" id="riwayatlain"
-                                        name="riwayatlain" value="1">
+                                        name="riwayatlain" value="1"
+                                        @if ($assdok[0]->riwayatlain == '1') checked @endif>
                                     <label class="form-check-label" for="exampleCheck1">Lain-lain</label>
                                 </div>
                             </div>
@@ -182,16 +189,18 @@
                         <div class="row">
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input ml-2 mr-3" type="radio" name="alergi"
-                                    id="alergi" value="Tidak Ada" checked>
+                                    id="alergi" value="Tidak Ada"
+                                    @if ($asskep[0]->riwayat_alergi == 'Tidak Ada') checked @endif>
                                 <label class="form-check-label" for="inlineRadio1">Tidak Ada</label>
                             </div>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input mr-3" type="radio" name="alergi" id="alergi"
-                                    value="Ada">
+                                    value="Ada" @if ($assdok[0]->riwayat_alergi == 'Ada') checked @endif>
                                 <label class="form-check-label" for="inlineRadio2">Ada</label>
                                 <div class="form-group form-check">
                                     <input class="form-control" id="ketalergi" name="ketalergi"
-                                        placeholder="keterangan alergi ...">
+                                        placeholder="keterangan alergi ..."
+                                        value="{{ $asskep[0]->keterangan_alergi }}">
                                 </div>
                             </div>
                         </div>
@@ -200,7 +209,8 @@
                 <tr>
                     <td>Status Generalis</td>
                     <td>
-                        <input type="text" class="form-control" name="statusgeneralis" id="statusgeneralis">
+                        <input type="text" class="form-control" name="statusgeneralis" id="statusgeneralis"
+                            value="{{ $assdok[0]->statusgeneralis }}">
                     </td>
                 </tr>
                 <tr>
@@ -209,25 +219,25 @@
                 <tr>
                     <td>Keadaan Umum</td>
                     <td colspan="3">
-                        <textarea class="form-control" name="keadaanumum"></textarea>
+                        <textarea class="form-control" name="keadaanumum">{{ $assdok[0]->keadaanumum }}</textarea>
                     </td>
                 </tr>
                 <tr>
                     <td>Kesadaran</td>
                     <td colspan="3">
-                        <textarea class="form-control" name="kesadaran"></textarea>
+                        <textarea class="form-control" name="kesadaran">{{ $assdok[0]->kesadaran }}</textarea>
                     </td>
                 </tr>
                 <tr>
                     <td>Diagnosa Kerja</td>
                     <td colspan="3">
-                        <textarea class="form-control" name="diagnosakerja"></textarea>
+                        <textarea class="form-control" name="diagnosakerja">{{ $assdok[0]->diagnosakerja }}</textarea>
                     </td>
                 </tr>
                 <tr>
                     <td>Diagnosa banding</td>
                     <td colspan="2">
-                        <textarea name="diagnosabanding" class="form-control"></textarea>
+                        <textarea name="diagnosabanding" class="form-control">{{ $assdok[0]->diagnosabanding }}</textarea>
                     </td>
                     <td><button type="button" class="btn btn-warning showmodalicd" data-toggle="modal"
                             data-target="#modalicd">ICD 10</button>
@@ -238,7 +248,7 @@
                 <tr>
                     <td>Rencana Kerja</td>
                     <td colspan="3">
-                        <textarea class="form-control" name="rencanakerja"></textarea>
+                        <textarea class="form-control" name="rencanakerja">{{ $assdok[0]->rencanakerja }}</textarea>
                     </td>
                 </tr>
                 <tr>
@@ -252,7 +262,7 @@
                                 <span class="input-group-text">OD</span>
                             </div>
                             <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)"
-                                id="od_visus_dasar" name="od_visus_dasar" value="">
+                                id="od_visus_dasar" name="od_visus_dasar" value="{{ $assdok[0]->vd_od }}">
                         </div>
                     </td>
                     <td>
@@ -261,7 +271,8 @@
                                 <span class="input-group-text">PINHOLE</span>
                             </div>
                             <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)"
-                                name="od_pinhole_visus_dasar" id="od_pinhole_visus_dasar" value="">
+                                name="od_pinhole_visus_dasar" id="od_pinhole_visus_dasar"
+                                value="{{ $assdok[0]->vd_od_pinhole }}">
                         </div>
                     </td>
                 </tr>
@@ -271,8 +282,8 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">OS</span>
                             </div>
-                            <input name="os_visus_dasar" id="os_visus_dasar" value="" type="text"
-                                class="form-control" aria-label="Amount (to the nearest dollar)">
+                            <input name="os_visus_dasar" id="os_visus_dasar" value="{{ $assdok[0]->vd_os }}"
+                                type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
                         </div>
                     </td>
                     <td>
@@ -281,7 +292,8 @@
                                 <span class="input-group-text">PINHOLE</span>
                             </div>
                             <input name="os_pinhole_visus_dasar" id="os_pinhole_visus_dasar" type="text"
-                                class="form-control" value="" aria-label="Amount (to the nearest dollar)">
+                                class="form-control" value="{{ $assdok[0]->vd_os_pinhole }}"
+                                aria-label="Amount (to the nearest dollar)">
                         </div>
                     </td>
                 </tr>
@@ -292,8 +304,9 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">OD : Sph</span>
                             </div>
-                            <input name="od_sph_refraktometer" value="" id="od_sph_refraktometer"
-                                type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+                            <input name="od_sph_refraktometer" value="{{ $assdok[0]->refraktometer_od_sph }}"
+                                id="od_sph_refraktometer" type="text" class="form-control"
+                                aria-label="Amount (to the nearest dollar)">
                         </div>
                     </td>
                     <td>
@@ -301,8 +314,8 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Cyl</span>
                             </div>
-                            <input type="text" value="" id="od_cyl_refraktometer"
-                                name="od_cyl_refraktometer" class="form-control"
+                            <input type="text" value="{{ $assdok[0]->refraktometer_od_cyl }}"
+                                id="od_cyl_refraktometer" name="od_cyl_refraktometer" class="form-control"
                                 aria-label="Amount (to the nearest dollar)">
                         </div>
                     </td>
@@ -311,8 +324,9 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">X</span>
                             </div>
-                            <input id="od_x_refraktometer" value="" name="od_x_refraktometer" type="text"
-                                class="form-control" aria-label="Amount (to the nearest dollar)">
+                            <input id="od_x_refraktometer" value="{{ $assdok[0]->refraktometer_od_x }}"
+                                name="od_x_refraktometer" type="text" class="form-control"
+                                aria-label="Amount (to the nearest dollar)">
                         </div>
                     </td>
                 </tr>
@@ -322,8 +336,9 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">OS : Sph</span>
                             </div>
-                            <input id="os_sph_refraktometer" value="" name="os_sph_refraktometer"
-                                type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+                            <input id="os_sph_refraktometer" value="{{ $assdok[0]->refraktometer_os_sph }}"
+                                name="os_sph_refraktometer" type="text" class="form-control"
+                                aria-label="Amount (to the nearest dollar)">
                         </div>
                     </td>
                     <td>
@@ -331,8 +346,9 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Cyl</span>
                             </div>
-                            <input id="os_cyl_refraktometer" value="" name="os_cyl_refraktometer"
-                                type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+                            <input id="os_cyl_refraktometer" value="{{ $assdok[0]->refraktometer_os_cyl }}"
+                                name="os_cyl_refraktometer" type="text" class="form-control"
+                                aria-label="Amount (to the nearest dollar)">
                         </div>
                     </td>
                     <td>
@@ -340,8 +356,9 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">X</span>
                             </div>
-                            <input id="os_x_refraktometer" value="" name="os_x_refraktometer" type="text"
-                                class="form-control" aria-label="Amount (to the nearest dollar)">
+                            <input id="os_x_refraktometer" value="{{ $assdok[0]->refraktometer_os_x }}"
+                                name="os_x_refraktometer" type="text" class="form-control"
+                                aria-label="Amount (to the nearest dollar)">
                         </div>
                     </td>
                 </tr>
@@ -352,8 +369,9 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">OD : Sph</span>
                             </div>
-                            <input id="od_sph_Lensometer" value="" name="od_sph_Lensometer" type="text"
-                                class="form-control" aria-label="Amount (to the nearest dollar)">
+                            <input id="od_sph_Lensometer" value="{{ $assdok[0]->Lensometer_od_sph }}"
+                                name="od_sph_Lensometer" type="text" class="form-control"
+                                aria-label="Amount (to the nearest dollar)">
                         </div>
                     </td>
                     <td>
@@ -361,8 +379,9 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Cyl</span>
                             </div>
-                            <input id="od_cyl_Lensometer" value="" name="od_cyl_Lensometer" type="text"
-                                class="form-control" aria-label="Amount (to the nearest dollar)">
+                            <input id="od_cyl_Lensometer" value="{{ $assdok[0]->Lensometer_od_cyl }}"
+                                name="od_cyl_Lensometer" type="text" class="form-control"
+                                aria-label="Amount (to the nearest dollar)">
                         </div>
                     </td>
                     <td>
@@ -370,8 +389,9 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">X</span>
                             </div>
-                            <input id="od_x_Lensometer" value="" name="od_x_Lensometer" type="text"
-                                class="form-control" aria-label="Amount (to the nearest dollar)">
+                            <input id="od_x_Lensometer" value="{{ $assdok[0]->Lensometer_od_x }}"
+                                name="od_x_Lensometer" type="text" class="form-control"
+                                aria-label="Amount (to the nearest dollar)">
                         </div>
                     </td>
                 </tr>
@@ -381,8 +401,9 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">OS : Sph</span>
                             </div>
-                            <input id="os_sph_Lensometer" value="" name="os_sph_Lensometer" type="text"
-                                class="form-control" aria-label="Amount (to the nearest dollar)">
+                            <input id="os_sph_Lensometer" value="{{ $assdok[0]->Lensometer_os_sph }}"
+                                name="os_sph_Lensometer" type="text" class="form-control"
+                                aria-label="Amount (to the nearest dollar)">
                         </div>
                     </td>
                     <td>
@@ -390,8 +411,9 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Cyl</span>
                             </div>
-                            <input id="os_cyl_Lensometer" value="" name="os_cyl_Lensometer" type="text"
-                                class="form-control" aria-label="Amount (to the nearest dollar)">
+                            <input id="os_cyl_Lensometer" value="{{ $assdok[0]->Lensometer_os_cyl }}"
+                                name="os_cyl_Lensometer" type="text" class="form-control"
+                                aria-label="Amount (to the nearest dollar)">
                         </div>
                     </td>
                     <td>
@@ -399,8 +421,9 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">X</span>
                             </div>
-                            <input id="os_x_Lensometer" value="" name="os_x_Lensometer" type="text"
-                                class="form-control" aria-label="Amount (to the nearest dollar)">
+                            <input id="os_x_Lensometer" value="{{ $assdok[0]->Lensometer_os_x }}"
+                                name="os_x_Lensometer" type="text" class="form-control"
+                                aria-label="Amount (to the nearest dollar)">
                         </div>
                     </td>
                 </tr>
@@ -411,8 +434,9 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">VOD : Sph</span>
                             </div>
-                            <input id="vod_sph_kpj" value="" name="vod_sph_kpj" type="text"
-                                class="form-control" aria-label="Amount (to the nearest dollar)">
+                            <input id="vod_sph_kpj" value="{{ $assdok[0]->koreksipenglihatan_vod_sph }}"
+                                name="vod_sph_kpj" type="text" class="form-control"
+                                aria-label="Amount (to the nearest dollar)">
                         </div>
                     </td>
                     <td>
@@ -420,8 +444,9 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Cyl</span>
                             </div>
-                            <input id="vod_cyl_kpj" value="" name="vod_cyl_kpj" type="text"
-                                class="form-control" aria-label="Amount (to the nearest dollar)">
+                            <input id="vod_cyl_kpj" value="{{ $assdok[0]->koreksipenglihatan_vod_cyl }}"
+                                name="vod_cyl_kpj" type="text" class="form-control"
+                                aria-label="Amount (to the nearest dollar)">
                         </div>
                     </td>
                     <td>
@@ -429,8 +454,9 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">X</span>
                             </div>
-                            <input id="vod_x_kpj" value="" name="vod_x_kpj" type="text"
-                                class="form-control" aria-label="Amount (to the nearest dollar)">
+                            <input id="vod_x_kpj" value="{{ $assdok[0]->koreksipenglihatan_vod_X }}"
+                                name="vod_x_kpj" type="text" class="form-control"
+                                aria-label="Amount (to the nearest dollar)">
                         </div>
                     </td>
                 </tr>
@@ -440,7 +466,8 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">VOS : Sph</span>
                             </div>
-                            <input type="text" id="vos_sph_kpj" value="" name="vos_sph_kpj"
+                            <input type="text" id="vos_sph_kpj"
+                                value="{{ $assdok[0]->koreksipenglihatan_vos_sph }}" name="vos_sph_kpj"
                                 class="form-control" aria-label="Amount (to the nearest dollar)">
                         </div>
                     </td>
@@ -449,8 +476,9 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Cyl</span>
                             </div>
-                            <input id="vos_cyl_kpj" value="" name="vos_cyl_kpj" type="text"
-                                class="form-control" aria-label="Amount (to the nearest dollar)">
+                            <input id="vos_cyl_kpj" value="{{ $assdok[0]->koreksipenglihatan_vos_cyl }}"
+                                name="vos_cyl_kpj" type="text" class="form-control"
+                                aria-label="Amount (to the nearest dollar)">
                         </div>
                     </td>
                     <td>
@@ -458,94 +486,113 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">X</span>
                             </div>
-                            <input id="vos_x_kpj" value="" name="vos_x_kpj" type="text"
-                                class="form-control" aria-label="Amount (to the nearest dollar)">
+                            <input id="vos_x_kpj" value="{{ $assdok[0]->koreksipenglihatan_vos_x }}"
+                                name="vos_x_kpj" type="text" class="form-control"
+                                aria-label="Amount (to the nearest dollar)">
                         </div>
                     </td>
                 </tr>
                 <tr>
                     <td>Tajam penglihatan dekat</td>
                     <td colspan="3">
-                        <textarea class="form-control" value="" id="penglihatan_dekat" name="penglihatan_dekat"></textarea>
+                        <textarea class="form-control" id="penglihatan_dekat" name="penglihatan_dekat">{{ $assdok[0]->tajampenglihatandekat }}</textarea>
                     </td>
                 </tr>
                 <tr>
                     <td>Tekanan Intra Okular</td>
                     <td colspan="3">
-                        <textarea class="form-control" value="" id="tekanan_intra_okular" name="tekanan_intra_okular"></textarea>
+                        <textarea class="form-control" id="tekanan_intra_okular" name="tekanan_intra_okular">{{ $assdok[0]->tekananintraokular }}</textarea>
                     </td>
                 </tr>
                 <tr>
                     <td>Catatan Pemeriksaan Lainnya</td>
                     <td colspan="3">
-                        <textarea class="form-control" value="" name="catatan_pemeriksaan_lainnya" id="catatan_pemerikssaan_lainnya"></textarea>
+                        <textarea class="form-control" value="{{ $assdok[0]->catatanpemeriksaanlain }}" name="catatan_pemeriksaan_lainnya"
+                            id="catatan_pemerikssaan_lainnya"></textarea>
                     </td>
                 </tr>
                 <tr>
                     <td>Palpebra</td>
-                    <td colspan="3"><input class="form-control" value="" id="palpebra"
-                            name="palpebra"></input></td>
+                    <td colspan="3"><input class="form-control" value="{{ $assdok[0]->palpebra }}"
+                            id="palpebra" name="palpebra"></input></td>
                 </tr>
                 <tr>
                     <td>Konjungtiva</td>
-                    <td colspan="3"><input class="form-control" value="" id="konjungtiva"
-                            name="konjungtiva"></input></td>
+                    <td colspan="3"><input class="form-control" value="{{ $assdok[0]->konjungtiva }}"
+                            id="konjungtiva" name="konjungtiva"></input></td>
                 </tr>
                 <tr>
                     <td>Kornea</td>
-                    <td colspan="3"><input class="form-control" value="" name="kornea"
+                    <td colspan="3"><input class="form-control" value="{{ $assdok[0]->kornea }}" name="kornea"
                             id="kornea"></input></td>
                 </tr>
                 <tr>
                     <td>Bilik Mata Depan</td>
-                    <td colspan="3"><input class="form-control" value="" name="bilik_mata_depan"
-                            id="bilik_mata_depan"></input></td>
+                    <td colspan="3"><input class="form-control" value="{{ $assdok[0]->bilikmatadepan }}"
+                            name="bilik_mata_depan" id="bilik_mata_depan"></input></td>
                 </tr>
                 <tr>
                     <td>Pupil</td>
-                    <td colspan="3"><input class="form-control" value="" id="pupil"
+                    <td colspan="3"><input class="form-control" value="{{ $assdok[0]->pupil }}" id="pupil"
                             name="pupil"></input></td>
                 </tr>
                 <tr>
                     <td>Iris</td>
-                    <td colspan="3"><input class="form-control" value="" name="iris"
+                    <td colspan="3"><input class="form-control" value="{{ $assdok[0]->iris }}" name="iris"
                             id="iris"></input></td>
                 </tr>
                 <tr>
                     <td>Lensa</td>
-                    <td colspan="3"><input class="form-control" value="" name="lensa"
+                    <td colspan="3"><input class="form-control" value="{{ $assdok[0]->lensa }}" name="lensa"
                             id="lensa"></input></td>
                 </tr>
                 <tr>
                     <td>Funduskopi</td>
-                    <td colspan="3"><input class="form-control" value="" name="funduskopi"
-                            id="funduskopi"></input></td>
+                    <td colspan="3"><input class="form-control" value="{{ $assdok[0]->funduskopi }}"
+                            name="funduskopi" id="funduskopi"></input></td>
                 </tr>
                 <tr>
                     <td>Status Oftalmologis Khusus</td>
                     <td colspan="3">
-                        <textarea class="form-control" value="" name="oftamologis" id="oftamologis"></textarea>
+                        <textarea class="form-control" name="oftamologis" id="oftamologis">{{ $assdok[0]->status_oftamologis_khusus }}</textarea>
                     </td>
                 </tr>
                 <tr>
                     <td>Masalah Medis</td>
                     <td colspan="3">
-                        <textarea class="form-control" value="" name="masalahmedis" id="masalahmedis"></textarea>
+                        <textarea class="form-control" name="masalahmedis" id="masalahmedis">{{ $assdok[0]->masalahmedis }}</textarea>
                     </td>
                 </tr>
                 <tr>
                     <td>Prognosis</td>
                     <td colspan="3">
-                        <textarea class="form-control" value="" name="prognosis" id="prognosis"></textarea>
+                        <textarea class="form-control" name="prognosis" id="prognosis">{{ $assdok[0]->prognosis }}</textarea>
                     </td>
                 </tr>
                 <tr>
                     <td>Penandaan Gambar</td>
                     <td colspan="3">
                         <div class="gambar1">
+                            <input hidden type="text" id="gambarmata1">
+                            <img id="gambarnya1" style="margin-top:50px" width="500px"
+                                src="{{ $assdok[0]->gambar1 }}"
+                                onclick="showMarkerArea(this);" />
+                            <canvas hidden id="myCanvas1" width="500px" height="450px"
+                                style="border:1px solid #d3d3d3;">
+                                Your browser does not support the HTML5 canvas tag.
+                            </canvas>
+                            <button type="button" class="btn btn-danger mt-2"
+                                onclick="batalgambar1()">batal</button>
 
                         </div>
                         <div class="gambar2">
+                            <input hidden type="text" id="gambarmata2">
+                            <img id="gambarnya2"  width="400px" src="{{ $assdok[0]->gambar2 }}"
+                                onclick="showMarkerArea(this);" />
+                            <canvas hidden id="myCanvas2" width="500px" height="450px" style="border:1px solid #d3d3d3;">
+                                Your browser does not support the HTML5 canvas tag.
+                            </canvas>
+                            <button type="button" class="btn btn-danger mt-2" onclick="batalgambar2()">batal</button>
 
                         </div>
                     </td>
@@ -582,61 +629,21 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 <script>
     $(function() {
-        $('input[name="tgljampemeriksaan"]').daterangepicker({
-            singleDatePicker: true,
-            showDropdowns: true,
-            timePicker: true,
-            timePicker24Hour: true,
-            timePickerSeconds: true,
-            minYear: 2023,
-            locale: {
-                format: 'YYYY-MM-DD HH:mm:ss',
-                locale: 'id'
-            }
-        }, function(start, end, label) {
-            var years = moment().diff(start, 'years');
-        });
-    });
-    $(document).ready(function() {
-        ambilgambar1()
-        ambilgambar2()
-
-        function ambilgambar1() {
-            $.ajax({
-                type: 'post',
-                data: {
-                    _token: "{{ csrf_token() }}",
-                },
-                url: '<?= route('gambarmata1') ?>',
-                error: function(data) {
-                    alert('ok')
-                },
-                success: function(response) {
-                    spinner.hide()
-                    $('.gambar1').html(response)
-                }
-            });
+    $('input[name="tgljampemeriksaan"]').daterangepicker({
+        singleDatePicker: true,
+        showDropdowns: true,
+        timePicker: true,
+        timePicker24Hour: true,
+        timePickerSeconds: true,
+        minYear: 2023,
+        locale: {
+            format: 'YYYY-MM-DD HH:mm:ss',
+            locale: 'id'
         }
-
-        function ambilgambar2() {
-            $.ajax({
-                type: 'post',
-                data: {
-                    _token: "{{ csrf_token() }}",
-                },
-                url: '<?= route('gambarmata2') ?>',
-                error: function(data) {
-                    alert('ok')
-                },
-                success: function(response) {
-                    spinner.hide()
-                    $('.gambar2').html(response)
-                }
-            });
-        }
-
+    }, function(start, end, label) {
+        var years = moment().diff(start, 'years');
     });
-
+    });
     function simpanhasil() {
         var canvas = document.getElementById("myCanvas1");
         var ctx = canvas.getContext("2d");
@@ -663,11 +670,11 @@
             data: {
                 _token: "{{ csrf_token() }}",
                 data: JSON.stringify(data),
-                idkunjungan  : $('#idkunjungan').val(),
-                kodekunjungan : $('#kodekunjungan').val(),
-                idpasien : $('#idpasien').val(),
-                idpasien : $('#idpasien').val(),
-                idaskep : $('#idaskep').val(),
+                idkunjungan: $('#idkunjungan').val(),
+                kodekunjungan: $('#kodekunjungan').val(),
+                idpasien: $('#idpasien').val(),
+                idpasien: $('#idpasien').val(),
+                idaskep: $('#idaskep').val(),
                 gambar1,
                 gambar2
             },
@@ -701,4 +708,60 @@
             }
         });
     }
+</script>
+<script src="{{ asset('vendor/marker/markerjs2.js') }}"></script>
+<script>
+    function showMarkerArea(target) {
+        const markerArea = new markerjs2.MarkerArea(target);
+        markerArea.addEventListener("render", (event) => (target.src = event.dataUrl));
+        markerArea.show();
+    }
+    function batalgambar1() {
+        ambilgambar1()
+    }
+    function ambilgambar1() {
+            $.ajax({
+                type: 'post',
+                data: {
+                    _token: "{{ csrf_token() }}",
+                },
+                url: '<?= route('gambarmata1') ?>',
+                error: function(data) {
+                    alert('ok')
+                },
+                success: function(response) {
+                    spinner.hide()
+                    $('.gambar1').html(response)
+                }
+            });
+        }
+</script>
+<script src="{{ asset('vendor/marker/markerjs2_2.js') }}"></script>
+
+
+<script>
+    function showMarkerArea(target) {
+        const markerArea = new markerjs2.MarkerArea(target);
+        markerArea.addEventListener("render", (event) => (target.src = event.dataUrl));
+        markerArea.show();
+    }
+    function batalgambar2() {
+        ambilgambar2()
+    }
+    function ambilgambar2() {
+            $.ajax({
+                type: 'post',
+                data: {
+                    _token: "{{ csrf_token() }}",
+                },
+                url: '<?= route('gambarmata2') ?>',
+                error: function(data) {
+                    alert('ok')
+                },
+                success: function(response) {
+                    spinner.hide()
+                    $('.gambar2').html(response)
+                }
+            });
+        }
 </script>

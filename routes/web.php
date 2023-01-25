@@ -55,6 +55,8 @@ Route::middleware('auth')->group(function () {
         Route::post('gambarmata1', [DokterController::class, 'gambarMata1'])->name('gambarmata1');
         Route::post('gambarmata2', [DokterController::class, 'gambarMata2'])->name('gambarmata2');
         Route::post('simpanpemeriksaandokter', [DokterController::class, 'simpanForm'])->name('simpanpemeriksaandokter');
+        Route::post('simpanttddokter', [DokterController::class, 'simpanTtdDokter'])->name('simpanttddokter');
+        Route::post('simpantindakan', [DokterController::class, 'simpanTindakan'])->name('simpantindakan');
 
         Route::get('ermperawat', [PerawatController::class, 'indexPerawat'])->name('ermperawat');
         Route::post('indexermperawat', [PerawatController::class, 'indexErmPerawat'])->name('indexermperawat');

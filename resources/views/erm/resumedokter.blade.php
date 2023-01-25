@@ -297,3 +297,71 @@
     @endif
     </div><!-- /.card-body -->
 </div>
+<script type="text/javascript" src="{{ asset('vendor/signature/js/signature.js') }}"></script>
+<script>
+    var wrapper = document.getElementById("signature-pad");
+    var clearButton = wrapper.querySelector("[data-action=clear]");
+    var canvas = wrapper.querySelector("canvas");
+    var el_note = document.getElementById("note");
+    var signaturePad;
+    signaturePad = new SignaturePad(canvas);
+    clearButton.addEventListener("click", function(event) {
+        document.getElementById("note").innerHTML = "The signature should be inside box";
+        signaturePad.clear();
+    });
+
+    function simpantandatangan() {
+        var canvas = document.getElementById("the_canvas");
+        var dataUrl = canvas.toDataURL();
+        if (dataUrl ==
+            'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAV4AAABkCAYAAADOvVhlAAADOklEQVR4Xu3UwQkAAAgDMbv/0m5xr7hAIcjtHAECBAikAkvXjBEgQIDACa8nIECAQCwgvDG4OQIECAivHyBAgEAsILwxuDkCBAgIrx8gQIBALCC8Mbg5AgQICK8fIECAQCwgvDG4OQIECAivHyBAgEAsILwxuDkCBAgIrx8gQIBALCC8Mbg5AgQICK8fIECAQCwgvDG4OQIECAivHyBAgEAsILwxuDkCBAgIrx8gQIBALCC8Mbg5AgQICK8fIECAQCwgvDG4OQIECAivHyBAgEAsILwxuDkCBAgIrx8gQIBALCC8Mbg5AgQICK8fIECAQCwgvDG4OQIECAivHyBAgEAsILwxuDkCBAgIrx8gQIBALCC8Mbg5AgQICK8fIECAQCwgvDG4OQIECAivHyBAgEAsILwxuDkCBAgIrx8gQIBALCC8Mbg5AgQICK8fIECAQCwgvDG4OQIECAivHyBAgEAsILwxuDkCBAgIrx8gQIBALCC8Mbg5AgQICK8fIECAQCwgvDG4OQIECAivHyBAgEAsILwxuDkCBAgIrx8gQIBALCC8Mbg5AgQICK8fIECAQCwgvDG4OQIECAivHyBAgEAsILwxuDkCBAgIrx8gQIBALCC8Mbg5AgQICK8fIECAQCwgvDG4OQIECAivHyBAgEAsILwxuDkCBAgIrx8gQIBALCC8Mbg5AgQICK8fIECAQCwgvDG4OQIECAivHyBAgEAsILwxuDkCBAgIrx8gQIBALCC8Mbg5AgQICK8fIECAQCwgvDG4OQIECAivHyBAgEAsILwxuDkCBAgIrx8gQIBALCC8Mbg5AgQICK8fIECAQCwgvDG4OQIECAivHyBAgEAsILwxuDkCBAgIrx8gQIBALCC8Mbg5AgQICK8fIECAQCwgvDG4OQIECAivHyBAgEAsILwxuDkCBAgIrx8gQIBALCC8Mbg5AgQICK8fIECAQCwgvDG4OQIECAivHyBAgEAsILwxuDkCBAgIrx8gQIBALCC8Mbg5AgQICK8fIECAQCwgvDG4OQIECAivHyBAgEAsILwxuDkCBAgIrx8gQIBALCC8Mbg5AgQICK8fIECAQCwgvDG4OQIECDweoABlt2MJjgAAAABJRU5ErkJggg=='
+        ) {
+            dataUrl = ''
+        }
+        document.getElementById("signature").value = dataUrl;
+        signature = $('#signature').val()
+        $.ajax({
+            async: true,
+            type: 'post',
+            dataType: 'json',
+            data: {
+                _token: "{{ csrf_token() }}",
+                idkunjungan: $('#idkunjungan').val(),
+                signature
+            },
+            url: '<?= route('simpanttddokter') ?>',
+            error: function(data) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Something went wrong!',
+                    footer: 'Klinikmatalosari2023'
+                })
+                spinner.hide();
+            },
+            success: function(data) {
+                spinner.hide();
+                if (data.kode == '502') {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops',
+                        text: data.message,
+                        footer: 'Klinikmatalosari2023'
+                    })
+                } else {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'OK',
+                        text: data.message,
+                        footer: 'Klinikmatalosari2023'
+                    })
+                    formcatatanmedis($('#idpasien').val())
+                }
+            }
+        });
+    }
+
+    function my_function() {
+        document.getElementById("note").innerHTML = "";
+    }
+</script>
