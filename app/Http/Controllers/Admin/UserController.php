@@ -97,10 +97,6 @@ class UserController extends Controller
             'email_verified_at' => Carbon::now(),
             'user_id' => Auth::user()->id,
         ]);
-        // $wa = new WhatsappController();
-        // $request['message'] = "*Verifikasi Akun SIMRS WALED* \nAkun anda telah diverifikasi. Data akun anda sebagai berikut.\n\nNAMA : " . $user->name . "\nPHONE : " . $user->phone . "\nEMAIL : " . $user->email . "\n\nSilahkan gunakan akun ini baik-baik.";
-        // $request['number'] = $user->phone;
-        // $wa->send_message($request);
         Alert::success('Success', 'Akun telah diverifikasi');
         return back();
     }

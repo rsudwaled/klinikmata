@@ -37,9 +37,10 @@ return new class extends Migration
             $table->string('pendidikan')->nullable();
             $table->string('pekerjaan')->nullable();
 
+            $table->string('tgl_kematian')->nullable();
+            $table->string('pasien_baru')->nullable();
             $table->string('pic');
             $table->string('status')->default(1);
-            $table->string('tgl_kematian')->nullable();
             $table->timestamps();
         });
     }

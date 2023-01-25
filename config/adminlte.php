@@ -303,33 +303,65 @@ return [
             'can'  => 'manage-blog',
         ],
 
-        [
-            'text'        => 'ERM',
-            'url'         => 'erm',
-            'icon'        => 'far fa-fw fa-file',
-        ],
-        [
-            'text'        => 'ERM Perawat',
-            'url'         => 'ermperawat',
-            'icon'        => 'far fa-fw fa-file',
-        ],
+
+
+
+        // MENU PENDAFTARAN
         [
             'text' => 'Menu Pendaftaran',
             'icon' => 'fas fa-user-plus',
+            'can'  => 'pendaftaran',
             'submenu' => [
                 [
                     'text'        => 'Pendaftaran Pasien',
                     'url'         => 'pendaftaran',
                     'icon'        => 'fas fa-user-plus',
                     'shift'   => 'ml-2',
-
+                    'can'  => 'pendaftaran',
                 ],
                 [
                     'text' => 'Kunjungan Pasien',
                     'url'  => 'pendaftaran/kunjungan',
                     'icon' => 'fas fa-hospital-user',
                     'shift'   => 'ml-2',
-
+                    'can'  => 'pendaftaran',
+                ],
+                [
+                    'text' => 'Data Pasien',
+                    'url'  => 'pendaftaran/pasien',
+                    'icon' => 'fas fa-user-injured',
+                    'shift'   => 'ml-2',
+                    'can'  => 'pendaftaran',
+                ],
+            ]
+        ],
+        // MENU PERAWATAN
+        [
+            'text' => 'Menu Perawat',
+            'icon' => 'fas fa-user-nurse',
+            'can'  => 'perawat',
+            'submenu' => [
+                [
+                    'text'        => 'ERM Perawat',
+                    'url'         => 'ermperawat',
+                    'icon'        => 'fas fa-notes-medical',
+                    'shift'   => 'ml-2',
+                    'can'  => 'perawat',
+                ],
+            ]
+        ],
+        // MENU DOKTER
+        [
+            'text' => 'Menu Dokter',
+            'icon' => 'fas fa-user-md',
+            'can'  => 'dokter',
+            'submenu' => [
+                [
+                    'text'        => 'ERM Dokter',
+                    'url'         => 'erm',
+                    'icon'        => 'fas fa-notes-medical',
+                    'shift'   => 'ml-2',
+                    'can'  => 'dokter',
                 ],
             ]
         ],
@@ -337,13 +369,28 @@ return [
         [
             'text' => 'Menu Kasir',
             'icon' => 'fas fa-cash-register',
+            'can'  => 'kasir',
             'submenu' => [
                 [
                     'text'        => 'Pendaftaran Pasien',
                     'url'         => '/as',
-                    'icon'        => 'fas fa-user-plus',
+                    'icon'        => 'fas fa-money-bill',
                     'shift'   => 'ml-2',
-
+                    'can'  => 'kasir',
+                ],
+                [
+                    'text' => 'Transaksi',
+                    'url'  => 'administrator/transaksi',
+                    'icon'        => 'fas fa-money-bill',
+                    'shift'   => 'ml-2',
+                    'can'  => 'kasir',
+                ],
+                [
+                    'text' => 'Tarif Pelayanan',
+                    'url'  => 'administrator/tarif',
+                    'icon' => 'fas fa-hand-holding-medical',
+                    'shift'   => 'ml-2',
+                    'can'  => 'kasir',
                 ],
             ]
         ],
@@ -351,42 +398,49 @@ return [
         [
             'text' => 'Menu Farmasi',
             'icon' => 'fas fa-user-injured',
+            'can'  => 'farmasi',
             'submenu' => [
                 [
                     'text' => 'Order Obat',
                     'url'  => 'farmasi/orderobat',
                     'icon' => 'fas fa-pills',
                     'shift'   => 'ml-2',
+                    'can'  => 'farmasi',
                 ],
                 [
                     'text' => 'Obat',
                     'url'  => 'administrator/obat',
                     'icon' => 'fas fa-pills',
                     'shift'   => 'ml-2',
+                    'can'  => 'farmasi',
                 ],
                 [
                     'text' => 'Satuan Obat',
                     'url'  => 'administrator/satuanobat',
                     'icon' => 'fas fa-pills',
                     'shift'   => 'ml-2',
+                    'can'  => 'farmasi',
                 ],
                 [
                     'text' => 'Kategori Obat',
                     'url'  => 'administrator/kategoriobat',
                     'icon' => 'fas fa-pills',
                     'shift'   => 'ml-2',
+                    'can'  => 'farmasi',
                 ],
                 [
                     'text' => 'Supplier',
                     'url'  => 'administrator/supplier',
                     'icon' => 'fas fa-pills',
                     'shift'   => 'ml-2',
+                    'can'  => 'farmasi',
                 ],
                 [
                     'text' => 'Stok Obat',
                     'url'  => 'administrator/stokobat',
                     'icon' => 'fas fa-pills',
                     'shift'   => 'ml-2',
+                    'can'  => 'farmasi',
                 ],
             ]
         ],
@@ -394,68 +448,78 @@ return [
         [
             'text' => 'Menu Administrasi',
             'icon' => 'fas fa-user-injured',
+            'can'  => 'admin',
             'submenu' => [
                 [
                     'text' => 'Pasien',
                     'url'  => 'administrator/pasien',
                     'icon' => 'fas fa-user-injured',
                     'shift'   => 'ml-2',
-
+                    'can'  => 'admin',
                 ],
                 [
                     'text' => 'Dokter',
                     'url'  => 'administrator/dokter',
                     'icon' => 'fas fa-user-md',
                     'shift'   => 'ml-2',
+                    'can'  => 'admin',
+
                 ],
                 [
                     'text' => 'Poliklinik',
                     'url'  => 'administrator/poliklinik',
                     'icon' => 'fas fa-clinic-medical',
                     'shift'   => 'ml-2',
+                    'can'  => 'admin',
+
                 ],
                 [
                     'text' => 'Ruangan',
                     'url'  => 'administrator/ruangan',
                     'icon' => 'fas fa-clinic-medical',
                     'shift'   => 'ml-2',
+                    'can'  => 'admin',
+
                 ],
                 [
                     'text' => 'Unit',
                     'url'  => 'administrator/unit',
                     'icon' => 'fas fa-clinic-medical',
                     'shift'   => 'ml-2',
+                    'can'  => 'admin',
+
                 ],
                 [
                     'text' => 'Jadwal Dokter',
                     'url'  => 'administrator/jadwaldokter',
                     'icon' => 'fas fa-calendar-alt',
                     'shift'   => 'ml-2',
+                    'can'  => 'admin',
+
                 ],
                 [
                     'text' => 'Diagnosa ICD 10',
                     'url'  => 'administrator/icd10',
                     'icon' => 'fas fa-diagnoses',
                     'shift'   => 'ml-2',
+                    'can'  => 'admin',
+
                 ],
                 [
                     'text' => 'Diagnosa ICD 9',
                     'url'  => 'administrator/icd9',
                     'icon' => 'fas fa-diagnoses',
                     'shift'   => 'ml-2',
+                    'can'  => 'admin',
+
                 ],
                 [
                     'text' => 'Kunjungan',
                     'url'  => 'administrator/kunjungan',
                     'icon' => 'fas fa-hospital-user',
                     'shift'   => 'ml-2',
+                    'can'  => 'admin',
 
-                ],
-                [
-                    'text' => 'Transaksi',
-                    'url'  => 'administrator/transaksi',
-                    'icon' => 'fas fa-hospital-user',
-                    'shift'   => 'ml-2',
 
                 ],
                 // [
@@ -470,12 +534,7 @@ return [
                 //     'icon' => 'fas fa-prescription-bottle',
                 //     'shift'   => 'ml-2',
                 // ],
-                [
-                    'text' => 'Tarif Pelayanan',
-                    'url'  => 'administrator/tarif',
-                    'icon' => 'fas fa-hand-holding-medical',
-                    'shift'   => 'ml-2',
-                ],
+
                 // [
                 //     'text' => 'Keuangan',
                 //     'url'  => 'administrator/keuangan',

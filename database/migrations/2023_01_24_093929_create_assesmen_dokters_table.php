@@ -84,8 +84,8 @@ return new class extends Migration
             $table->text('status_oftamologis_khusus');
             $table->text('masalahmedis');
             $table->text('prognosis');
-            $table->text('gambar1')->nullable();
-            $table->text('gambar2')->nullable();
+            $table->binary('gambar1')->nullable();
+            $table->binary('gambar2')->nullable();
             $table->string('keluhan_pasien');
             $table->text('signature')->nullable();
             $table->string('status')->default('0');

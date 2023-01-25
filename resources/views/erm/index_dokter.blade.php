@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'ERM')
+@section('title', 'ERM Dokter')
 
 @section('content_header')
-    <h1>ERM</h1>
+    <h1>ERM Dokter</h1>
     <div class="preloader2" id="loader2">
         <div class="loading">
             <img src="{{ asset('klinik mata losari/fb.gif') }}" width="80">
