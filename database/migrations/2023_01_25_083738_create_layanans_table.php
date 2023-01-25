@@ -13,15 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('transaksis', function (Blueprint $table) {
+        Schema::create('layanans', function (Blueprint $table) {
             $table->id();
-            $table->string('kode')->nullable();
-            $table->string('nama')->nullable();
-            $table->double('debit')->nullable();
-            $table->double('kredit')->nullable();
-            $table->double('tipe')->nullable();
-            $table->string('keterangan')->nullable();
-            $table->string('pic')->nullable();
+            $table->string('kunjungan_id');
+            $table->string('transaksi_id');
+            $table->string('kode');
+            $table->string('tarif');
+            $table->string('harga');
+            $table->string('status');
+            $table->string('pic');
             $table->timestamps();
         });
     }
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('transaksis');
+        Schema::dropIfExists('layanans');
     }
 };

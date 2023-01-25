@@ -333,52 +333,29 @@ return [
                 ],
             ]
         ],
-
+        // MENU KASIR
         [
-            'text' => 'Menu Administrasi',
+            'text' => 'Menu Kasir',
+            'icon' => 'fas fa-cash-register',
+            'submenu' => [
+                [
+                    'text'        => 'Pendaftaran Pasien',
+                    'url'         => '/as',
+                    'icon'        => 'fas fa-user-plus',
+                    'shift'   => 'ml-2',
+
+                ],
+            ]
+        ],
+        // MENU FARMASI
+        [
+            'text' => 'Menu Farmasi',
             'icon' => 'fas fa-user-injured',
             'submenu' => [
                 [
-                    'text' => 'Pasien',
-                    'url'  => 'administrator/pasien',
-                    'icon' => 'fas fa-user-injured',
-                    'shift'   => 'ml-2',
-
-                ],
-                [
-                    'text' => 'Dokter',
-                    'url'  => 'administrator/dokter',
-                    'icon' => 'fas fa-user-md',
-                    'shift'   => 'ml-2',
-                ],
-                [
-                    'text' => 'Poliklinik',
-                    'url'  => 'administrator/poliklinik',
-                    'icon' => 'fas fa-clinic-medical',
-                    'shift'   => 'ml-2',
-                ],
-                [
-                    'text' => 'Ruangan',
-                    'url'  => 'administrator/ruangan',
-                    'icon' => 'fas fa-clinic-medical',
-                    'shift'   => 'ml-2',
-                ],
-                [
-                    'text' => 'Jadwal Dokter',
-                    'url'  => 'administrator/jadwaldokter',
-                    'icon' => 'fas fa-calendar-alt',
-                    'shift'   => 'ml-2',
-                ],
-                [
-                    'text' => 'Diagnosa ICD 10',
-                    'url'  => 'administrator/icd10',
-                    'icon' => 'fas fa-diagnoses',
-                    'shift'   => 'ml-2',
-                ],
-                [
-                    'text' => 'Diagnosa ICD 9',
-                    'url'  => 'administrator/icd9',
-                    'icon' => 'fas fa-diagnoses',
+                    'text' => 'Order Obat',
+                    'url'  => 'farmasi/orderobat',
+                    'icon' => 'fas fa-pills',
                     'shift'   => 'ml-2',
                 ],
                 [
@@ -409,6 +386,62 @@ return [
                     'text' => 'Stok Obat',
                     'url'  => 'administrator/stokobat',
                     'icon' => 'fas fa-pills',
+                    'shift'   => 'ml-2',
+                ],
+            ]
+        ],
+        // MENU ADMINISTRASI
+        [
+            'text' => 'Menu Administrasi',
+            'icon' => 'fas fa-user-injured',
+            'submenu' => [
+                [
+                    'text' => 'Pasien',
+                    'url'  => 'administrator/pasien',
+                    'icon' => 'fas fa-user-injured',
+                    'shift'   => 'ml-2',
+
+                ],
+                [
+                    'text' => 'Dokter',
+                    'url'  => 'administrator/dokter',
+                    'icon' => 'fas fa-user-md',
+                    'shift'   => 'ml-2',
+                ],
+                [
+                    'text' => 'Poliklinik',
+                    'url'  => 'administrator/poliklinik',
+                    'icon' => 'fas fa-clinic-medical',
+                    'shift'   => 'ml-2',
+                ],
+                [
+                    'text' => 'Ruangan',
+                    'url'  => 'administrator/ruangan',
+                    'icon' => 'fas fa-clinic-medical',
+                    'shift'   => 'ml-2',
+                ],
+                [
+                    'text' => 'Unit',
+                    'url'  => 'administrator/unit',
+                    'icon' => 'fas fa-clinic-medical',
+                    'shift'   => 'ml-2',
+                ],
+                [
+                    'text' => 'Jadwal Dokter',
+                    'url'  => 'administrator/jadwaldokter',
+                    'icon' => 'fas fa-calendar-alt',
+                    'shift'   => 'ml-2',
+                ],
+                [
+                    'text' => 'Diagnosa ICD 10',
+                    'url'  => 'administrator/icd10',
+                    'icon' => 'fas fa-diagnoses',
+                    'shift'   => 'ml-2',
+                ],
+                [
+                    'text' => 'Diagnosa ICD 9',
+                    'url'  => 'administrator/icd9',
+                    'icon' => 'fas fa-diagnoses',
                     'shift'   => 'ml-2',
                 ],
                 [
@@ -451,8 +484,6 @@ return [
                 // ],
             ]
         ],
-
-
         // USER ACCESS CONTROLL
         ['header' => 'MENU USER'],
         [

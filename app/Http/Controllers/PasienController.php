@@ -44,12 +44,22 @@ class PasienController extends APIController
     public function store(Request $request)
     {
         $request['pic'] = Auth::user()->id;
+        $request['no_rm'] = 'A' . str_pad(Pasien::count() + 1, 6, '0', STR_PAD_LEFT);
         $validator = Validator::make(request()->all(), [
-            "nik" => "required|numeric",
+            "nik" => "required|numeric|digits:16",
             "nama" =>  "required",
             "sex" =>  "required",
             "tempat_lahir" =>  "required",
             "tgl_lahir" =>  "required|date",
+            "nohp" =>  "required",
+
+            "provinsi" =>  "required",
+            "kabupaten" =>  "required",
+            "kecamatan" =>  "required",
+            "desa" =>  "required",
+            "alamat" =>  "required",
+
+            "no_rm" =>  "required",
             "pic" => "required|numeric",
 
         ]);
@@ -57,7 +67,7 @@ class PasienController extends APIController
             return $this->sendError($validator->errors()->first(), null, 400);
         }
         Pasien::create($request->except('_token'));
-        return response()->json($request);
+        return response()->json($request->all());
     }
     public function update(Request $request)
     {

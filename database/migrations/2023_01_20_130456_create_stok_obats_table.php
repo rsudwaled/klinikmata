@@ -16,18 +16,15 @@ return new class extends Migration
         Schema::create('stok_obats', function (Blueprint $table) {
             $table->id();
             $table->string('kode')->nullable();
-            $table->string('stok_in')->nullable();
-            $table->string('stok_out')->nullable();
-            $table->string('satuan_id')->nullable();
-
-            $table->string('obat_id')->nullable();
-            $table->string('kategori_id')->nullable();
             $table->string('unit_id')->nullable();
-            $table->string('tgl_expire')->nullable();
-
             $table->string('transaksi_id')->nullable();
             $table->string('invoice');
             $table->string('supplier_id')->nullable();
+
+            $table->string('obat_id')->nullable();
+            $table->string('tgl_expire')->nullable();
+            $table->string('stok_in')->nullable();
+            $table->string('stok_out')->nullable();
 
             $table->string('harga_beli')->nullable();
             $table->string('harga_jual')->nullable();

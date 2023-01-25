@@ -25,7 +25,8 @@
                     <div class="col-md-8">
                         <x-adminlte-button label="Tambah" class="btn-sm btnTambah" theme="success" title="Tambah Pasien"
                             icon="fas fa-plus" />
-                        <a href="{{ route('pasien.index') }}" class="btn btn-sm btn-warning"><i class="fas fa-sync"></i>Refresh</a>
+                        <a href="{{ route('pasien.index') }}" class="btn btn-sm btn-warning"><i
+                                class="fas fa-sync"></i>Refresh</a>
                     </div>
                     <div class="col-md-4">
                         <form action="" method="get">
@@ -94,8 +95,8 @@
             @csrf
             <div class="row">
                 <div class="col-md-4">
+                    <x-adminlte-input name="no_rm" label="No RM" igroup-size="sm" enable-old-support readonly />
                     <x-adminlte-input name="nik" label="NIK" igroup-size="sm" enable-old-support required />
-                    <x-adminlte-input name="no_rm" label="No RM" igroup-size="sm" enable-old-support required />
                     <x-adminlte-input name="no_bpjs" label="No BPJS" igroup-size="sm" enable-old-support required />
                     <x-adminlte-input name="no_ihs" label="No Satu Sehat" igroup-size="sm" enable-old-support required />
                 </div>
@@ -112,39 +113,33 @@
                                 required />
                         </div>
                         <div class="col-md-5">
-                            <x-adminlte-input name="tgl_lahir" label="Tgl Lahir" igroup-size="sm" enable-old-support
-                                required />
+                            @php
+                                $config = ['format' => 'YYYY-MM-DD'];
+                            @endphp
+                            <x-adminlte-input-date name="tgl_lahir" label="Tgl Lahir" igroup-size="sm" :config="$config"
+                                enable-old-support required />
                         </div>
                     </div>
                     <x-adminlte-input name="nohp" label="No HP" igroup-size="sm" enable-old-support required />
                 </div>
                 <div class="col-md-4">
                     <x-adminlte-select2 name="provinsi" label="Provinsi">
-                        <option value="" selected disabled>PILIH PROVINSI</option>
+                        <option value="" disabled>PILIH PROVINSI</option>
                         @foreach ($provinsi as $code => $name)
                             <option value="{{ $code }}">{{ $name }}</option>
                         @endforeach
                     </x-adminlte-select2>
                     <x-adminlte-select2 name="kabupaten" label="Kabupaten">
-                        <option value="" selected disabled>PILIH KABUPATEN</option>
-                        @foreach ($provinsi as $code => $name)
-                            <option value="{{ $code }}">{{ $name }}</option>
-                        @endforeach
+                        <option value="" disabled>PILIH KABUPATEN</option>
                     </x-adminlte-select2>
                     <x-adminlte-select2 name="kecamatan" label="Kecamatan">
-                        <option value="" selected disabled>PILIH KECAMATAN</option>
-                        @foreach ($provinsi as $code => $name)
-                            <option value="{{ $code }}">{{ $name }}</option>
-                        @endforeach
+                        <option value="" disabled>PILIH KECAMATAN</option>
                     </x-adminlte-select2>
                     <x-adminlte-select2 name="desa" label="Desa">
-                        <option value="" selected disabled>PILIH DESA</option>
-                        @foreach ($provinsi as $code => $name)
-                            <option value="{{ $code }}">{{ $name }}</option>
-                        @endforeach
+                        <option value="" disabled>PILIH DESA</option>
                     </x-adminlte-select2>
-
-                    <x-adminlte-input name="alamat" label="Tgl Lahir" igroup-size="sm" enable-old-support required />
+                    <x-adminlte-textarea name="alamat" placeholder="Alamat" label="Alamat" igroup-size="sm"
+                        enable-old-support required />
                 </div>
             </div>
         </form>
@@ -171,7 +166,6 @@
                 $('#btnUpdate').hide();
                 $('#btnStore').show();
             });
-
             $('.btnEdit').click(function() {
                 var jadwalid = $(this).data('id');
                 $.LoadingOverlay("show");
@@ -190,15 +184,19 @@
                     $('#tgl_lahir').val(data.tgl_lahir);
                     $('#nohp').val(data.nohp);
 
-                    $.LoadingOverlay("hide", true);
+                    $('#provinsi').val(data.provinsi).trigger('change');
+                    $('#kabupaten').append(new Option(data.nama_kabupaten, data.kabupaten));
+                    $('#kecamatan').append(new Option(data.nama_kecamatan, data.kecamatan));
+                    $('#desa').append(new Option(data.nama_desa, data.desa));
+                    $('#alamat').val(data.alamat);
 
+                    $.LoadingOverlay("hide", true);
                     $('#btnUpdate').show();
                     $('#btnStore').hide();
                     $('#modal').modal('show');
                 })
 
             });
-
             $('#btnStore').click(function(e) {
                 $.LoadingOverlay("show");
                 e.preventDefault();
@@ -233,7 +231,6 @@
                     }
                 });
             });
-
             $('#btnUpdate').click(function(e) {
                 var id = $("#id").val()
                 $.LoadingOverlay("show");
@@ -270,7 +267,6 @@
                     }
                 });
             });
-
             $('#btnDelete').click(function(e) {
                 Swal.fire({
                     title: 'Konfirmasi Hapus Data',
@@ -287,6 +283,93 @@
                         Swal.fire('Data tidak jadi dihapus', '', 'info')
                     }
                 })
+            });
+        });
+    </script>
+    <script>
+        $(function() {
+            $("#provinsi").select2({
+                theme: "bootstrap4",
+                ajax: {
+                    url: "{{ route('get_provinsi') }}",
+                    type: "get",
+                    dataType: 'json',
+                    delay: 100,
+                    data: function(params) {
+                        return {
+                            search: params.term // search term
+                        };
+                    },
+                    processResults: function(response) {
+                        return {
+                            results: response
+                        };
+                    },
+                    cache: true
+                }
+            });
+            $("#kabupaten").select2({
+                theme: "bootstrap4",
+                ajax: {
+                    url: "{{ route('get_kabupaten') }}",
+                    type: "get",
+                    dataType: 'json',
+                    delay: 100,
+                    data: function(params) {
+                        return {
+                            code: $("#provinsi option:selected").val(),
+                            search: params.term // search term
+                        };
+                    },
+                    processResults: function(response) {
+                        return {
+                            results: response
+                        };
+                    },
+                    cache: true
+                }
+            });
+            $("#kecamatan").select2({
+                theme: "bootstrap4",
+                ajax: {
+                    url: "{{ route('get_kecamatan') }}",
+                    type: "get",
+                    dataType: 'json',
+                    delay: 100,
+                    data: function(params) {
+                        return {
+                            code: $("#kabupaten option:selected").val(),
+                            search: params.term // search term
+                        };
+                    },
+                    processResults: function(response) {
+                        return {
+                            results: response
+                        };
+                    },
+                    cache: true
+                }
+            });
+            $("#desa").select2({
+                theme: "bootstrap4",
+                ajax: {
+                    url: "{{ route('get_desa') }}",
+                    type: "get",
+                    dataType: 'json',
+                    delay: 100,
+                    data: function(params) {
+                        return {
+                            code: $("#kecamatan option:selected").val(),
+                            search: params.term // search term
+                        };
+                    },
+                    processResults: function(response) {
+                        return {
+                            results: response
+                        };
+                    },
+                    cache: true
+                }
             });
         });
     </script>
