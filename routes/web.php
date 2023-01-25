@@ -50,18 +50,14 @@ Route::middleware('auth')->group(function () {
     Route::get('get_kabupaten', [LaravoltController::class, 'get_kabupaten'])->name('get_kabupaten');
     Route::get('get_kecamatan', [LaravoltController::class, 'get_kecamatan'])->name('get_kecamatan');
     Route::get('get_desa', [LaravoltController::class, 'get_desa'])->name('get_desa');
-
-
     Route::middleware('permission:admin')->group(function () {
         Route::resource('user', UserController::class);
         Route::resource('role', RoleController::class);
         Route::resource('permission', PermissionController::class);
-        //apw516
         Route::get('profile', [UserController::class, 'profile'])->name('profile');
         Route::get('user_verifikasi/{user}', [UserController::class, 'user_verifikasi'])->name('user_verifikasi');
         Route::get('delet_verifikasi', [UserController::class, 'delet_verifikasi'])->name('delet_verifikasi');
     });
-
     Route::middleware('permission:admin')->prefix('administrator')->group(function () {
         Route::resource('pasien', PasienController::class);
         Route::resource('dokter', ControllersDokterController::class);
@@ -71,12 +67,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('ruangan', RuanganController::class);
         Route::resource('unit', UnitController::class);
         Route::resource('tarif', TarifController::class);
-        Route::resource('obat', ObatController::class);
-        Route::resource('satuanobat', SatuanObatController::class);
-        Route::resource('kategoriobat', KategoriObatController::class);
-        Route::resource('supplier', SupplierController::class);
-        Route::resource('stokobat', StokObatController::class);
-        Route::resource('transaksi', TransaksiController::class);
+
         Route::post('tarif/import',  [TarifController::class, 'import'])->name('tarif.import');
         Route::post('obat/import',  [ObatController::class, 'import'])->name('obat.import');
         Route::get('icd10',  [DiagnosaController::class, 'index_icd10']);
@@ -84,20 +75,25 @@ Route::middleware('auth')->group(function () {
     });
     Route::middleware('permission:farmasi')->prefix('farmasi')->group(function () {
         Route::resource('orderobat', OrderObatController::class);
+        Route::resource('obat', ObatController::class);
+        Route::resource('satuanobat', SatuanObatController::class);
+        Route::resource('kategoriobat', KategoriObatController::class);
+        Route::resource('supplier', SupplierController::class);
+        Route::resource('stokobat', StokObatController::class);
+        Route::resource('transaksi', TransaksiController::class);
     });
     Route::middleware('permission:pendaftaran')->group(function () {
-
-        Route::prefix('pendaftaran')->group(function () {
-            Route::resource('kunjungan', KunjunganController::class);
-            Route::resource('pasien', PasienController::class);
-        });
         Route::get('pendaftaran', [PendaftaranController::class, 'indexPendaftaran'])->name('pendaftaran');
         Route::post('datapasienbaru', [PendaftaranController::class, 'dataPasienBaru'])->name('datapasienbaru');
         Route::post('pendaftaranpasien', [PendaftaranController::class, 'formPendaftaran'])->name('pendaftaranpasien');
         Route::post('pencaripasien', [PendaftaranController::class, 'pencarianPasien'])->name('pencaripasien');
         Route::post('simpanpendaftaran', [PendaftaranController::class, 'simpanPendfataran'])->name('simpanpendaftaran');
-    });
 
+        Route::prefix('pendaftaran')->group(function () {
+            Route::resource('kunjungan', KunjunganController::class);
+            Route::resource('pasien', PasienController::class);
+        });
+    });
     Route::middleware('permission:dokter')->group(function () {
         Route::get('erm', [DokterController::class, 'indexDokter'])->name('erm');
         Route::post('indexerm', [DokterController::class, 'indexErm'])->name('indexerm');
@@ -110,8 +106,9 @@ Route::middleware('auth')->group(function () {
         Route::post('gambarmata1', [DokterController::class, 'gambarMata1'])->name('gambarmata1');
         Route::post('gambarmata2', [DokterController::class, 'gambarMata2'])->name('gambarmata2');
         Route::post('simpanpemeriksaandokter', [DokterController::class, 'simpanForm'])->name('simpanpemeriksaandokter');
+        Route::post('simpanttddokter', [DokterController::class, 'simpanTtdDokter'])->name('simpanttddokter');
+        Route::post('simpantindakan', [DokterController::class, 'simpanTindakan'])->name('simpantindakan');
     });
-
     Route::middleware('permission:perawat')->group(function () {
         Route::get('ermperawat', [PerawatController::class, 'indexPerawat'])->name('ermperawat');
         Route::post('indexermperawat', [PerawatController::class, 'indexErmPerawat'])->name('indexermperawat');
