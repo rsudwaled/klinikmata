@@ -25,7 +25,8 @@
             </thead>
             <tbody>
                 @foreach ($kunjungan as $k)
-                    <tr class="pilihpasien" idpasien="{{ $k->pasien_id }}" kodekunjungan="{{ $k->kode }}" idkunjungan="{{ $k->id }}">
+                    <tr class="pilihpasien" idpasien="{{ $k->pasien_id }}" kodekunjungan="{{ $k->kode }}"
+                        idkunjungan="{{ $k->id }}">
                         <td>{{ $k->pasien->no_rm }}</td>
                         <td>{{ $k->pasien->nama }}</td>
                         <td>{{ $k->pasien->tempat_lahir }},
@@ -34,7 +35,21 @@
                         </td>
                         <td>{{ $k->pasien->nama_desa }}, {{ $k->pasien->nama_kecamatan }} | {{ $k->pasien->alamat }}</td>
                         <td>{{ $k->keluhan }}</td>
-                        <td>{{ $k->status_assesmen_perawat }}</td>
+                        <td>
+                            @switch($k->status_assesmen_perawat)
+                                @case(0)
+                                    Belum tdd
+                                @break
+
+                                @case(1)
+                                    Sudah Diisi
+                                @break
+
+                                @default
+                                    Belum Diisi
+                            @endswitch
+
+                        </td>
                     </tr>
                 @endforeach
             </tbody>
@@ -143,6 +158,7 @@
             $(".slide2").attr('hidden', true);
             $(".slide1").removeAttr('hidden', true);
         }
+
         function formcatatanmedis(idpasien) {
             spinner = $('#loader2');
             spinner.show();
@@ -162,6 +178,7 @@
                 }
             });
         }
+
         function formpemeriksaan() {
             var element = document.getElementById("pemeriksaan");
             element.classList.add("active");
@@ -171,8 +188,8 @@
                 type: 'post',
                 data: {
                     _token: "{{ csrf_token() }}",
-                    idkunjungan : $('#idkunjungan').val(),
-                    kodekunjungan : $('#kodekunjungan').val()
+                    idkunjungan: $('#idkunjungan').val(),
+                    kodekunjungan: $('#kodekunjungan').val()
                 },
                 url: '<?= route('formpemeriksaan_perawat') ?>',
                 error: function(data) {
@@ -184,6 +201,7 @@
                 }
             });
         }
+
         function resume() {
             var element = document.getElementById("pemeriksaan");
             element.classList.add("active");
@@ -193,8 +211,8 @@
                 type: 'post',
                 data: {
                     _token: "{{ csrf_token() }}",
-                    idkunjungan : $('#idkunjungan').val(),
-                    kodekunjungan : $('#kodekunjungan').val()
+                    idkunjungan: $('#idkunjungan').val(),
+                    kodekunjungan: $('#kodekunjungan').val()
                 },
                 url: '<?= route('resumeperawat') ?>',
                 error: function(data) {

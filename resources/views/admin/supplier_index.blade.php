@@ -18,8 +18,14 @@
                             <td>{{ $item->nama }}</td>
                             <td>{{ $item->alamat }}</td>
                             <td>{{ $item->penanggungjawab }}</td>
-                            <td>{{ $item->phone }}</td>
-                            <td>{{ $item->status }}</td>
+                            <td>{{ $item->nohp }}</td>
+                            <td>
+                                @if ($item->status)
+                                    <span class="badge badge-success">Aktif</span>
+                                @else
+                                    <span class="badge badge-success">Non-Aktif</span>
+                                @endif
+                            </td>
                             <td>{{ $item->created_at }} {{ $item->user_entry }}</td>
                         </tr>
                     @endforeach

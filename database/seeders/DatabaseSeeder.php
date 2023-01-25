@@ -31,7 +31,7 @@ class DatabaseSeeder extends Seeder
 
         Pasien::factory(50)->create();
         Dokter::factory(50)->create();
-        Kunjungan::factory(50)->create();
+        // Kunjungan::factory(50)->create();
         JadwalDokter::factory(1)->create();
 
         $this->command->info('Loading Tarif table seed');

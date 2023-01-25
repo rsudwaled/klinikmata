@@ -23,6 +23,7 @@ return new class extends Migration
             $table->dateTime('tgl_keluar')->nullable();
 
             $table->string('pasien_id')->nullable();
+            $table->string('pasien_baru')->nullable();
             $table->string('dokter_id')->nullable();
             $table->string('penjamin_id')->nullable();
             $table->string('status')->default(1);

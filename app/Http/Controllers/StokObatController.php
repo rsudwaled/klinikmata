@@ -33,7 +33,7 @@ class StokObatController extends APIController
     }
     public function edit($id)
     {
-        $stok  =  StokObat::find($id);
+        $stok  =  StokObat::with(['supplier'])->find($id);
         return response()->json($stok);
     }
     public function store(Request $request)
@@ -46,7 +46,6 @@ class StokObatController extends APIController
             "kode" =>  "required",
             "stok_in" =>  "required",
             "obat_id" =>  "required",
-            "kategori_id" =>  "required",
             "unit_id" =>  "required",
             "tgl_expire" =>  "required|date",
             "transaksi_id" =>  "required",
@@ -58,12 +57,18 @@ class StokObatController extends APIController
         if ($validator->fails()) {
             return $this->sendError($validator->errors()->first(), null, 400);
         }
+
         StokObat::create($request->except('_token'));
+        $obat  = Obat::find($request->obat_id);
+        $ppn = $request->harga_beli * $request->ppn / 100;
+        $pph = $request->harga_beli * $request->pph / 100;
+        $diskon = $request->harga_beli * $request->diskon / 100;
+        $total = $request->harga_beli + $ppn + $pph - $diskon;
         Transaksi::create([
             'kode' => $request->transaksi_id,
-            'nama' => "PO OBAT ",
-            'kredit' => $request->harga_beli,
-            'keterangan' => "PO OBAT ",
+            'nama' => "PO OBAT " . $obat->nama,
+            'kredit' => $total,
+            'keterangan' => "PO OBAT " . $obat->nama,
             'pic' => $request->pic,
 
         ]);
