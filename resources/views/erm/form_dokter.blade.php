@@ -6,12 +6,13 @@
     </div><!-- /.card-header -->
     <div class="card-body scroll">
         <form action="" class="formpemeriksaan">
+            <input type="text" hidden name="idaskep" value="idaskep" value="{{ $asskep[0]->id }}">
             <table class="table table-sm">
                 <tr>
                     <td>Tanggal & Jam Kunjungan</td>
-                    <td><input readonly type="text" class="form-control" value="" name="tgljamkunjungan"></td>
+                    <td><input readonly type="text" class="form-control" value="{{$kunjungan[0]->tgl_masuk }}" name="tgljamkunjungan"></td>
                     <td>Tanggal & Jam Pemeriksaan</td>
-                    <td><input type="text" class="form-control" value="" name="tgljampemeriksaan"></td>
+                    <td><input type="text" class="form-control" value="{{ $now }}" id="tgljampemeriksaan" name="tgljampemeriksaan"></td>
                 </tr>
                 <tr>
                     <td>Sumber Data</td>
@@ -39,7 +40,7 @@
                     <td>
                         <div class="input-group date" id="reservationdate" data-target-input="nearest">
                             <input type="text" class="form-control form-control-md" name="tekanandarah"
-                                id="tekanandarah" />
+                                id="tekanandarah" value="{{ $asskep[0]->tekanan_darah }}"/>
                             <div class="input-group-append">
                                 <div class="input-group-text text-md">mmHg</div>
                             </div>
@@ -49,7 +50,7 @@
                     <td>
                         <div class="input-group date" id="reservationdate" data-target-input="nearest">
                             <input type="text" class="form-control form-control-md" name="frekuensinadi"
-                                id="frekuensinadi" />
+                                id="frekuensinadi" value="{{ $asskep[0]->frekuensi_nadi }}" />
                             <div class="input-group-append">
                                 <div class="input-group-text text-md">X / Menit</div>
                             </div>
@@ -61,7 +62,7 @@
                     <td>
                         <div class="input-group date" id="reservationdate" data-target-input="nearest">
                             <input type="text" class="form-control form-control-md" name="frekuensinapas"
-                                id="frekuensinapas" />
+                                id="frekuensinapas" value="{{ $asskep[0]->frekuensi_nafas }}"/>
                             <div class="input-group-append">
                                 <div class="input-group-text text-md">X / Menit</div>
                             </div>
@@ -71,7 +72,7 @@
                     <td>
                         <div class="input-group date" id="reservationdate" data-target-input="nearest">
                             <input type="text" class="form-control form-control-md" name="suhutubuh"
-                                id="suhutubuh" />
+                                id="suhutubuh" value="{{ $asskep[0]->suhu_tubuh }}" />
                             <div class="input-group-append">
                                 <div class="input-group-text text-md">°C</div>
                             </div>
@@ -81,7 +82,7 @@
                 <tr>
                     <td>Keluhan Utama</td>
                     <td colspan="3">
-                        <textarea cols="10" rows="4" class="form-control" name="keluhanutama" id="keluhanutama"></textarea>
+                        <textarea cols="10" rows="4" class="form-control" name="keluhanutama" id="keluhanutama">{{ $kunjungan[0]->keluhan}}</textarea>
                     </td>
                 </tr>
                 <tr>
@@ -575,10 +576,27 @@
         </form>
     </div><!-- /.card-body -->
 </div>
-
-@section('plugins.Datatables', true)
-@section('plugins.Select2', true)
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 <script>
+    $(function() {
+        $('input[name="tgljampemeriksaan"]').daterangepicker({
+            singleDatePicker: true,
+            showDropdowns: true,
+            timePicker: true,
+            timePicker24Hour: true,
+            timePickerSeconds: true,
+            minYear: 2023,
+            locale: {
+                format: 'YYYY-MM-DD HH:mm:ss',
+                locale: 'id'
+            }
+        }, function(start, end, label) {
+            var years = moment().diff(start, 'years');
+        });
+    });
     $(document).ready(function() {
         ambilgambar1()
         ambilgambar2()
@@ -637,5 +655,50 @@
         var dataUrl = canvas.toDataURL();
         $('#gambarmata2').val(dataUrl)
         gambar2 = $('#gambarmata2').val()
+        var data = $('.formpemeriksaan').serializeArray();
+        $.ajax({
+            async: true,
+            type: 'post',
+            dataType: 'json',
+            data: {
+                _token: "{{ csrf_token() }}",
+                data: JSON.stringify(data),
+                idkunjungan  : $('#idkunjungan').val(),
+                kodekunjungan : $('#kodekunjungan').val(),
+                idpasien : $('#idpasien').val(),
+                idpasien : $('#idpasien').val(),
+                idaskep : $('#idaskep').val(),
+                gambar1,
+                gambar2
+            },
+            url: '<?= route('simpanpemeriksaandokter') ?>',
+            error: function(data) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Something went wrong!',
+                    footer: 'Klinikmatalosari2023'
+                })
+                spinner.hide();
+            },
+            success: function(data) {
+                spinner.hide();
+                if (data.kode == '502') {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops',
+                        text: data.message,
+                        footer: 'Klinikmatalosari2023'
+                    })
+                } else {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'OK',
+                        text: data.message,
+                        footer: 'Klinikmatalosari2023'
+                    })
+                }
+            }
+        });
     }
 </script>
