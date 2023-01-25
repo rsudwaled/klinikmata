@@ -1,12 +1,12 @@
 @extends('adminlte::page')
-@section('title', 'Stok Obat')
+@section('title', 'Transaksi')
 @section('content_header')
-    <h1 class="m-0 text-dark">Stok Obat</h1>
+    <h1 class="m-0 text-dark">Transaksi</h1>
 @stop
 @section('content')
     <div class="row">
         <div class="col-12">
-            <x-adminlte-card title="Riwayat Stok Obat" theme="secondary" collapsible>
+            <x-adminlte-card title="Riwayat Transaksi" theme="secondary" collapsible>
                 <div class="row">
                     <div class="col-md-8">
                         <x-adminlte-button label="Tambah" class="btn-sm btnTambah" theme="success" title="Tambah Pasien"
@@ -39,8 +39,8 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $item->kode }}</td>
                             <td>{{ $item->nama }}</td>
-                            <td>{{ $item->debit }}</td>
-                            <td>{{ $item->kredit }}</td>
+                            <td class="text-right">{{ $item->debit ? money($item->debit, 'IDR2') : '-' }}</td>
+                            <td class="text-right">{{ $item->kredit ? money($item->kredit, 'IDR2') : '-' }}</td>
                             <td>{{ $item->tipe }}</td>
                             <td>{{ $item->keterangan }}</td>
                             <td>{{ $item->status }}</td>

@@ -333,7 +333,64 @@ return [
                 ],
             ]
         ],
+        // MENU KASIR
+        [
+            'text' => 'Menu Kasir',
+            'icon' => 'fas fa-cash-register',
+            'submenu' => [
+                [
+                    'text'        => 'Pendaftaran Pasien',
+                    'url'         => '/as',
+                    'icon'        => 'fas fa-user-plus',
+                    'shift'   => 'ml-2',
 
+                ],
+            ]
+        ],
+        // MENU FARMASI
+        [
+            'text' => 'Menu Farmasi',
+            'icon' => 'fas fa-user-injured',
+            'submenu' => [
+                [
+                    'text' => 'Order Obat',
+                    'url'  => 'farmasi/orderobat',
+                    'icon' => 'fas fa-pills',
+                    'shift'   => 'ml-2',
+                ],
+                [
+                    'text' => 'Obat',
+                    'url'  => 'administrator/obat',
+                    'icon' => 'fas fa-pills',
+                    'shift'   => 'ml-2',
+                ],
+                [
+                    'text' => 'Satuan Obat',
+                    'url'  => 'administrator/satuanobat',
+                    'icon' => 'fas fa-pills',
+                    'shift'   => 'ml-2',
+                ],
+                [
+                    'text' => 'Kategori Obat',
+                    'url'  => 'administrator/kategoriobat',
+                    'icon' => 'fas fa-pills',
+                    'shift'   => 'ml-2',
+                ],
+                [
+                    'text' => 'Supplier',
+                    'url'  => 'administrator/supplier',
+                    'icon' => 'fas fa-pills',
+                    'shift'   => 'ml-2',
+                ],
+                [
+                    'text' => 'Stok Obat',
+                    'url'  => 'administrator/stokobat',
+                    'icon' => 'fas fa-pills',
+                    'shift'   => 'ml-2',
+                ],
+            ]
+        ],
+        // MENU ADMINISTRASI
         [
             'text' => 'Menu Administrasi',
             'icon' => 'fas fa-user-injured',
@@ -388,36 +445,6 @@ return [
                     'shift'   => 'ml-2',
                 ],
                 [
-                    'text' => 'Obat',
-                    'url'  => 'administrator/obat',
-                    'icon' => 'fas fa-pills',
-                    'shift'   => 'ml-2',
-                ],
-                [
-                    'text' => 'Satuan Obat',
-                    'url'  => 'administrator/satuanobat',
-                    'icon' => 'fas fa-pills',
-                    'shift'   => 'ml-2',
-                ],
-                [
-                    'text' => 'Kategori Obat',
-                    'url'  => 'administrator/kategoriobat',
-                    'icon' => 'fas fa-pills',
-                    'shift'   => 'ml-2',
-                ],
-                [
-                    'text' => 'Supplier',
-                    'url'  => 'administrator/supplier',
-                    'icon' => 'fas fa-pills',
-                    'shift'   => 'ml-2',
-                ],
-                [
-                    'text' => 'Stok Obat',
-                    'url'  => 'administrator/stokobat',
-                    'icon' => 'fas fa-pills',
-                    'shift'   => 'ml-2',
-                ],
-                [
                     'text' => 'Kunjungan',
                     'url'  => 'administrator/kunjungan',
                     'icon' => 'fas fa-hospital-user',
@@ -457,8 +484,6 @@ return [
                 // ],
             ]
         ],
-
-
         // USER ACCESS CONTROLL
         ['header' => 'MENU USER'],
         [

@@ -11,7 +11,9 @@ use App\Http\Controllers\Erm\PerawatController;
 use App\Http\Controllers\JadwalDokterController;
 use App\Http\Controllers\KategoriObatController;
 use App\Http\Controllers\KunjunganController;
+use App\Http\Controllers\LaravoltController;
 use App\Http\Controllers\ObatController;
+use App\Http\Controllers\OrderObatController;
 use App\Http\Controllers\Pendaftaran\PendaftaranController;
 use App\Http\Controllers\PoliklinikController;
 use App\Http\Controllers\RuanganController;
@@ -41,6 +43,12 @@ Auth::routes();
 
 Route::middleware('auth')->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('get_provinsi', [LaravoltController::class, 'get_provinsi'])->name('get_provinsi');
+    Route::get('get_kabupaten', [LaravoltController::class, 'get_kabupaten'])->name('get_kabupaten');
+    Route::get('get_kecamatan', [LaravoltController::class, 'get_kecamatan'])->name('get_kecamatan');
+    Route::get('get_desa', [LaravoltController::class, 'get_desa'])->name('get_desa');
+
+
     Route::middleware('permission:admin')->group(function () {
         Route::resource('user', UserController::class);
         Route::resource('role', RoleController::class);
@@ -85,18 +93,19 @@ Route::middleware('auth')->group(function () {
         Route::resource('ruangan', RuanganController::class);
         Route::resource('unit', UnitController::class);
         Route::resource('tarif', TarifController::class);
-
         Route::resource('obat', ObatController::class);
         Route::resource('satuanobat', SatuanObatController::class);
         Route::resource('kategoriobat', KategoriObatController::class);
         Route::resource('supplier', SupplierController::class);
         Route::resource('stokobat', StokObatController::class);
         Route::resource('transaksi', TransaksiController::class);
-
         Route::post('tarif/import',  [TarifController::class, 'import'])->name('tarif.import');
         Route::post('obat/import',  [ObatController::class, 'import'])->name('obat.import');
         Route::get('icd10',  [DiagnosaController::class, 'index_icd10']);
         Route::get('icd9',  [DiagnosaController::class, 'index_icd9']);
+    });
+    Route::middleware('permission:farmasi')->prefix('farmasi')->group(function () {
+        Route::resource('orderobat', OrderObatController::class);
     });
     Route::middleware('permission:pendaftaran')->prefix('pendaftaran')->group(function () {
         Route::resource('kunjungan', KunjunganController::class);

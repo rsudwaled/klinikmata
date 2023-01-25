@@ -18,14 +18,22 @@ return new class extends Migration
             $table->string('kode')->unique();
             $table->string('barcode')->nullable()->unique();
             $table->string('nama')->nullable();
-            $table->string('satuan_id')->nullable();
-            $table->string('jenis')->nullable();
-            $table->string('kategori_id')->nullable();
-            $table->boolean('status')->default(0);
 
-            $table->boolean('harga_jual')->nullable();
-            $table->boolean('margin_jual')->nullable();
-            $table->boolean('pic')->default(0);
+            $table->string('satuan_id')->nullable();
+            $table->string('jenis_id')->nullable();
+            $table->string('tipe_id')->nullable();
+            $table->string('kelompok_id')->nullable();
+            $table->string('kategori_id')->nullable();
+
+            $table->string('harga_beli')->nullable();
+            $table->string('harga_jual')->nullable();
+            $table->string('ppn')->nullable();
+            $table->string('pph')->nullable();
+            $table->string('diskon')->nullable();
+            $table->string('margin_jual')->nullable();
+
+            $table->boolean('status')->default(0);
+            $table->string('pic')->default(0);
             $table->timestamps();
         });
     }

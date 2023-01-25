@@ -31,16 +31,15 @@
                     </div>
                 </div>
                 @php
-                    $heads = ['No', 'Kode', 'Obat', 'Qty', 'Kategori', 'Supplier', 'Invoice', 'Harga Beli', 'Upadted at'];
+                    $heads = ['No', 'Kode', 'Obat', 'Qty', 'Supplier', 'Invoice', 'Harga Beli', 'Upadted at'];
                 @endphp
                 <x-adminlte-datatable id="table1" class="text-xs" :heads="$heads" hoverable bordered compressed>
                     @foreach ($stoks as $item)
                         <tr class="btnEdit" data-id="{{ $item->id }}">
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $item->kode }}</td>
-                            <td>{{ $item->obat->nama }} {{ '/ '. $item->obat->satuan_obat ?? null }}</td>
+                            <td>{{ $item->obat->nama }} {{ '/ ' . $item->obat->satuan_obat ?? null }}</td>
                             <td>{{ $item->stok_in }}</td>
-                            <td>{{ $item->kategori->nama }}</td>
                             <td>{{ $item->supplier->nama }}</td>
                             <td>{{ $item->invoice }}</td>
                             <td>{{ money($item->total_harga, 'IDR2') }}</td>
@@ -56,33 +55,12 @@
             @csrf
             <div class="row">
                 <div class="col-md-4">
-                    <x-adminlte-select2 name="obat_id" label="Obat">
-                        <option value="" selected disabled>Pilih Obat</option>
-                        @foreach ($obats as $item)
-                            <option value="{{ $item->id }}">{{ $item->nama }}
-                                {{ $item->satuan ? ' / ' . $item->satuan->nama : '' }}</option>
-                        @endforeach
-                    </x-adminlte-select2>
-                    <x-adminlte-input name="stok_in" label="Qty Stok Masuk" igroup-size="sm" enable-old-support required />
-                    <x-adminlte-select2 name="kategori_id" label="Kategori">
-                        <option value="" selected disabled>Pilih Obat</option>
-                        @foreach ($kategori as $id => $name)
-                            <option value="{{ $id }}">{{ $name }}</option>
-                        @endforeach
-                    </x-adminlte-select2>
                     <x-adminlte-select2 name="unit_id" label="Unit">
                         <option value="" selected disabled>Pilih Unit</option>
                         @foreach ($units as $id => $name)
                             <option value="{{ $id }}">{{ $name }}</option>
                         @endforeach
                     </x-adminlte-select2>
-                </div>
-                <div class="col-md-4">
-                    @php
-                        $config = ['format' => 'YYYY-MM-DD'];
-                    @endphp
-                    <x-adminlte-input-date name="tgl_expire" label="Tanggal Expiered" :config="$config" enable-old-support
-                        required />
                     <x-adminlte-input name="transaksi_id" label="Kode Trsansaki" igroup-size="sm" readonly
                         enable-old-support />
                     <x-adminlte-select2 name="supplier_id" label="Supplier">
@@ -93,6 +71,28 @@
                     </x-adminlte-select2>
                     <x-adminlte-input name="invoice" label="Invoice / Faktu Perusahaan" igroup-size="sm" enable-old-support
                         required />
+                </div>
+                <div class="col-md-4">
+                    <x-adminlte-select2 name="obat_id" label="Obat">
+                        <option value="" selected disabled>Pilih Obat</option>
+                        @foreach ($obats as $item)
+                            <option value="{{ $item->id }}">{{ $item->nama }}
+                                {{ $item->satuan ? ' / ' . $item->satuan->nama : '' }}</option>
+                        @endforeach
+                    </x-adminlte-select2>
+                    <x-adminlte-input name="stok_in" label="Qty Stok Masuk" placeholder="Jumlah Satuan Stok Masuk"
+                        igroup-size="sm" enable-old-support required />
+                    {{-- <x-adminlte-select2 name="kategori_id" label="Kategori">
+                        <option value="" selected disabled>Pilih Obat</option>
+                        @foreach ($kategori as $id => $name)
+                            <option value="{{ $id }}">{{ $name }}</option>
+                        @endforeach
+                    </x-adminlte-select2> --}}
+                    @php
+                        $config = ['format' => 'YYYY-MM-DD'];
+                    @endphp
+                    <x-adminlte-input-date name="tgl_expire" label="Tanggal Expiered" placeholder="Tanggal Kadaluarsa"
+                        :config="$config" enable-old-support required />
                 </div>
                 <div class="col-md-4">
                     <x-adminlte-input name="harga_beli" label="Harga Beli" igroup-size="sm" enable-old-support required />
@@ -171,7 +171,7 @@
                 <div class="col-12">
                     <h4>
                         <i class="fas fa-globe"></i> Klinik Mata Losari.
-                        <small class="float-right">{{ now()->format('m/d/Y') }}</small>
+                        <small class="float-right"><span id="created_at">-</span></small>
                     </h4>
                 </div>
                 <!-- /.col -->
@@ -179,16 +179,16 @@
             <!-- info row -->
             <div class="row invoice-info">
                 <div class="col-sm-4 invoice-col">
-                    Telah diterima dari
+                    Telah diterima dari :
                     <address>
-                        <strong><span id="supplier">-</span></strong><br>
+                        <strong><span id="nama_supplier">-</span></strong><br>
                         <span id="penanggungjawab">-</span><br>
                         <span id="nohp">-</span><br>
                     </address>
                 </div>
                 <!-- /.col -->
                 <div class="col-sm-4 invoice-col">
-                    Diterima oleh
+                    Diterima oleh :
                     <address>
                         <strong>Klinik Mata Losari</strong><br>
                         <span id="user_entry">-</span><br>
@@ -196,10 +196,10 @@
                 </div>
                 <!-- /.col -->
                 <div class="col-sm-4 invoice-col">
-                    <b>Invoice #007612</b><br>
-                    <b>Kode PO : </b> 4F3S8J<br>
-                    <b>Kode Transaksi : </b> 2/22/2014<br>
-                    <b>Account </b> 968-34567
+                    <b>Invoice #<span id="invoice_id">-</span></b><br>
+                    <b>Kode PO : </b> <span id="kode_id">-</span><br>
+                    <b>Kode Transaksi : </b><span id="transaksi_id2">-</span><br>
+                    <b>Jumlah </b> <span id="jumlah_rupiah">-</span>
                 </div>
                 <!-- /.col -->
             </div>
@@ -334,8 +334,16 @@
                 $.get("{{ route('stokobat.index') }}" + '/' + id + '/edit', function(data) {
                     console.log(data);
                     // $('#id').val(data.id);
+                    $('#nama_supplier').html(data.supplier.nama);
+                    $('#penanggungjawab').html(data.supplier.penanggungjawab);
+                    $('#nohp').html(data.supplier.nohp);
 
                     $('#user_entry').html(data.user_entry);
+                    $('#invoice_id').html(data.invoice);
+                    $('#kode_id').html(data.kode);
+                    $('#transaksi_id2').html(data.transaksi_id);
+                    $('#created_at').html(data.created_at);
+
                     // $('#no_rm').val(data.no_rm);
                     // $('#no_ihs').val(data.no_ihs);
                     // $('#no_bpjs').val(data.no_bpjs);

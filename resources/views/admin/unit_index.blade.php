@@ -1,19 +1,20 @@
 @extends('adminlte::page')
-@section('title', 'Poliklinik - Antrian BPJS')
+@section('title', 'Unit')
 @section('content_header')
-    <h1 class="m-0 text-dark">Poliklinik Antrian BPJS</h1>
+    <h1 class="m-0 text-dark">Unit</h1>
 @stop
 @section('content')
     <div class="row">
         <div class="col-12">
-            <x-adminlte-card title="Referensi Poliklinik Antrian BPJS" theme="secondary" collapsible>
+            <x-adminlte-card title="Data Unit" theme="secondary" collapsible>
                 @php
-                    $heads = ['No', 'Nama', 'Deskripsi', 'Status','Tgl Update'];
+                    $heads = ['No', 'Kode', 'Nama', 'Deskripsi', 'Status', 'Tgl Update'];
                 @endphp
                 <x-adminlte-datatable id="table1" class="text-xs" :heads="$heads" hoverable bordered compressed>
                     @foreach ($units as $poliklinik)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
+                            <td>{{ $poliklinik->kode }}</td>
                             <td>{{ $poliklinik->nama }}</td>
                             <td>{{ $poliklinik->deskripsi }}</td>
                             <td>{{ $poliklinik->status }}</td>

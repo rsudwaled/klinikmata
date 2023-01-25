@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('dokters', function (Blueprint $table) {
             $table->id();
-            $table->string('kode')->nullable()->unique();
+            $table->string('kode')->unique();
             $table->string('kode_jkn')->nullable()->unique();
             $table->string('kode_ihs')->nullable()->unique();
-            $table->string('nik')->unique();
+            $table->string('nik')->nullable()->unique();
 
             $table->string('nama');
             $table->string('suffix')->nullable();
