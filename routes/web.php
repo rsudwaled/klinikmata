@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\DiagnosaController;
 use App\Http\Controllers\DokterController as ControllersDokterController;
 use App\Http\Controllers\PasienController;
@@ -39,7 +40,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('landingpage');
 });
-Auth::routes();
+Auth::routes(['verfiy' => true]);
+Route::get('verifikasi_akun', [VerificationController::class, 'verifikasi_akun'])->name('verifikasi_akun');
+Route::post('verifikasi_kirim', [VerificationController::class, 'verifikasi_kirim'])->name('verifikasi_kirim');
 
 Route::middleware('auth')->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -54,32 +57,6 @@ Route::middleware('auth')->group(function () {
         Route::resource('role', RoleController::class);
         Route::resource('permission', PermissionController::class);
         //apw516
-        Route::get('erm', [DokterController::class, 'indexDokter'])->name('erm');
-        Route::post('indexerm', [DokterController::class, 'indexErm'])->name('indexerm');
-        Route::post('formcatatanmedis', [DokterController::class, 'formCatatanMedis'])->name('formcatatanmedis');
-        Route::post('formpemeriksaan_dokter', [DokterController::class, 'formPemeriksaan'])->name('formpemeriksaan_dokter');
-        Route::post('inputtindakan', [DokterController::class, 'formTindakan'])->name('inputtindakan');
-        Route::post('orderfarmasi', [DokterController::class, 'orderFarmasi'])->name('orderfarmasi');
-        Route::post('orderpenunjang', [DokterController::class, 'orderPenunjang'])->name('orderpenunjang');
-        Route::post('resumedokter', [DokterController::class, 'resumeDokter'])->name('resumedokter');
-        Route::post('gambarmata1', [DokterController::class, 'gambarMata1'])->name('gambarmata1');
-        Route::post('gambarmata2', [DokterController::class, 'gambarMata2'])->name('gambarmata2');
-        Route::post('simpanpemeriksaandokter', [DokterController::class, 'simpanForm'])->name('simpanpemeriksaandokter');
-
-        Route::get('ermperawat', [PerawatController::class, 'indexPerawat'])->name('ermperawat');
-        Route::post('indexermperawat', [PerawatController::class, 'indexErmPerawat'])->name('indexermperawat');
-        Route::post('formcatatanmedis_perawat', [PerawatController::class, 'formCatatanMedis'])->name('formcatatanmedis_perawat');
-        Route::post('formpemeriksaan_perawat', [PerawatController::class, 'formPemeriksaan'])->name('formpemeriksaan_perawat');
-        Route::post('simpanpemeriksaanperawat', [PerawatController::class, 'simpanForm'])->name('simpanpemeriksaanperawat');
-        Route::post('resumeperawat', [PerawatController::class, 'resumePerawat'])->name('resumeperawat');
-        Route::post('simpanttdperawat', [PerawatController::class, 'simpanTtdPerawat'])->name('simpanttdperawat');
-
-        Route::get('pendaftaran', [PendaftaranController::class, 'indexPendaftaran'])->name('pendaftaran');
-        Route::post('datapasienbaru', [PendaftaranController::class, 'dataPasienBaru'])->name('datapasienbaru');
-        Route::post('pendaftaranpasien', [PendaftaranController::class, 'formPendaftaran'])->name('pendaftaranpasien');
-        Route::post('pencaripasien', [PendaftaranController::class, 'pencarianPasien'])->name('pencaripasien');
-
-        Route::post('simpanpendaftaran', [PendaftaranController::class, 'simpanPendfataran'])->name('simpanpendaftaran');
 
         Route::get('profile', [UserController::class, 'profile'])->name('profile');
         Route::get('user_verifikasi/{user}', [UserController::class, 'user_verifikasi'])->name('user_verifikasi');
@@ -109,7 +86,40 @@ Route::middleware('auth')->group(function () {
     Route::middleware('permission:farmasi')->prefix('farmasi')->group(function () {
         Route::resource('orderobat', OrderObatController::class);
     });
-    Route::middleware('permission:pendaftaran')->prefix('pendaftaran')->group(function () {
-        Route::resource('kunjungan', KunjunganController::class);
+    Route::middleware('permission:pendaftaran')->group(function () {
+
+        Route::prefix('pendaftaran')->group(function () {
+            Route::resource('kunjungan', KunjunganController::class);
+            Route::resource('pasien', PasienController::class);
+        });
+        Route::get('pendaftaran', [PendaftaranController::class, 'indexPendaftaran'])->name('pendaftaran');
+        Route::post('datapasienbaru', [PendaftaranController::class, 'dataPasienBaru'])->name('datapasienbaru');
+        Route::post('pendaftaranpasien', [PendaftaranController::class, 'formPendaftaran'])->name('pendaftaranpasien');
+        Route::post('pencaripasien', [PendaftaranController::class, 'pencarianPasien'])->name('pencaripasien');
+        Route::post('simpanpendaftaran', [PendaftaranController::class, 'simpanPendfataran'])->name('simpanpendaftaran');
+    });
+
+    Route::middleware('permission:dokter')->group(function () {
+        Route::get('erm', [DokterController::class, 'indexDokter'])->name('erm');
+        Route::post('indexerm', [DokterController::class, 'indexErm'])->name('indexerm');
+        Route::post('formcatatanmedis', [DokterController::class, 'formCatatanMedis'])->name('formcatatanmedis');
+        Route::post('formpemeriksaan_dokter', [DokterController::class, 'formPemeriksaan'])->name('formpemeriksaan_dokter');
+        Route::post('inputtindakan', [DokterController::class, 'formTindakan'])->name('inputtindakan');
+        Route::post('orderfarmasi', [DokterController::class, 'orderFarmasi'])->name('orderfarmasi');
+        Route::post('orderpenunjang', [DokterController::class, 'orderPenunjang'])->name('orderpenunjang');
+        Route::post('resumedokter', [DokterController::class, 'resumeDokter'])->name('resumedokter');
+        Route::post('gambarmata1', [DokterController::class, 'gambarMata1'])->name('gambarmata1');
+        Route::post('gambarmata2', [DokterController::class, 'gambarMata2'])->name('gambarmata2');
+        Route::post('simpanpemeriksaandokter', [DokterController::class, 'simpanForm'])->name('simpanpemeriksaandokter');
+    });
+
+    Route::middleware('permission:perawat')->group(function () {
+        Route::get('ermperawat', [PerawatController::class, 'indexPerawat'])->name('ermperawat');
+        Route::post('indexermperawat', [PerawatController::class, 'indexErmPerawat'])->name('indexermperawat');
+        Route::post('formcatatanmedis_perawat', [PerawatController::class, 'formCatatanMedis'])->name('formcatatanmedis_perawat');
+        Route::post('formpemeriksaan_perawat', [PerawatController::class, 'formPemeriksaan'])->name('formpemeriksaan_perawat');
+        Route::post('simpanpemeriksaanperawat', [PerawatController::class, 'simpanForm'])->name('simpanpemeriksaanperawat');
+        Route::post('resumeperawat', [PerawatController::class, 'resumePerawat'])->name('resumeperawat');
+        Route::post('simpanttdperawat', [PerawatController::class, 'simpanTtdPerawat'])->name('simpanttdperawat');
     });
 });

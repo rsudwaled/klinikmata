@@ -53,51 +53,44 @@ class UserSeeder extends Seeder
 
         $user = User::create([
             "name" => "Admin Pendaftaran",
-            "email" => "adminpendaftaran@gmail.com",
-            "username" => "adminpendaftaran",
+            "email" => "pendaftaran@gmail.com",
+            "username" => "pendaftaran",
             "phone" => "089529909036",
-            'password' => bcrypt('adminpendaftaran'),
+            'password' => bcrypt('pendaftaran'),
         ]);
         $user->assignRole('Pendaftaran');
         $user = User::create([
             "name" => "Admin Kasir",
-            "email" => "adminkasir@gmail.com",
-            "username" => "adminkasir",
+            "email" => "kasir@gmail.com",
+            "username" => "kasir",
             "phone" => "089529909036",
-            'password' => bcrypt('adminkasir'),
+            'password' => bcrypt('kasir'),
         ]);
         $user->assignRole('Kasir');
         $user = User::create([
-            "name" => "Admin Poliklinik",
-            "email" => "adminpoli@gmail.com",
-            "username" => "adminpoli",
-            "phone" => "089529909036",
-            'password' => bcrypt('adminpoli'),
-        ]);
-        $user->assignRole('Poliklinik');
-        $user = User::create([
             "name" => "Admin Farmasi",
-            "email" => "adminfarmasi@gmail.com",
-            "username" => "adminfarmasi",
+            "email" => "farmasi@gmail.com",
+            "username" => "farmasi",
             "phone" => "089529909036",
-            'password' => bcrypt('adminfarmasi'),
+            'password' => bcrypt('farmasi'),
         ]);
         $user->assignRole('Farmasi');
         $user = User::create([
-            "name" => "Admin Pelayanan Medis",
-            "email" => "adminyanmed@gmail.com",
-            "username" => "adminyanmed",
+            "name" => "Admin Perawat",
+            "email" => "perawat@gmail.com",
+            "username" => "perawat",
             "phone" => "089529909036",
-            'password' => bcrypt('adminyanmed'),
+            'password' => bcrypt('perawat'),
         ]);
-        $user->assignRole('Pelayanan Medis');
+        $user->assignRole('Perawat');
         $user = User::create([
-            "name" => "Admin Rekam Medis",
-            "email" => "adminrekammedis@gmail.com",
-            "username" => "adminrekammedis",
+            "name" => "Admin Dokter",
+            "email" => "dokter@gmail.com",
+            "username" => "dokter",
             "phone" => "089529909036",
-            'password' => bcrypt('adminrekammedis'),
+            'password' => bcrypt('dokter'),
         ]);
-        $user->assignRole('Rekam Medis');
+        $user->assignRole('Dokter');
+
     }
 }

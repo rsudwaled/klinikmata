@@ -31,7 +31,7 @@ class DatabaseSeeder extends Seeder
 
         Pasien::factory(50)->create();
         Dokter::factory(50)->create();
-        // Kunjungan::factory(50)->create();
+        Kunjungan::factory(5)->create();
         JadwalDokter::factory(1)->create();
 
         $this->command->info('Loading Tarif table seed');
@@ -44,6 +44,11 @@ class DatabaseSeeder extends Seeder
         DB::unprepared(file_get_contents($path));
         $this->command->info('Obat table seeded');
 
+        // $this->command->info('Loading Assement Dokter table seed');
+        // $path = 'public/sql/assesmen_dokter.sql';
+        // DB::unprepared(file_get_contents($path));
+        // $this->command->info('ICD 10 table seeded');
+
         $this->command->info('Loading ICD 9 table seed');
         $path = 'public/sql/icd9.sql';
         DB::unprepared(file_get_contents($path));
@@ -53,6 +58,8 @@ class DatabaseSeeder extends Seeder
         $path = 'public/sql/icd10.sql';
         DB::unprepared(file_get_contents($path));
         $this->command->info('ICD 10 table seeded');
+
+
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',

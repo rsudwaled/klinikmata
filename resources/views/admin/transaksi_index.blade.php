@@ -7,7 +7,7 @@
     <div class="row">
         <div class="col-12">
             <x-adminlte-card title="Riwayat Transaksi" theme="secondary" collapsible>
-                <div class="row">
+                {{-- <div class="row">
                     <div class="col-md-8">
                         <x-adminlte-button label="Tambah" class="btn-sm btnTambah" theme="success" title="Tambah Pasien"
                             icon="fas fa-plus" />
@@ -29,23 +29,20 @@
                             </x-adminlte-input>
                         </form>
                     </div>
-                </div>
+                </div> --}}
                 @php
-                    $heads = ['No', 'Kode', 'Nama', 'Debit', 'Kredit', 'Tipe', 'Ket', 'Status', 'Tgl Transaksi'];
+                    $heads = ['No', 'Tgl Transaksi', 'Transaksi', 'Keterangan', 'Status', 'Debit', 'Kredit'];
                 @endphp
                 <x-adminlte-datatable id="table1" class="text-xs" :heads="$heads" hoverable bordered compressed>
                     @foreach ($transaksi as $item)
                         <tr class="btnEdit" data-id="{{ $item->id }}">
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $item->kode }}</td>
-                            <td>{{ $item->nama }}</td>
-                            <td class="text-right">{{ $item->debit ? money($item->debit, 'IDR2') : '-' }}</td>
-                            <td class="text-right">{{ $item->kredit ? money($item->kredit, 'IDR2') : '-' }}</td>
-                            <td>{{ $item->tipe }}</td>
+                            <td>{{ $item->created_at }} ({{ $item->user_entry }})</td>
+                            <td><b>{{ $item->kode }}</b> {{ $item->nama }}</td>
                             <td>{{ $item->keterangan }}</td>
                             <td>{{ $item->status }}</td>
-
-                            <td>{{ $item->created_at }} ({{ $item->user_entry }})</td>
+                            <td class="text-right">{{ $item->debit ? money($item->debit, 'IDR2') : '-' }}</td>
+                            <td class="text-right">{{ $item->kredit ? money($item->kredit, 'IDR2') : '-' }}</td>
                         </tr>
                     @endforeach
                 </x-adminlte-datatable>

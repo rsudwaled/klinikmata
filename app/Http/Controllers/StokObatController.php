@@ -70,7 +70,7 @@ class StokObatController extends APIController
             'kredit' => $total,
             'keterangan' => "PO OBAT " . $obat->nama,
             'pic' => $request->pic,
-
+            'status' => 1,
         ]);
         return response()->json($request);
     }

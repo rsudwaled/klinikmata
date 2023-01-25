@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'ERM')
+@section('title', 'ERM Perawat')
 
 @section('content_header')
-    <h1>ERM</h1>
+    <h1>ERM Perawat</h1>
     <div class="preloader2" id="loader2">
         <div class="loading">
             <img src="{{ asset('klinik mata losari/fb.gif') }}" width="80">
@@ -36,19 +36,15 @@
                         <td>{{ $k->pasien->nama_desa }}, {{ $k->pasien->nama_kecamatan }} | {{ $k->pasien->alamat }}</td>
                         <td>{{ $k->keluhan }}</td>
                         <td>
-                            @switch($k->status_assesmen_perawat)
-                                @case(0)
-                                    Belum tdd
-                                @break
-
-                                @case(1)
-                                    Sudah Diisi
-                                @break
-
-                                @default
-                                    Belum Diisi
-                            @endswitch
-
+                            @if ($k->status_assesmen_perawat == '0')
+                                <span class="badge badge-warning">Belum tdd</span>
+                            @endif
+                            @if ($k->status_assesmen_perawat == 1)
+                                <span class="badge badge-success">Sudah Diisi</span>
+                            @endif
+                            @if ($k->status_assesmen_perawat == null)
+                                <span class="badge badge-danger">Belum Diisi</span>
+                            @endif
                         </td>
                     </tr>
                 @endforeach
