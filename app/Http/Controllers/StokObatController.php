@@ -38,25 +38,23 @@ class StokObatController extends APIController
     }
     public function store(Request $request)
     {
-        $request['pic'] = Auth::user()->id;
-        $unit = Unit::find($request->unit_id);
-        $request['transaksi_id'] = $unit->kode . now()->format('dm') . Transaksi::whereDate('created_at', now()->today())->count() + 1;
-        $request['kode'] = $unit->kode . now()->format('dm') . StokObat::whereDate('created_at', now()->today())->count() + 1;
+
         $validator = Validator::make(request()->all(), [
-            "kode" =>  "required",
             "stok_in" =>  "required",
             "obat_id" =>  "required",
             "unit_id" =>  "required",
             "tgl_expire" =>  "required|date",
-            "transaksi_id" =>  "required",
             "supplier_id" =>  "required",
             "invoice" =>  "required",
             "harga_beli" =>  "required",
-            "pic" =>  "required",
         ]);
         if ($validator->fails()) {
             return $this->sendError($validator->errors()->first(), null, 400);
         }
+        $request['pic'] = Auth::user()->id;
+        $unit = Unit::find($request->unit_id);
+        $request['transaksi_id'] = $unit->kode . now()->format('dm') . Transaksi::whereDate('created_at', now()->today())->count() + 1;
+        $request['kode'] = $unit->kode . now()->format('dm') . StokObat::whereDate('created_at', now()->today())->count() + 1;
 
         StokObat::create($request->except('_token'));
         $obat  = Obat::find($request->obat_id);

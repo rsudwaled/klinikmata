@@ -305,7 +305,7 @@ return [
 
 
 
-
+        ['header' => 'MENU UTAMA'],
         // MENU PENDAFTARAN
         [
             'text' => 'Menu Pendaftaran',
