@@ -41,7 +41,17 @@
                             </form>
                         </div>
                         <div class="card-footer">
-                            <p>pilih layanan untuk pasien</p>
+                        </div>
+                    </div>
+                    <div class="card mt-2">
+                        <div class="card-header bg-info">Tindakan Hari Ini</div>
+                        <div class="card-body">
+                            <div class="riwayattindakanhariini">
+
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <p></p>
                         </div>
                     </div>
                 </div>
@@ -50,6 +60,28 @@
     </div>
 </div>
 <script>
+      $(document).ready(function() {
+        ambilriwayattindakan()
+      })
+    function ambilriwayattindakan()
+    {
+        $.ajax({
+                type: 'post',
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    idkunjungan  : $('#idkunjungan').val(),
+                    kodekunjungan : $('#kodekunjungan').val(),
+                },
+                url: '<?= route('ambilriwayattindakan') ?>',
+                error: function(data) {
+                    alert('errror')
+                },
+                success: function(response) {
+                    spinner.hide()
+                    $('.riwayattindakanhariini').html(response)
+                }
+            });
+    }
     $(function() {
         $("#tabeltarif").DataTable({
             "responsive": true,
@@ -79,7 +111,7 @@
                 kode +
                 '"></div><div class="form-group col-md-2"><label for="inputPassword4">Tarif</label><input readonly type="" class="form-control form-control-sm" id="" name="tarif" value="' +
                 tarif +
-                '"></div><div class="form-group col-md-1"><label for="inputPassword4">Jumlah</label><input type="" class="form-control form-control-sm" id="" name="qty" value="1"></div><div class="form-group col-md-1"><label for="inputPassword4">Disc</label><input type="" class="form-control form-control-sm" id="" name="disc" value="0"></div><div class="form-group col-md-1"><label for="inputPassword4">Cyto</label><input type="" class="form-control form-control-sm" id="" name="cyto" value="0"></div><i class="bi bi-x-square remove_field form-group col-md-2 text-danger">X</i></div>'
+                '"></div><div class="form-group col-md-1"><label for="inputPassword4">Jumlah</label><input type="" class="form-control form-control-sm" id="" name="qty" value="1"></div><div class="form-group col-md-1"><label for="inputPassword4">Disc</label><input type="" class="form-control form-control-sm" id="" name="disc" value="0"></div><i class="bi bi-x-square remove_field form-group col-md-2 text-danger">X</i></div>'
             );
             $(wrapper).on("click", ".remove_field", function(e) { //user click on remove
                 e.preventDefault();
@@ -112,7 +144,7 @@
                 success: function(data) {
                     if (data.kode == 502) {
                         Swal.fire({
-                            icon: 'error',
+                            icon: 'warning',
                             title: 'Oops...',
                             text: data.message,
                             footer: ''
@@ -124,6 +156,7 @@
                             text: 'Data berhasil disimpan!',
                             footer: ''
                         })
+                        ambilriwayattindakan()
                     }
                 }
             });

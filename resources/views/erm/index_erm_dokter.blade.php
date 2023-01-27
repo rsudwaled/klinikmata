@@ -52,11 +52,11 @@
                             <i class="far fa-file-alt mr-2"></i>Order Farmasi
                         </a>
                     </li>
-                    <li class="nav-item">
+                    {{-- <li class="nav-item">
                         <a href="#" class="nav-link" onclick="orderpenunjang()">
                             <i class="fas fa-filter mr-2"></i> Order Penunjang
                         </a>
-                    </li>
+                    </li> --}}
                     <li class="nav-item">
                         <a href="#" class="nav-link" onclick="resumedokter()">
                             <i class="fas fa-filter mr-2"></i> Resume

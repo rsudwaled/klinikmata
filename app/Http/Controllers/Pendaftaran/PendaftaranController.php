@@ -28,7 +28,6 @@ class PendaftaranController extends Controller
     }
     public function dataPasienBaru(Request $request)
     {
-
         $pasiens = Pasien::get();
         return view('Pendaftaran.datapasienbaru', [
             'datapasien' => $pasiens

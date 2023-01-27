@@ -243,17 +243,34 @@
         <div class="card">
             <div class="card-header bg-info">Riwayat Tindakan</div>
             <div class="card-body">
-
+                <table id="tabelriwayattindakan" class="table table-sm table-hover">
+                    <thead>
+                        <th>Kode Header</th>
+                        <th>Kode Detail</th>
+                        <th>Nama Tindakan</th>
+                        <th>Tarif</th>
+                        <th>Jlh Tindakan</th>
+                        <th>Discount</th>
+                    </thead>
+                    <tbody>
+                        @if(count($detail_tindakan) > 0)
+                        @foreach ($detail_tindakan as $dt)
+                            <tr>
+                                <td>{{ $dt->kode_layanan_header }}</td>
+                                <td>{{ $dt->id_layanan_detail }}</td>
+                                <td>{{ $dt->nama_tarif }}</td>
+                                <td>{{ money($dt->tarif, 'IDR')}}</td>
+                                <td class="text-center">{{ $dt->jumlah_layanan }}</td>
+                                <td class="text-center">{{ $dt->diskon_layanan }}</td>
+                            </tr>
+                        @endforeach
+                        @endif
+                    </tbody>
+                </table>
             </div>
         </div>
         <div class="card">
             <div class="card-header bg-info">Order Farmasi</div>
-            <div class="card-body">
-
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-header bg-info">Order Penunjang</div>
             <div class="card-body">
 
             </div>
