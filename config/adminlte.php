@@ -401,15 +401,15 @@ return [
             'can'  => 'farmasi',
             'submenu' => [
                 [
-                    'text' => 'Order Obat',
-                    'url'  => 'farmasi/orderobat',
+                    'text' => 'Barang',
+                    'url'  => 'farmasi/barang',
                     'icon' => 'fas fa-pills',
                     'shift'   => 'ml-2',
                     'can'  => 'farmasi',
                 ],
                 [
-                    'text' => 'Obat',
-                    'url'  => 'farmasi/obat',
+                    'text' => 'Pembelian Barang',
+                    'url'  => 'farmasi/notapembelian',
                     'icon' => 'fas fa-pills',
                     'shift'   => 'ml-2',
                     'can'  => 'farmasi',

@@ -25,13 +25,11 @@ class DatabaseSeeder extends Seeder
         $this->call(PoliklinikSeeder::class);
         $this->call(RuanganSeeder::class);
         $this->call(UnitSeeder::class);
-        $this->call(KategoriObatSeeder::class);
-        $this->call(SatuanObatSeeder::class);
         $this->call(SupplierSeeder::class);
 
         Pasien::factory(50)->create();
-        Dokter::factory(50)->create();
-        Kunjungan::factory(5)->create();
+        Dokter::factory(20)->create();
+        // Kunjungan::factory(5)->create();
         JadwalDokter::factory(1)->create();
 
         $this->command->info('Loading Tarif table seed');
@@ -39,25 +37,20 @@ class DatabaseSeeder extends Seeder
         DB::unprepared(file_get_contents($path));
         $this->command->info('Tarif table seeded');
 
-        $this->command->info('Loading Obat table seed');
-        $path = 'public/sql/obat.sql';
-        DB::unprepared(file_get_contents($path));
-        $this->command->info('Obat table seeded');
-
         // $this->command->info('Loading Assement Dokter table seed');
         // $path = 'public/sql/assesmen_dokter.sql';
         // DB::unprepared(file_get_contents($path));
         // $this->command->info('ICD 10 table seeded');
 
-        $this->command->info('Loading ICD 9 table seed');
-        $path = 'public/sql/icd9.sql';
-        DB::unprepared(file_get_contents($path));
-        $this->command->info('ICD 9 table seeded');
+        // $this->command->info('Loading ICD 9 table seed');
+        // $path = 'public/sql/icd9.sql';
+        // DB::unprepared(file_get_contents($path));
+        // $this->command->info('ICD 9 table seeded');
 
-        $this->command->info('Loading ICD 10 table seed');
-        $path = 'public/sql/icd10.sql';
-        DB::unprepared(file_get_contents($path));
-        $this->command->info('ICD 10 table seeded');
+        // $this->command->info('Loading ICD 10 table seed');
+        // $path = 'public/sql/icd10.sql';
+        // DB::unprepared(file_get_contents($path));
+        // $this->command->info('ICD 10 table seeded');
 
 
 

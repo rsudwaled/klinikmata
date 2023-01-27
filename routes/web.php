@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\VerificationController;
+use App\Http\Controllers\BarangController;
 use App\Http\Controllers\DiagnosaController;
 use App\Http\Controllers\DokterController as ControllersDokterController;
 use App\Http\Controllers\PasienController;
@@ -13,6 +14,7 @@ use App\Http\Controllers\JadwalDokterController;
 use App\Http\Controllers\KategoriObatController;
 use App\Http\Controllers\KunjunganController;
 use App\Http\Controllers\LaravoltController;
+use App\Http\Controllers\NotaPembelianController;
 use App\Http\Controllers\ObatController;
 use App\Http\Controllers\OrderObatController;
 use App\Http\Controllers\Pendaftaran\PendaftaranController;
@@ -69,13 +71,15 @@ Route::middleware('auth')->group(function () {
         Route::resource('tarif', TarifController::class);
 
         Route::post('tarif/import',  [TarifController::class, 'import'])->name('tarif.import');
-        Route::post('obat/import',  [ObatController::class, 'import'])->name('obat.import');
         Route::get('icd10',  [DiagnosaController::class, 'index_icd10']);
         Route::get('icd9',  [DiagnosaController::class, 'index_icd9']);
     });
     Route::middleware('permission:farmasi')->prefix('farmasi')->group(function () {
-        Route::resource('orderobat', OrderObatController::class);
-        Route::resource('obat', ObatController::class);
+        Route::resource('barang', BarangController::class);
+        Route::post('barang/import',  [BarangController::class, 'import'])->name('barang.import');
+        Route::resource('notapembelian', NotaPembelianController::class);
+
+
         Route::resource('satuanobat', SatuanObatController::class);
         Route::resource('kategoriobat', KategoriObatController::class);
         Route::resource('supplier', SupplierController::class);
