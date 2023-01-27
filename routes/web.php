@@ -15,6 +15,7 @@ use App\Http\Controllers\KategoriObatController;
 use App\Http\Controllers\KunjunganController;
 use App\Http\Controllers\LaravoltController;
 use App\Http\Controllers\NotaPembelianController;
+use App\Http\Controllers\NotaPenjualanController;
 use App\Http\Controllers\ObatController;
 use App\Http\Controllers\OrderObatController;
 use App\Http\Controllers\Pendaftaran\PendaftaranController;
@@ -78,6 +79,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('barang', BarangController::class);
         Route::post('barang/import',  [BarangController::class, 'import'])->name('barang.import');
         Route::resource('notapembelian', NotaPembelianController::class);
+        Route::resource('notapenjualan', NotaPenjualanController::class);
 
 
         Route::resource('satuanobat', SatuanObatController::class);
