@@ -38,11 +38,13 @@ class PerawatController extends Controller
     }
     public function formCatatanMedis(Request $request)
     {
-        $kunjungan = Kunjungan::where('kode', $request->kodekunjungan)->first();
-        $riwayat = DB::select('SELECT * FROM kunjungans a
-        LEFT OUTER JOIN assesmen_perawats b ON a.`id` = b.`id_kunjungan` WHERE a.`pasien_id` = ?',[$request->idpasien]);
+        // $kunjungan = Kunjungan::where('kode', $request->kodekunjungan)->first();
+        $riwayat = DB::select('SELECT *,b.id as id_perawat,c.id as id_dokter,b.signature as ttdperawat,c.signature as ttddokter FROM kunjungans a
+        LEFT OUTER JOIN assesmen_perawats b ON a.`id` = b.`id_kunjungan`
+        LEFT OUTER JOIN assesmen_dokters c ON b.id = c.id_asskep
+        WHERE a.`pasien_id` = ?',[$request->idpasien]);
         return view('erm.form_catatan_medis_perawat', compact([
-            'kunjungan',
+            // 'kunjungan',
             'riwayat'
         ]));
     }

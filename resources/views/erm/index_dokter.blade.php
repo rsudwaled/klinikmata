@@ -194,6 +194,8 @@
                 type: 'post',
                 data: {
                     _token: "{{ csrf_token() }}",
+                    idkunjungan : $('#idkunjungan').val(),
+                    kodekunjungan : $('#kodekunjungan').val()
                 },
                 url: '<?= route('inputtindakan') ?>',
                 error: function(data) {
