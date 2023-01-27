@@ -171,64 +171,65 @@
     </script>
     <script>
         $(function() {
-                    $('.btnTambah').click(function() {
-                            $('#form').trigger("reset");
-                            $('#modalPasienBaru').modal('show');
-                            $('#btnUpdate').hide();
-                            $('#btnDelete'
-                                ').hide();
-                                $('#btnStore').show();
-                            }); $('#btnStore').click(function(e) {
-                            $.LoadingOverlay("show");
-                            e.preventDefault();
-                            var url = "{{ route('pasien.store') }}";
-                            $.ajax({
-                                data: $('#form').serialize(),
-                                url: url,
-                                type: "POST",
-                                dataType: 'json',
-                                success: function(data) {
-                                    console.log(data);
-                                    Swal.fire({
-                                        icon: 'success',
-                                        title: 'Success',
-                                        text: 'Data berhasil disimpan',
-                                    }).then(okay => {
-                                        if (okay) {
-                                            $.LoadingOverlay("show");
-                                            location.reload();
-                                        }
-                                    });
-                                    $.LoadingOverlay("hide");
-                                },
-                                error: function(data) {
-                                    console.log(data);
-                                    swal.fire({
-                                        icon: 'error',
-                                        title: 'Error ' + data.statusText,
-                                        text: data.responseJSON.metadata.message,
-                                    });
-                                    $.LoadingOverlay("hide");
-                                }
-                            });
-                        }); $('#btnDelete').click(function(e) {
-                            Swal.fire({
-                                title: 'Konfirmasi Hapus Data',
-                                text: 'Apakah anda akan menghapus data ini ?',
-                                showDenyButton: true,
-                                showCancelButton: true,
-                                confirmButtonText: 'Ya,  Hapus',
-                                denyButtonText: `Tidak`,
-                            }).then((result) => {
-                                /* Read more about isConfirmed, isDenied below */
-                                if (result.isConfirmed) {
-                                    Swal.fire('Data berhasil dihapus', '', 'success')
-                                } else if (result.isDenied) {
-                                    Swal.fire('Data tidak jadi dihapus', '', 'info')
-                                }
-                            })
+            $('.btnTambah').click(function() {
+                $('#form').trigger("reset");
+                $('#modalPasienBaru').modal('show');
+                $('#btnUpdate').hide();
+                $('#btnDelete').hide();
+                $('#btnStore').show();
+            });
+            $('#btnStore').click(function(e) {
+                $.LoadingOverlay("show");
+                e.preventDefault();
+                var url = "{{ route('pasien.store') }}";
+                $.ajax({
+                    data: $('#form').serialize(),
+                    url: url,
+                    type: "POST",
+                    dataType: 'json',
+                    success: function(data) {
+                        console.log(data);
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success',
+                            text: 'Data berhasil disimpan',
+                        }).then(okay => {
+                            if (okay) {
+                                $.LoadingOverlay("show");
+                                location.reload();
+                            }
                         });
-                    });
+                        $.LoadingOverlay("hide");
+                    },
+                    error: function(data) {
+                        console.log(data);
+                        swal.fire({
+                            icon: 'error',
+                            title: 'Error ' + data.statusText,
+                            text: data.responseJSON.metadata.message,
+                        });
+                        $.LoadingOverlay("hide");
+                    }
+                });
+            });
+            $('#btnDelete').click(function(e) {
+                Swal.fire({
+                    title: 'Konfirmasi Hapus Data',
+                    text: 'Apakah anda akan menghapus data ini ?',
+                    showDenyButton: true,
+                    showCancelButton: true,
+                    confirmButtonText: 'Ya,  Hapus',
+                    denyButtonText: `Tidak`,
+                }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {
+                        Swal.fire('Data berhasil dihapus', '', 'success')
+                    } else if (result.isDenied) {
+                        Swal.fire('Data tidak jadi dihapus', '', 'info')
+                    }
+                })
+            });
+        });
     </script>
     <script>
         $(function() {

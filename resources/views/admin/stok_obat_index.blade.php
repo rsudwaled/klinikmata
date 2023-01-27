@@ -327,7 +327,6 @@
                 $('#btnUpdate').hide();
                 $('#btnStore').show();
             });
-
             $('.btnEdit').click(function() {
                 var id = $(this).data('id');
                 $.LoadingOverlay("show");
@@ -359,7 +358,6 @@
                 })
 
             });
-
             $('#btnStore').click(function(e) {
                 $.LoadingOverlay("show");
                 e.preventDefault();
@@ -394,7 +392,6 @@
                     }
                 });
             });
-
             $('#btnUpdate').click(function(e) {
                 var id = $("#id").val()
                 $.LoadingOverlay("show");
@@ -431,7 +428,6 @@
                     }
                 });
             });
-
             $('#btnDelete').click(function(e) {
                 Swal.fire({
                     title: 'Konfirmasi Hapus Data',

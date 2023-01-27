@@ -13,12 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('kategori_obats', function (Blueprint $table) {
+        Schema::create('retur_pembelians', function (Blueprint $table) {
             $table->id();
-            $table->string('kode')->nullable();
-            $table->string('nama')->nullable();
-            $table->string('deskripsi')->nullable();
-            $table->string('status')->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kategori_obats');
+        Schema::dropIfExists('retur_pembelians');
     }
 };

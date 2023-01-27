@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('satuan_obats', function (Blueprint $table) {
+        Schema::create('kelompok_barangs', function (Blueprint $table) {
             $table->id();
-            $table->string('kode')->nullable();
-            $table->string('nama')->nullable();
-            $table->string('deskripsi')->nullable();
-            $table->string('status')->nullable();
+            $table->string('kode');
+            $table->string('nama');
+            $table->string('deskripsi');
+            $table->bigInteger('pic');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('satuan_obats');
+        Schema::dropIfExists('kelompok_barangs');
     }
 };

@@ -13,15 +13,20 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('suppliers', function (Blueprint $table) {
+        Schema::create('nota_pembelians', function (Blueprint $table) {
             $table->id();
             $table->string('kode');
-            $table->string('nama');
-            $table->string('alamat');
-            $table->string('nohp');
-            $table->string('penanggungjawab')->nullable();
-            $table->string('kota')->nullable();
+            $table->string('barang_id');
+            $table->string('supplier_id');
+            $table->string('nomor_faktur');
+            $table->date('tanggal_faktur');
+            $table->string('jumlah');
 
+            $table->string('tanggal_expire')->nullable();
+            $table->string('harga_beli');
+            $table->string('ppn')->nullable();
+            $table->string('pph')->nullable();
+            $table->string('diskon')->nullable();
             $table->bigInteger('pic');
             $table->boolean('status')->default(1);
             $table->timestamps();
@@ -35,6 +40,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('suppliers');
+        Schema::dropIfExists('nota_pembelians');
     }
 };

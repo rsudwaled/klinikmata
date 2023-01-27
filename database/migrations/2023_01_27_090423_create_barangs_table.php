@@ -13,18 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('stok_obats', function (Blueprint $table) {
+        Schema::create('barangs', function (Blueprint $table) {
             $table->id();
-            $table->string('kode')->nullable();
-            $table->string('unit_id')->nullable();
-            $table->string('transaksi_id')->nullable();
-            $table->string('invoice');
-            $table->string('supplier_id')->nullable();
+            $table->string('kode');
+            $table->string('nama');
+            $table->string('barcode')->nullable()->unique();
 
-            $table->string('obat_id')->nullable();
-            $table->string('tgl_expire')->nullable();
-            $table->string('stok_in')->nullable();
-            $table->string('stok_out')->nullable();
+            $table->string('satuan_id')->nullable();
+            $table->string('jenis_id')->nullable();
+            $table->string('tipe_id')->nullable();
+            $table->string('kelompok_id')->nullable();
+            $table->string('kategori_id')->nullable();
 
             $table->string('harga_beli')->nullable();
             $table->string('harga_jual')->nullable();
@@ -33,7 +32,8 @@ return new class extends Migration
             $table->string('diskon')->nullable();
             $table->string('margin_jual')->nullable();
 
-            $table->string('pic')->nullable();
+            $table->bigInteger('pic');
+            $table->boolean('status')->default(1);
             $table->timestamps();
         });
     }
@@ -45,6 +45,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('stok_obats');
+        Schema::dropIfExists('barangs');
     }
 };

@@ -84,9 +84,9 @@ return [
     */
 
     'auth_logo' => [
-        'enabled' => false,
+        'enabled' => true,
         'img' => [
-            'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+            'path' => 'klinik mata losari/logo favicon kml.png',
             'alt' => 'Auth Logo',
             'class' => '',
             'width' => 50,
@@ -305,7 +305,7 @@ return [
 
 
 
-
+        ['header' => 'MENU UTAMA'],
         // MENU PENDAFTARAN
         [
             'text' => 'Menu Pendaftaran',
@@ -401,43 +401,43 @@ return [
             'can'  => 'farmasi',
             'submenu' => [
                 [
-                    'text' => 'Order Obat',
-                    'url'  => 'farmasi/orderobat',
+                    'text' => 'Barang',
+                    'url'  => 'farmasi/barang',
                     'icon' => 'fas fa-pills',
                     'shift'   => 'ml-2',
                     'can'  => 'farmasi',
                 ],
                 [
-                    'text' => 'Obat',
-                    'url'  => 'administrator/obat',
+                    'text' => 'Pembelian Barang',
+                    'url'  => 'farmasi/notapembelian',
                     'icon' => 'fas fa-pills',
                     'shift'   => 'ml-2',
                     'can'  => 'farmasi',
                 ],
                 [
                     'text' => 'Satuan Obat',
-                    'url'  => 'administrator/satuanobat',
+                    'url'  => 'farmasi/satuanobat',
                     'icon' => 'fas fa-pills',
                     'shift'   => 'ml-2',
                     'can'  => 'farmasi',
                 ],
                 [
                     'text' => 'Kategori Obat',
-                    'url'  => 'administrator/kategoriobat',
+                    'url'  => 'farmasi/kategoriobat',
                     'icon' => 'fas fa-pills',
                     'shift'   => 'ml-2',
                     'can'  => 'farmasi',
                 ],
                 [
                     'text' => 'Supplier',
-                    'url'  => 'administrator/supplier',
+                    'url'  => 'farmasi/supplier',
                     'icon' => 'fas fa-pills',
                     'shift'   => 'ml-2',
                     'can'  => 'farmasi',
                 ],
                 [
                     'text' => 'Stok Obat',
-                    'url'  => 'administrator/stokobat',
+                    'url'  => 'farmasi/stokobat',
                     'icon' => 'fas fa-pills',
                     'shift'   => 'ml-2',
                     'can'  => 'farmasi',
