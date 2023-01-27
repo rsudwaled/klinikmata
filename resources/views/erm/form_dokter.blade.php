@@ -6,7 +6,7 @@
     </div><!-- /.card-header -->
     <div class="card-body scroll">
         <form action="" class="formpemeriksaan">
-            <input type="text" hidden name="idaskep"  id="idaskep" value="{{ $assdok[0]->id }}">
+            <input type="text" hidden name="idaskep"  id="idaskep" value="{{ $asskep[0]->id }}">
             <table class="table table-sm">
                 <tr>
                     <td>Tanggal & Jam Kunjungan</td>

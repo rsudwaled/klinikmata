@@ -110,6 +110,9 @@ Route::middleware('auth')->group(function () {
         Route::post('gambarmata1', [DokterController::class, 'gambarMata1'])->name('gambarmata1');
         Route::post('gambarmata2', [DokterController::class, 'gambarMata2'])->name('gambarmata2');
         Route::post('simpanpemeriksaandokter', [DokterController::class, 'simpanForm'])->name('simpanpemeriksaandokter');
+        Route::post('simpantindakan', [DokterController::class, 'simpanTindakan'])->name('simpantindakan');
+        Route::post('simpanttddokter', [DokterController::class, 'simpanTtdDokter'])->name('simpanttddokter');
+        Route::post('ambilriwayattindakan', [DokterController::class, 'riwayatTindakan'])->name('ambilriwayattindakan');
     });
 
     Route::middleware('permission:perawat')->group(function () {
