@@ -1,91 +1,87 @@
 @extends('adminlte::page')
-@section('title', 'Barang')
+@section('title', 'Nota Penjualan Barang')
 @section('content_header')
-    <h1 class="m-0 text-dark">Barang</h1>
+    <h1 class="m-0 text-dark">Nota Penjualan Barang</h1>
 @stop
 @section('content')
     <div class="row">
         <div class="col-12">
-            <x-adminlte-card title="Barang" theme="secondary" collapsible>
+            <x-adminlte-card title="Riwayat Nota Penjualan Barang" theme="secondary" collapsible>
                 <div class="row">
-                    <div class="col-md-8 mb-2">
+                    <div class="col-md-8">
                         <x-adminlte-button label="Tambah" class="btn-sm btnTambah" theme="success" title="Tambah Pasien"
-                            icon="fas fa-plus" />
-                        <x-adminlte-button label="Import" class="btn-sm btnImport" theme="warning" title="Import"
                             icon="fas fa-plus" />
                         <x-adminlte-button label="Refresh" class="btn-sm" theme="warning" title="Refresh Halaman"
                             icon="fas fa-sync" onclick="location.reload();" />
                     </div>
+                    {{-- <div class="col-md-4">
+                        <form action="" method="get">
+                            <x-adminlte-input name="search" placeholder="Pencarian NIK / Nama" igroup-size="sm"
+                                value="{{ $request->search }}">
+                                <x-slot name="appendSlot">
+                                    <x-adminlte-button type="submit" theme="outline-primary" label="Cari" />
+                                </x-slot>
+                                <x-slot name="prependSlot">
+                                    <div class="input-group-text text-primary">
+                                        <i class="fas fa-search"></i>
+                                    </div>
+                                </x-slot>
+                            </x-adminlte-input>
+                        </form>
+                    </div> --}}
                 </div>
                 @php
-                    $heads = ['No', 'Kode', 'Barcode', 'Nama Barang', 'Kategori', 'Jenis', 'Stok', 'Status', 'Updated at'];
+                    $heads = ['Kode', 'Tgl Faktur', 'Barang', 'Supplier', 'Qty', 'Harga Beli', 'Tgl Inpu'];
                     $config['scrollY'] = '400px';
                     $config['paging'] = false;
                     $config['scrollCollapse'] = true;
                 @endphp
                 <x-adminlte-datatable id="table1" class="text-xs" :heads="$heads" :config="$config" hoverable bordered
                     compressed>
-                    @foreach ($barangs as $item)
+                    @foreach ($nota as $item)
                         <tr class="btnEdit" data-id="{{ $item->id }}">
-                            <td>{{ $item->id }}</td>
                             <td>{{ $item->kode }}</td>
-                            <td></td>
-                            <td>{{ $item->nama }}</td>
-                            <td>{{ $item->satuan ? $item->satuan->nama : '-' }}</td>
-                            <td>{{ $item->jenis }}</td>
-                            <td>{{ $item->stok }}</td>
-                            <td>
-                                @if ($item->status)
-                                    <span class="badge badge-success">Aktif</span>
-                                @else
-                                    <span class="badge badge-danger">Non-Aktif</span>
-                                @endif
-                            </td>
-                            <td>{{ $item->updated_at }} ({{ $item->user_entry }})</td>
+                            <td>{{ $item->tanggal_faktur }}</td>
+                            <td>{{ $item->barang->nama }}</td>
+                            <td>{{ $item->supplier->nama }}</td>
+                            <td>{{ $item->jumlah }}</td>
+                            <td class="text-right">{{ money($item->harga_beli, 'IDR2') }}</td>
+                            <td>{{ $item->created_at }}</td>
                         </tr>
                     @endforeach
                 </x-adminlte-datatable>
             </x-adminlte-card>
         </div>
     </div>
-    <x-adminlte-modal id="modalImport" title="Import Data Obat" theme="success" v-centered>
-        <form id="formImport" method="POST" action="{{ route('barang.import') }}" enctype="multipart/form-data">
-            @csrf
-            <div class="form-group">
-                <x-adminlte-input-file name="file" label="File Import (csx)" required />
-            </div>
-        </form>
-        <x-slot name="footerSlot">
-            <x-adminlte-button type="submit" class="mr-auto " form="formImport" theme="success" icon="fas fa-save"
-                label="Import" />
-            <x-adminlte-button theme="secondary" icon="fas fa-arrow-left" label="Kembali" data-dismiss="modal" />
-        </x-slot>
-    </x-adminlte-modal>
-    <x-adminlte-modal id="modal" title="Data Barang" theme="success" v-centered>
+    <x-adminlte-modal id="modal" title="Nota Penjualan Barang" size="xl" theme="success" v-centered>
         <form action="" id="form">
             @csrf
             <div class="row">
                 <div class="col-md-6">
                     <input id="id" type="hidden" name="id">
-                    <x-adminlte-input name="kode" label="Kode" igroup-size="sm" enable-old-support required readonly />
-                    <x-adminlte-input name="nama" label="Nama Barang" igroup-size="sm" enable-old-support required />
-                    <x-adminlte-input name="barcode" label="Barcode" igroup-size="sm" enable-old-support required />
-                    <x-adminlte-input-switch name="status" igroup-size="sm" label="Status Aktif" data-on-text="YES"
-                        data-off-text="NO" data-on-color="primary" />
+                    <x-adminlte-input name="kode" label="Kode" igroup-size="sm" required readonly />
+                    <x-adminlte-select2 name="pasien_id" label="Pasien">
+                        <option value="" selected disabled>Pilih Pasien</option>
+                        @foreach ($pasien as $id => $name)
+                            <option value="{{ $id }}">{{ $name }}</option>
+                        @endforeach
+                    </x-adminlte-select2>
+                    @php
+                        $config = ['format' => 'YYYY-MM-DD'];
+                    @endphp
+                    <x-adminlte-input-date name="tanggal_faktur" label="Tanggal Faktur" placeholder="Tanggal Faktur"
+                        igroup-size="sm" :config="$config" required />
+                    <x-adminlte-input name="nomor_faktur" label="Nomor Faktur" igroup-size="sm" required />
                 </div>
                 <div class="col-md-6">
-                    {{-- <x-adminlte-select name="satuan_id" label="Satuan Obat" igroup-size="sm" enable-old-support required>
-                        <option selected disabled>Pilih Satuan Obat</option>
-                        @foreach ($satuan as $id => $nama)
-                            <option value="{{ $id }}">{{ $nama }}</option>
+                    <x-adminlte-select2 name="barang_id" label="Barang">
+                        <option value="" selected disabled>Pilih Obat</option>
+                        @foreach ($barang as $id => $name)
+                            <option value="{{ $id }}">{{ $name }}</option>
                         @endforeach
-                    </x-adminlte-select>
-                    <x-adminlte-select name="jenis" label="Jenis Obat" igroup-size="sm" enable-old-support required>
-                        <option value="Oral">Oral</option>
-                        <option value="Tetes">Tetes</option>
-                        <option value="Oles">Oles</option>
-                    </x-adminlte-select> --}}
-
+                    </x-adminlte-select2>
+                    <x-adminlte-input name="jumlah" label="Jumlah Kuantitas" igroup-size="sm" required />
+                    <x-adminlte-input name="harga_jual" label="Harga Jual" igroup-size="sm" required />
                 </div>
             </div>
         </form>
@@ -97,10 +93,9 @@
         </x-slot>
     </x-adminlte-modal>
 @stop
-
 @section('plugins.Datatables', true)
-@section('plugins.BootstrapSwitch', true)
-@section('plugins.BsCustomFileInput', true)
+@section('plugins.TempusDominusBs4', true)
+@section('plugins.Select2', true)
 @section('js')
     <script>
         $(function() {
@@ -114,13 +109,22 @@
             $('.btnEdit').click(function() {
                 var id = $(this).data('id');
                 $.LoadingOverlay("show");
-                $.get("{{ route('barang.index') }}" + '/' + id, function(data) {
+                $.get("{{ route('notapenjualan.index') }}" + '/' + id, function(data) {
                     console.log(data);
                     $('#id').val(data.id);
                     $('#kode').val(data.kode);
+                    $('#supplier_id').val(data.supplier_id).trigger('change');
+                    $('#tanggal_faktur').val(data.tanggal_faktur);
+                    $('#nomor_faktur').val(data.nomor_faktur);
+
+                    $('#barang_id').val(data.barang_id).trigger('change');
+                    $('#nomor_faktur').val(data.nomor_faktur);
+                    $('#jumlah').val(data.jumlah);
+                    $('#harga_beli').val(data.harga_beli);
+                    $('#tanggal_expire').val(data.tanggal_expire);
+
                     $('#barcode').val(data.barcode);
                     $('#nama').val(data.nama);
-                    $('#satuan_id').val(data.satuan_id).trigger('change');
                     $('#jenis').val(data.jenis).trigger('change');
                     if (data.status == 1) {
                         $('#status').prop('checked', true).trigger('change');
@@ -135,7 +139,7 @@
             $('#btnStore').click(function(e) {
                 $.LoadingOverlay("show");
                 e.preventDefault();
-                var url = "{{ route('barang.store') }}";
+                var url = "{{ route('notapenjualan.store') }}";
                 $.ajax({
                     data: $('#form').serialize(),
                     url: url,
@@ -170,7 +174,7 @@
                 var id = $("#id").val()
                 $.LoadingOverlay("show");
                 e.preventDefault();
-                var url = "{{ route('barang.index') }}/" + id;
+                var url = "{{ route('notapenjualan.index') }}/" + id;
                 $.LoadingOverlay("hide");
                 $.ajax({
                     data: $('#form').serialize(),

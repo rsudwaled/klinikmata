@@ -31,7 +31,7 @@
                             <td>{{ $item->kode }}</td>
                             <td></td>
                             <td>{{ $item->nama }}</td>
-                            <td>{{ $item->satuan ? $item->satuan->nama : "-" }}</td>
+                            <td>{{ $item->satuan ? $item->satuan->nama : '-' }}</td>
                             <td>{{ $item->jenis }}</td>
                             <td>{{ $item->stok_current }}</td>
                             <td>
@@ -52,7 +52,7 @@
         <form id="formImport" method="POST" action="{{ route('obat.import') }}" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
-                <input type="file" name="file" required="required">
+                <x-adminlte-input-file name="file" label="File Import (csx)" required />
             </div>
         </form>
         <x-slot name="footerSlot">
@@ -98,10 +98,8 @@
 @stop
 
 @section('plugins.Datatables', true)
+@section('plugins.BsCustomFileInput', true)
 @section('plugins.BootstrapSwitch', true)
-
-
-
 @section('js')
     <script>
         $(function() {

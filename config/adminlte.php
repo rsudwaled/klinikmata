@@ -415,6 +415,13 @@ return [
                     'can'  => 'farmasi',
                 ],
                 [
+                    'text' => 'Penjualan Barang',
+                    'url'  => 'farmasi/notapenjualan',
+                    'icon' => 'fas fa-pills',
+                    'shift'   => 'ml-2',
+                    'can'  => 'farmasi',
+                ],
+                [
                     'text' => 'Satuan Obat',
                     'url'  => 'farmasi/satuanobat',
                     'icon' => 'fas fa-pills',
@@ -777,6 +784,16 @@ return [
                     'type' => 'css',
                     'asset' => true,
                     'location' =>  'vendor/ekko-lightbox/ekko-lightbox.css',
+                ],
+            ],
+        ],
+        'BsCustomFileInput' => [
+            'active' => false,
+            'files' => [
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/bs-custom-file-input/bs-custom-file-input.min.js',
                 ],
             ],
         ],

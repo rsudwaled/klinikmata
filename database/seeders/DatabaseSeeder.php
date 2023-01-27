@@ -42,6 +42,11 @@ class DatabaseSeeder extends Seeder
         // DB::unprepared(file_get_contents($path));
         // $this->command->info('ICD 10 table seeded');
 
+        $this->command->info('Loading barang table seed');
+        $path = 'public/sql/barang.sql';
+        DB::unprepared(file_get_contents($path));
+        $this->command->info('barang table seeded');
+
         // $this->command->info('Loading ICD 9 table seed');
         // $path = 'public/sql/icd9.sql';
         // DB::unprepared(file_get_contents($path));
