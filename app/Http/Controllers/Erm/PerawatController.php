@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Erm;
 
 use App\Http\Controllers\Controller;
+use App\Models\AssesmenDokter;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -39,7 +40,15 @@ class PerawatController extends Controller
     public function formCatatanMedis(Request $request)
     {
         // $kunjungan = Kunjungan::where('kode', $request->kodekunjungan)->first();
-        $riwayat = DB::select('SELECT *,b.id as id_perawat,c.id as id_dokter,b.signature as ttdperawat,c.signature as ttddokter FROM kunjungans a
+        $riwayat = DB::select('SELECT *,b.tgl_kunjungan as asskep_tgl_kunjungan,b.tgl_pemeriksaan as asskep_tgl_pemeriksaan,b.keluhan_pasien as asskep_keluhan_pasien,
+        b.sumber_data as asskep_sumber_data,
+        b.tekanan_darah as asskep_tekanan_darah,
+        b.frekuensi_nadi as asskep_frekuensi_nadi,
+        b.frekuensi_nafas as asskep_frekuensi_nafas,
+        b.suhu_tubuh as asskep_suhu_tubuh,
+        b.riwayat_alergi as asskep_riwayat_alergi,
+        b.keterangan_alergi as asskep_keterangan_alergi,
+        b.id as id_perawat,c.id as id_dokter,b.signature as ttdperawat,c.signature as ttddokter FROM kunjungans a
         LEFT OUTER JOIN assesmen_perawats b ON a.`id` = b.`id_kunjungan`
         LEFT OUTER JOIN assesmen_dokters c ON b.id = c.id_asskep
         WHERE a.`pasien_id` = ?',[$request->idpasien]);
@@ -124,6 +133,7 @@ class PerawatController extends Controller
             'id_kunjungan' => $request->idkunjungan,
             'id_pasien' => $request->idpasien,
             'pic' => auth()->user()->id,
+            'nama_perawat' => auth()->user()->name,
             'tgl_entry' => $this->get_now(),
             'tgl_kunjungan' => $dataSet['tgljamkunjungan'],
             'tgl_pemeriksaan' => $dataSet['tanggalperiksa'],
@@ -140,9 +150,19 @@ class PerawatController extends Controller
         try {
             $cek = AssesmenPerawat::where('id_kunjungan', $request->idkunjungan)->get();
             if(count($cek) > 0){
-                $kunjungans = DB::table('assesmen_perawats')
-                ->where('id_kunjungan', $request->idkunjungan)
-                ->update($asskep);
+                $cek_assdok = AssesmenDokter::where('id_kunjungan', $request->idkunjungan)->get();
+                if(count($cek_assdok) > 0 ){
+                    $data = [
+                        'kode' => 502,
+                        'message' => 'Pasien sudah diperiksa oleh dokter !'
+                    ];
+                    echo json_encode($data);
+                    die;
+                }else{
+                    $kunjungans = DB::table('assesmen_perawats')
+                    ->where('id_kunjungan', $request->idkunjungan)
+                    ->update($asskep);
+                }
             }else{
                 $kunjungans = AssesmenPerawat::create($asskep);
             }

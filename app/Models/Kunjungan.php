@@ -25,6 +25,16 @@ class Kunjungan extends Model
         $item = Kunjungan::where('pasien_id', $this->pasien_id)->whereDate('tgl_masuk', '<=', $this->tgl_masuk)->count();
         return $item;
     }
+    public function getStatusAssesmenDoktertAttribute()
+    {
+        $assesmen = AssesmenDokter::find($this->id);
+        if (isset($assesmen)) {
+            $status_assdok = $assesmen->status;
+        } else {
+            $status_assdok = null;
+        }
+        return  $status_assdok;
+    }
     public function getStatusAssesmenPerawatAttribute()
     {
         $assesmen = AssesmenPerawat::find($this->id);
@@ -46,5 +56,9 @@ class Kunjungan extends Model
     public function assesmenperawat()
     {
         return $this->hasOne(AssesmenPerawat::class, 'id_kunjungan', 'id');
+    }
+    public function assesmendokter()
+    {
+        return $this->hasOne(AssesmenDokter::class, 'id_kunjungan', 'id');
     }
 }

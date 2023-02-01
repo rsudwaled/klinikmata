@@ -21,6 +21,7 @@ use App\Models\AssesmenDokter;
 use App\Models\Tarif;
 use App\Models\LayananHeader;
 use App\Models\LayananDetail;
+use App\Models\Barang;
 
 class DokterController extends Controller
 {
@@ -73,19 +74,26 @@ class DokterController extends Controller
     {
         $tarif = Tarif::get();
         $assdok = AssesmenDokter::where('id_kunjungan', $request->idkunjungan)->get();
-        if(count($assdok) > 0){
+        if (count($assdok) > 0) {
 
             return view('erm.form_tindakan', compact([
                 'tarif'
             ]));
-        }else{
+        } else {
             return view('erm.NULL3');
-
         }
     }
     public function orderFarmasi(Request $request)
     {
-        return view('erm.form_order_farmasi');
+        $barang = Barang::get();
+        $assdok = AssesmenDokter::where('id_kunjungan', $request->idkunjungan)->get();
+        if (count($assdok) > 0) {
+            return view('erm.form_order_farmasi', compact([
+                'barang'
+            ]));
+        } else {
+            return view('erm.NULL3');
+        }
     }
     public function orderPenunjang(Request $request)
     {
@@ -110,6 +118,20 @@ class DokterController extends Controller
             $kunjungans = DB::table('assesmen_dokters')
                 ->where('id_kunjungan', $request->idkunjungan)
                 ->update($assdok);
+
+            $cek_status_header = LayananHeader::where('id_kunjungan', $request->idkunjungan)->get();
+            if (count($cek_status_header) > 0) {
+                //harus dilooping
+                foreach ($cek_status_header as $c) {
+                    $id_header = $c->id;
+                    if ($c->status_layanan == 0) {
+                        $header = DB::table('layanan_headers')
+                            ->where('id_kunjungan', $request->idkunjungan)
+                            ->where('id', $id_header)
+                            ->update(['status_layanan' => 1]);
+                    }
+                }
+            }
             $data = [
                 'kode' => 200,
                 'message' => 'Tanda tangan berhasil disimpan ...'
@@ -127,7 +149,15 @@ class DokterController extends Controller
     }
     public function formCatatanMedis(Request $request)
     {
-        $riwayat = DB::select('SELECT *,b.id as id_perawat,c.id as id_dokter,b.signature as ttdperawat,c.signature as ttddokter FROM kunjungans a
+        $riwayat = DB::select('SELECT *,b.tgl_kunjungan as asskep_tgl_kunjungan,b.tgl_pemeriksaan as asskep_tgl_pemeriksaan,b.keluhan_pasien as asskep_keluhan_pasien,
+        b.sumber_data as asskep_sumber_data,
+        b.tekanan_darah as asskep_tekanan_darah,
+        b.frekuensi_nadi as asskep_frekuensi_nadi,
+        b.frekuensi_nafas as asskep_frekuensi_nafas,
+        b.suhu_tubuh as asskep_suhu_tubuh,
+        b.riwayat_alergi as asskep_riwayat_alergi,
+        b.keterangan_alergi as asskep_keterangan_alergi,
+        b.id as id_perawat,c.id as id_dokter,b.signature as ttdperawat,c.signature as ttddokter FROM kunjungans a
         LEFT OUTER JOIN assesmen_perawats b ON a.`id` = b.`id_kunjungan`
         LEFT OUTER JOIN assesmen_dokters c ON b.id = c.id_asskep
         WHERE a.`pasien_id` = ?', [$request->idpasien]);
@@ -135,6 +165,17 @@ class DokterController extends Controller
             // 'kunjungan',
             'riwayat'
         ]));
+    }
+    public function detailriwayatorder(Request $request)
+    {
+        $detail_tindakan = DB::select('SELECT * FROM layanan_headers a LEFT OUTER JOIN layanan_details b ON a.id = b.`id_header` WHERE          a.id_kunjungan = ?', [$request->kodekunjungan]);
+        if (count($detail_tindakan) > 0) {
+            return view('erm.riwayatorder', compact([
+                'detail_tindakan'
+            ]));
+        } else {
+            return view('erm.NULL');
+        }
     }
     public function gambarMata1()
     {
@@ -304,6 +345,7 @@ class DokterController extends Controller
                 'id_pasien' => $request->idpasien,
                 'id_asskep' => $request->idaskep,
                 'pic' => auth()->user()->id,
+                'nama_dokter' => auth()->user()->name,
                 'tgl_entry' => $this->get_now(),
                 'tgl_kunjungan' => $dataSet['tgljamkunjungan'],
                 'tgl_pemeriksaan' => $dataSet['tgljampemeriksaan'],
@@ -382,7 +424,9 @@ class DokterController extends Controller
             } else {
                 $kunjungans = AssesmenDokter::create($assdok);
             }
-
+            $asskep = DB::table('assesmen_perawats')
+                ->where('id', $request->idaskep)
+                ->update(['status' => 2]);
             $data = [
                 'kode' => 200,
                 'message' => 'Hasil Pemeriksaan berhasil disimpan ...'
@@ -418,7 +462,7 @@ class DokterController extends Controller
                 $arrayindex[] = $dataSet;
             }
         }
-        $kodeheader = $this->createKodeHeader();
+        $kodeheader = $this->createKodeHeader('KML');
         $dataheader = [
             'kode_layanan_header' => $kodeheader,
             'tgl_entry' => $this->get_now(),
@@ -428,7 +472,7 @@ class DokterController extends Controller
             'pic' => auth()->user()->id,
             'status_layanan' => 0,
             'keterangan' => '',
-            'status_retur' => '',
+            'status_retur' => 'OPN',
             'kode_penjamin' => '1',
             'diskon_global' => '',
             'status_pembayaran' => '0',
@@ -468,6 +512,12 @@ class DokterController extends Controller
             $total_layanan_header = $total_layanan_header2 + $total_layanan_header;
         }
         LayananHeader::whereRaw('id = ?', array($idheader->id))->update(['total_layanan' => $total_layanan_header, 'tagihan_pribadi' => $total_layanan_header]);
+        $assdok = DB::table('assesmen_dokters')
+            ->where('id_kunjungan', $request->idkunjungan)
+            ->update([
+                'signature' => '',
+                'status' => 0
+            ]);
         $data = [
             'kode' => 200,
             'message' => 'Tindakan berhasil disimpan ...'
@@ -475,7 +525,94 @@ class DokterController extends Controller
         echo json_encode($data);
         die;
     }
-    public function createKodeHeader()
+    public function simpanOrderFarmasi(Request $request)
+    {
+        $data = json_decode($_POST['data'], true);
+        if (count($data) > 0) {
+        } else {
+            $data = [
+                'kode' => 502,
+                'message' => 'Silahkan Pilih Obat / Barang ...'
+            ];
+            echo json_encode($data);
+            die;
+        }
+        foreach ($data as $nama) {
+            $index = $nama['name'];
+            $value = $nama['value'];
+            $dataSet[$index] = $value;
+            if ($index == 'signa') {
+                $arrayindex[] = $dataSet;
+            }
+        }
+        $kodeheader = $this->createKodeHeader('KMF');
+        $dataheader = [
+            'kode_layanan_header' => $kodeheader,
+            'tgl_entry' => $this->get_now(),
+            'id_kunjungan' => $request->idkunjungan,
+            'kode_kunjungan' => $request->kodekunjungan,
+            'kode_tipe_transaksi' => 1,
+            'pic' => auth()->user()->id,
+            'status_layanan' => 0,
+            'keterangan' => 'Order Farmasi',
+            'status_retur' => 'OPN',
+            'kode_penjamin' => '1',
+            'diskon_global' => '',
+            'status_pembayaran' => '0',
+            'id_dokter' => auth()->user()->id,
+        ];
+        $idheader = LayananHeader::create($dataheader);
+        $total_layanan_header = 0;
+        foreach ($arrayindex as $arr) {
+            $total_layanan = $arr['tarif'] * $arr['qty'];
+            if ($arr['disc'] != 0) {
+                $grand_total_tarif = $arr['disc'] / 100 * $total_layanan;
+            } else {
+                $grand_total_tarif = $total_layanan;
+            }
+            $id_detail = $this->createLayanandetail();
+            $save_detail = [
+                'id_layanan_detail' => $id_detail,
+                'kode_layanan_header' => $kodeheader,
+                'nama_tarif' => $arr['namatindakan'],
+                'kode_tarif' => $arr['kodelayanan'],
+                'tarif' => $arr['tarif'],
+                'jumlah_layanan' => $arr['qty'],
+                'total_layanan' => $total_layanan,
+                'diskon_layanan' => $arr['disc'],
+                'grand_total_tarif' => $grand_total_tarif,
+                'dokter' => auth()->user()->kode_dpjp,
+                'pic' => auth()->user()->kode_dpjp,
+                'signa' => $arr['signa'],
+                'satuan' => $arr['satuan'],
+                'matakanan' => $arr['matakanan'],
+                'matakiri' => $arr['matakiri'],
+                'status_layanan_detail' => '0',
+                'keterangan' => 'Order Farmasi',
+                'tagihan_penjamin' => '',
+                'tagihan_pribadi' =>  $grand_total_tarif,
+                'tgl_layanan_detail' => $this->get_now(),
+                'id_header' => $idheader['id']
+            ];
+            LayananDetail::create($save_detail);
+            $total_layanan_header2 = $grand_total_tarif;
+            $total_layanan_header = $total_layanan_header2 + $total_layanan_header;
+        }
+        LayananHeader::whereRaw('id = ?', array($idheader->id))->update(['total_layanan' => $total_layanan_header, 'tagihan_pribadi' => $total_layanan_header]);
+        $assdok = DB::table('assesmen_dokters')
+            ->where('id_kunjungan', $request->idkunjungan)
+            ->update([
+                'signature' => '',
+                'status' => 0
+            ]);
+        $data = [
+            'kode' => 200,
+            'message' => 'Tindakan berhasil disimpan ...'
+        ];
+        echo json_encode($data);
+        die;
+    }
+    public function createKodeHeader($kode)
     {
         $date = date('Y-m-d');
         $q = DB::select('SELECT id,kode_layanan_header,RIGHT(kode_layanan_header,6) AS kd_max  FROM layanan_headers
@@ -492,7 +629,7 @@ class DokterController extends Controller
             $kd = "000001";
         }
         date_default_timezone_set('Asia/Jakarta');
-        return 'KML' . date('ymd') . $kd;
+        return $kode . date('ymd') . $kd;
     }
     public function createLayanandetail()
     {
@@ -514,9 +651,21 @@ class DokterController extends Controller
     }
     public function riwayatTindakan(Request $request)
     {
-        $detail_tindakan = DB::select('SELECT * FROM layanan_headers a LEFT OUTER JOIN layanan_details b ON a.id = b.`id_header` WHERE  a.id_kunjungan = ?', [$request->idkunjungan]);
+        $detail_tindakan = DB::select('SELECT * FROM layanan_headers a LEFT OUTER JOIN layanan_details b ON a.id = b.`id_header` WHERE  a.id_kunjungan = ? AND a.keterangan = ?', [$request->idkunjungan, '']);
         if (count($detail_tindakan) > 0) {
             return view('erm.riwayattindakan_today', compact([
+                'detail_tindakan'
+            ]));
+        } else {
+            return view('erm.NULL');
+        }
+    }
+    public function ambilRiwayatOrder(Request $request)
+    {
+        $order = 'Order Farmasi';
+        $detail_tindakan = DB::select('SELECT * FROM layanan_headers a LEFT OUTER JOIN layanan_details b ON a.id = b.`id_header` WHERE  a.id_kunjungan = ? AND a.keterangan = ?', [$request->idkunjungan, $order]);
+        if (count($detail_tindakan) > 0) {
+            return view('erm.riwayatorder_today', compact([
                 'detail_tindakan'
             ]));
         } else {
