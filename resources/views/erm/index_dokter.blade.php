@@ -21,6 +21,8 @@
                 <th>Tempat, Tanggal Lahir</th>
                 <th>Alamat</th>
                 <th>Keluhan</th>
+                <th>Assesmen Perawat</th>
+                <th>Assesmen Dokter</th>
             </thead>
             <tbody>
                 @foreach ($kunjungan as $k)
@@ -33,6 +35,31 @@
                         </td>
                         <td>{{ $k->pasien->nama_desa }}, {{ $k->pasien->nama_kecamatan }} | {{ $k->pasien->alamat }}</td>
                         <td>{{ $k->keluhan }}</td>
+                        <td>
+                            @if ($k->status_assesmen_perawat == '0')
+                                <span class="badge badge-warning">Belum tdd</span>
+                            @endif
+                            @if ($k->status_assesmen_perawat == 1)
+                                <span class="badge badge-success">Sudah Diisi</span>
+                            @endif
+                            @if ($k->status_assesmen_perawat == 2)
+                                <span class="badge badge-success">Sudah Diisi</span>
+                            @endif
+                            @if ($k->status_assesmen_perawat == null)
+                                <span class="badge badge-danger">Belum Diisi</span>
+                            @endif
+                        </td>
+                        <td>
+                            @if ($k->status_assesmen_dokter == '0')
+                                <span class="badge badge-warning">Belum tdd</span>
+                            @endif
+                            @if ($k->status_assesmen_dokter == 1)
+                                <span class="badge badge-success">Sudah Diisi</span>
+                            @endif
+                            @if ($k->status_assesmen_dokter == null)
+                                <span class="badge badge-danger">Belum Diisi</span>
+                            @endif
+                        </td>
                     </tr>
                 @endforeach
             </tbody>
@@ -217,6 +244,8 @@
                 type: 'post',
                 data: {
                     _token: "{{ csrf_token() }}",
+                    idkunjungan : $('#idkunjungan').val(),
+                    kodekunjungan : $('#kodekunjungan').val()
                 },
                 url: '<?= route('orderfarmasi') ?>',
                 error: function(data) {

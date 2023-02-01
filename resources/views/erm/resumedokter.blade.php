@@ -255,6 +255,7 @@
                     <tbody>
                         @if(count($detail_tindakan) > 0)
                         @foreach ($detail_tindakan as $dt)
+                        @if($dt->keterangan != 'Order Farmasi')
                             <tr>
                                 <td>{{ $dt->kode_layanan_header }}</td>
                                 <td>{{ $dt->id_layanan_detail }}</td>
@@ -263,6 +264,7 @@
                                 <td class="text-center">{{ $dt->jumlah_layanan }}</td>
                                 <td class="text-center">{{ $dt->diskon_layanan }}</td>
                             </tr>
+                            @endif
                         @endforeach
                         @endif
                     </tbody>
@@ -272,12 +274,44 @@
         <div class="card">
             <div class="card-header bg-info">Order Farmasi</div>
             <div class="card-body">
-
+                <table id="tabelriwayattindakan" class="table table-sm table-hover">
+                    <thead>
+                        <th>Kode Header</th>
+                        <th>Kode Detail</th>
+                        <th>Nama Obat / Barang</th>
+                        <th>Tarif</th>
+                        <th>Jlh</th>
+                        <th>signa</th>
+                        <th>satuan</th>
+                        <th>Mata Kanan</th>
+                        <th>Mata Kiri</th>
+                    </thead>
+                    <tbody>
+                        @if(count($detail_tindakan) > 0)
+                        @foreach ($detail_tindakan as $dt)
+                        @if($dt->keterangan == 'Order Farmasi')
+                            <tr>
+                                <td>{{ $dt->kode_layanan_header }}</td>
+                                <td>{{ $dt->id_layanan_detail }}</td>
+                                <td>{{ $dt->nama_tarif }}</td>
+                                <td>{{ money($dt->tarif, 'IDR')}}</td>
+                                <td class="text-center">{{ $dt->jumlah_layanan }}</td>
+                                <td class="text-center">{{ $dt->signa }}</td>
+                                <td class="text-center">{{ $dt->satuan }}</td>
+                                <td class="text-center">{{ $dt->matakanan }}</td>
+                                <td class="text-center">{{ $dt->matakiri }}</td>
+                                <td class="text-center">{{ $dt->diskon_layanan }}</td>
+                            </tr>
+                            @endif
+                        @endforeach
+                        @endif
+                    </tbody>
+                </table>
             </div>
         </div>
          <table class="table mt-4">
                     <thead>
-                        <th>Nama Perawat</th>
+                        <th>Nama Dokter</th>
                         <th>Tanda Tangan</th>
                     </thead>
                     <tbody>

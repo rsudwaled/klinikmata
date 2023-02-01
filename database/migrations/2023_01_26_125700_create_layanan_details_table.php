@@ -19,6 +19,11 @@ return new class extends Migration
             $table->string('id_layanan_detail')->nullable();
             $table->string('kode_layanan_header')->nullable();
             $table->string('nama_tarif')->nullable();
+            $table->string('signa')->nullable();
+            $table->string('satuan')->nullable();
+            $table->string('matakanan')->nullable();
+            $table->string('matakiri')->nullable();
+            $table->string('keterangan')->nullable();
             $table->string('kode_tarif')->nullable();
             $table->string('tarif')->nullable();
             $table->string('jumlah_layanan')->nullable();

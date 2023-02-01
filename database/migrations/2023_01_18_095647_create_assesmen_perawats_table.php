@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('id_kunjungan');
             $table->string('id_pasien');
             $table->string('pic');
+            $table->string('nama_perawat');
             $table->timestamp('tgl_entry')->nullable();
             $table->timestamp('tgl_kunjungan')->nullable();
             $table->timestamp('tgl_pemeriksaan')->nullable();

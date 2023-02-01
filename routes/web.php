@@ -115,6 +115,9 @@ Route::middleware('auth')->group(function () {
         Route::post('simpantindakan', [DokterController::class, 'simpanTindakan'])->name('simpantindakan');
         Route::post('simpanttddokter', [DokterController::class, 'simpanTtdDokter'])->name('simpanttddokter');
         Route::post('ambilriwayattindakan', [DokterController::class, 'riwayatTindakan'])->name('ambilriwayattindakan');
+        Route::post('simpanorderfarmasi', [DokterController::class, 'simpanOrderFarmasi'])->name('simpanorderfarmasi');
+        Route::post('ambilriwayatorder', [DokterController::class, 'ambilRiwayatOrder'])->name('ambilriwayatorder');
+        Route::post('detailriwayatorder', [DokterController::class, 'detailriwayatorder'])->name('detailriwayatorder');
     });
     Route::middleware('permission:perawat')->group(function () {
         Route::get('ermperawat', [PerawatController::class, 'indexPerawat'])->name('ermperawat');
@@ -124,5 +127,6 @@ Route::middleware('auth')->group(function () {
         Route::post('simpanpemeriksaanperawat', [PerawatController::class, 'simpanForm'])->name('simpanpemeriksaanperawat');
         Route::post('resumeperawat', [PerawatController::class, 'resumePerawat'])->name('resumeperawat');
         Route::post('simpanttdperawat', [PerawatController::class, 'simpanTtdPerawat'])->name('simpanttdperawat');
+        Route::post('detailriwayatorder', [DokterController::class, 'detailriwayatorder'])->name('detailriwayatorder');
     });
 });
