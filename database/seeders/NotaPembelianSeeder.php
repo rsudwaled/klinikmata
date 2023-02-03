@@ -20,7 +20,7 @@ class NotaPembelianSeeder extends Seeder
     {
         $obats = Barang::get();
         foreach ($obats as $value) {
-            $nota = [
+            $notabeli = [
                 "supplier_id" => 1,
                 "tanggal_faktur" => fake()->date(),
                 "kode" => "NPB" . now()->format('dm') . str_pad(NotaPembelian::whereDate('created_at', now()->today())->count() + 1, 4, '0', STR_PAD_LEFT),
@@ -30,8 +30,8 @@ class NotaPembelianSeeder extends Seeder
                 "harga_beli" => fake()->numerify('1#00000'),
                 "pic" => 1,
             ];
-            NotaPembelian::create($nota);
-            Stok::create($nota);
+            NotaPembelian::create($notabeli);
+            Stok::create($notabeli);
             $stok = $value->stok_current;
             $value->update([
                 "stok_current" => $stok + 100
@@ -39,7 +39,7 @@ class NotaPembelianSeeder extends Seeder
         }
         for ($i = 1; $i < 21; $i++) {
             $jumlah = fake()->numerify('1#');
-            $data = [
+            $notajual = [
                 "pasien_id" => $i,
                 "tanggal_faktur" => fake()->date(),
                 "nomor_faktur" => fake()->numerify('######'),
@@ -49,7 +49,8 @@ class NotaPembelianSeeder extends Seeder
                 "pic" => 1,
                 "kode" => "NPJ" . now()->format('dm') . str_pad(NotaPenjualan::whereDate('created_at', now()->today())->count() + 1, 4, '0', STR_PAD_LEFT),
             ];
-            NotaPenjualan::create($data);
+            NotaPenjualan::create($notajual);
+            Stok::create($notajual);
             $obat = Barang::find($i);
             $stok = $obat->stok_current;
             $obat->update([

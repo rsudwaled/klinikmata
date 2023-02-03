@@ -22,6 +22,7 @@ use App\Http\Controllers\OrderObatController;
 use App\Http\Controllers\Pendaftaran\PendaftaranController;
 use App\Http\Controllers\PoliklinikController;
 use App\Http\Controllers\RuanganController;
+use App\Http\Controllers\SatuanBarangController;
 use App\Http\Controllers\SatuanObatController;
 use App\Http\Controllers\StokController;
 use App\Http\Controllers\SupplierController;
@@ -84,7 +85,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('notapembelian', NotaPembelianController::class);
         Route::resource('notapenjualan', NotaPenjualanController::class);
         Route::resource('stok', StokController::class);
-        Route::resource('satuanobat', SatuanObatController::class);
+        Route::resource('satuanbarang', SatuanBarangController::class);
         Route::resource('kategoriobat', KategoriObatController::class);
         Route::resource('supplier', SupplierController::class);
         Route::resource('transaksi', TransaksiController::class);
