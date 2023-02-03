@@ -57,6 +57,7 @@ class DatabaseSeeder extends Seeder
         // DB::unprepared(file_get_contents($path));
         // $this->command->info('ICD 10 table seeded');
 
+        $this->call(NotaPembelianSeeder::class);
 
 
         // \App\Models\User::factory()->create([

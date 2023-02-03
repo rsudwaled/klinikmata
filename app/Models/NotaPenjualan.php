@@ -11,4 +11,16 @@ class NotaPenjualan extends Model
     protected $guarded = [
         'id',
     ];
+    public function barang()
+    {
+        return $this->belongsTo(Barang::class);
+    }
+    public function pasien()
+    {
+        return $this->belongsTo(Pasien::class);
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'pic', 'id');
+    }
 }

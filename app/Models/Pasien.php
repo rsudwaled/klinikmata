@@ -13,6 +13,10 @@ class Pasien extends Model
 {
     use HasFactory;
 
+    protected $guarded = [
+        'id',
+    ];
+
 
     protected $appends = [
         'nama_provinsi',
@@ -22,9 +26,6 @@ class Pasien extends Model
         'user_entry',
     ];
 
-    protected $guarded = [
-        'id',
-    ];
 
     public function getNamaProvinsiAttribute()
     {

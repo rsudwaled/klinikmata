@@ -17,7 +17,7 @@ class BarangController extends APIController
 {
     public function index()
     {
-        $barangs = Barang::latest()->get();
+        $barangs = Barang::with(['user'])->latest()->get();
         $satuan = SatuanBarang::pluck('nama', 'id');
         return view('admin.barang_index', compact([
             'barangs',
