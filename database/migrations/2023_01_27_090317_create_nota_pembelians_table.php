@@ -20,10 +20,10 @@ return new class extends Migration
             $table->string('supplier_id');
             $table->string('nomor_faktur');
             $table->date('tanggal_faktur');
-            $table->string('jumlah');
+            $table->bigInteger('jumlah');
 
             $table->string('tanggal_expire')->nullable();
-            $table->string('harga_beli');
+            $table->double('harga_beli');
             $table->string('ppn')->nullable();
             $table->string('pph')->nullable();
             $table->string('diskon')->nullable();

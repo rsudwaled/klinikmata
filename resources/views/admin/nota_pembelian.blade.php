@@ -31,7 +31,7 @@
                     </div> --}}
                 </div>
                 @php
-                    $heads = ['Kode', 'Tgl Faktur', 'Barang', 'Supplier', 'Qty', 'Harga Beli', 'Tgl Inpu'];
+                    $heads = ['Kode', 'Tgl Faktur', 'Barang', 'Supplier', 'Qty', 'Harga Beli', 'Tgl Input'];
                     $config['scrollY'] = '400px';
                     $config['paging'] = false;
                     $config['scrollCollapse'] = true;

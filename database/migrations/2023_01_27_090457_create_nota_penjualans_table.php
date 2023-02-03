@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('pasien_id');
             $table->string('nomor_faktur');
             $table->date('tanggal_faktur');
-            $table->string('jumlah');
-            $table->string('harga_jual');
+            $table->bigInteger('jumlah');
+            $table->double('harga_beli');
             $table->bigInteger('pic');
             $table->boolean('status')->default(1);
             $table->timestamps();

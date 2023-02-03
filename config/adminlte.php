@@ -306,6 +306,21 @@ return [
 
 
         ['header' => 'MENU UTAMA'],
+        // MENU ANTRIAN
+        [
+            'text' => 'Menu Antrian',
+            'icon' => 'fas fa-user-plus',
+            // 'can'  => 'antrian',
+            'submenu' => [
+                [
+                    'text'        => 'Mesin Antrian',
+                    'url'         => 'mesinantrian',
+                    'icon'        => 'fas fa-user-plus',
+                    'shift'   => 'ml-2',
+                    // 'can'  => 'antrian',
+                ],
+            ]
+        ],
         // MENU PENDAFTARAN
         [
             'text' => 'Menu Pendaftaran',

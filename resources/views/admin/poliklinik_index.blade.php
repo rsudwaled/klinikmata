@@ -16,20 +16,20 @@
                     </div>
                 </div>
                 @php
-                    $heads = ['No', 'Nama Subspesialis', 'Kode Subspesialis', 'Nama Poli', 'Kode Poli', 'Status'];
+                    $heads = ['No', 'Kode Poli', 'Nama Poli','Kode Subspesialis', 'Nama Subspesialis',  'Status'];
                     $config['searching'] = true;
                     $config['paging'] = true;
                 @endphp
                 <x-adminlte-datatable id="table1" class="text-xs" :heads="$heads" :config="$config" hoverable bordered
                     compressed>
-                    @foreach ($polikliniks as $poliklinik)
-                        <tr>
+                    @foreach ($polikliniks as $item)
+                        <tr class="btnEdit" data-id="{{ $item->id }}">
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $poliklinik->namasubspesialis }}</td>
-                            <td>{{ $poliklinik->kodesubspesialis }}</td>
-                            <td>{{ $poliklinik->namapoli }}</td>
-                            <td>{{ $poliklinik->kodepoli }}</td>
-                            <td>{{ $poliklinik->status }}</td>
+                            <td>{{ $item->kodepoli }}</td>
+                            <td>{{ $item->namapoli }}</td>
+                            <td>{{ $item->kodesubspesialis }}</td>
+                            <td>{{ $item->namasubspesialis }}</td>
+                            <td>{{ $item->status }}</td>
                         </tr>
                     @endforeach
                 </x-adminlte-datatable>
@@ -39,10 +39,11 @@
     <x-adminlte-modal id="modal" title="Data Poliklinik" theme="success" v-centered>
         <form action="" id="form">
             @csrf
-            <x-adminlte-input name="kode_poli" label="Kode Poliklinik" igroup-size="sm" enable-old-support />
-            <x-adminlte-input name="nama_poli" label="Nama Poliklinik" igroup-size="sm" enable-old-support />
-            <x-adminlte-input name="kode_subspesialis" label="Kode Subspesialis" igroup-size="sm" enable-old-support />
-            <x-adminlte-input name="nama_subspesialis" label="Nama Subspesialis" igroup-size="sm" enable-old-support />
+            <input type="hidden" id="id" name="id">
+            <x-adminlte-input name="kodepoli" label="Kode Poliklinik" igroup-size="sm" enable-old-support />
+            <x-adminlte-input name="namapoli" label="Nama Poliklinik" igroup-size="sm" enable-old-support />
+            <x-adminlte-input name="kodesubspesialis" label="Kode Subspesialis" igroup-size="sm" enable-old-support />
+            <x-adminlte-input name="namasubspesialis" label="Nama Subspesialis" igroup-size="sm" enable-old-support />
             <x-adminlte-input-switch name="status" igroup-size="sm" label="Status Aktif" data-on-text="YES"
                 data-off-text="NO" data-on-color="primary" />
         </form>
@@ -68,28 +69,20 @@
                 $('#btnStore').show();
             });
             $('.btnEdit').click(function() {
-                var jadwalid = $(this).data('id');
+                var id = $(this).data('id');
                 $.LoadingOverlay("show");
-                $.get("{{ route('pasien.index') }}" + '/' + jadwalid + '/edit', function(data) {
+                $.get("{{ route('poliklinik.index') }}" + '/' + id, function(data) {
                     console.log(data);
                     $('#id').val(data.id);
-
-                    $('#nik').val(data.nik);
-                    $('#no_rm').val(data.no_rm);
-                    $('#no_ihs').val(data.no_ihs);
-                    $('#no_bpjs').val(data.no_bpjs);
-
-                    $('#nama').val(data.nama);
-                    $('#sex').val(data.sex).trigger('change');
-                    $('#tempat_lahir').val(data.tempat_lahir);
-                    $('#tgl_lahir').val(data.tgl_lahir);
-                    $('#nohp').val(data.nohp);
-
-                    $('#provinsi').val(data.provinsi).trigger('change');
-                    $('#kabupaten').append(new Option(data.nama_kabupaten, data.kabupaten));
-                    $('#kecamatan').append(new Option(data.nama_kecamatan, data.kecamatan));
-                    $('#desa').append(new Option(data.nama_desa, data.desa));
-                    $('#alamat').val(data.alamat);
+                    $('#kodepoli').val(data.kodepoli);
+                    $('#namapoli').val(data.namapoli);
+                    $('#kodesubspesialis').val(data.kodesubspesialis);
+                    $('#namasubspesialis').val(data.namasubspesialis);
+                    if (data.status == 1) {
+                        $('#status').prop('checked', true).trigger('change');
+                    } else {
+                        $('#status').prop('checked', false).trigger('change');
+                    }
 
                     $.LoadingOverlay("hide", true);
                     $('#btnUpdate').show();
@@ -101,7 +94,7 @@
             $('#btnStore').click(function(e) {
                 $.LoadingOverlay("show");
                 e.preventDefault();
-                var url = "{{ route('pasien.store') }}";
+                var url = "{{ route('poliklinik.store') }}";
                 $.ajax({
                     data: $('#form').serialize(),
                     url: url,
@@ -136,7 +129,7 @@
                 var id = $("#id").val()
                 $.LoadingOverlay("show");
                 e.preventDefault();
-                var url = "{{ route('pasien.index') }}/" + id;
+                var url = "{{ route('poliklinik.index') }}/" + id;
                 $.LoadingOverlay("hide");
                 $.ajax({
                     data: $('#form').serialize(),
@@ -184,93 +177,6 @@
                         Swal.fire('Data tidak jadi dihapus', '', 'info')
                     }
                 })
-            });
-        });
-    </script>
-    <script>
-        $(function() {
-            $("#provinsi").select2({
-                theme: "bootstrap4",
-                ajax: {
-                    url: "{{ route('get_provinsi') }}",
-                    type: "get",
-                    dataType: 'json',
-                    delay: 100,
-                    data: function(params) {
-                        return {
-                            search: params.term // search term
-                        };
-                    },
-                    processResults: function(response) {
-                        return {
-                            results: response
-                        };
-                    },
-                    cache: true
-                }
-            });
-            $("#kabupaten").select2({
-                theme: "bootstrap4",
-                ajax: {
-                    url: "{{ route('get_kabupaten') }}",
-                    type: "get",
-                    dataType: 'json',
-                    delay: 100,
-                    data: function(params) {
-                        return {
-                            code: $("#provinsi option:selected").val(),
-                            search: params.term // search term
-                        };
-                    },
-                    processResults: function(response) {
-                        return {
-                            results: response
-                        };
-                    },
-                    cache: true
-                }
-            });
-            $("#kecamatan").select2({
-                theme: "bootstrap4",
-                ajax: {
-                    url: "{{ route('get_kecamatan') }}",
-                    type: "get",
-                    dataType: 'json',
-                    delay: 100,
-                    data: function(params) {
-                        return {
-                            code: $("#kabupaten option:selected").val(),
-                            search: params.term // search term
-                        };
-                    },
-                    processResults: function(response) {
-                        return {
-                            results: response
-                        };
-                    },
-                    cache: true
-                }
-            });
-            $("#desa").select2({
-                theme: "bootstrap4",
-                ajax: {
-                    url: "{{ route('get_desa') }}",
-                    type: "get",
-                    dataType: 'json',
-                    delay: 100,
-                    data: function(params) {
-                        return {
-                            code: $("#kecamatan option:selected").val(),
-                            search: params.term // search term
-                        };
-                    },
-                    processResults: function(response) {
-                        return {
-                            results: response
-                        };
-                    },
-                    cache: true
-                }
             });
         });
     </script>

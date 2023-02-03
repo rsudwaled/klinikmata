@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\API\APIController;
 use App\Models\Barang;
 use App\Models\NotaPenjualan;
 use App\Models\Pasien;
@@ -11,7 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
-class NotaPenjualanController extends Controller
+class NotaPenjualanController extends APIController
 {
     public function index(Request $request)
     {
@@ -39,8 +40,8 @@ class NotaPenjualanController extends Controller
             "tanggal_faktur" =>  "required|date",
             "nomor_faktur" =>  "required",
             "barang_id" =>  "required",
-            "jumlah" =>  "required",
-            "harga_beli" =>  "required",
+            "jumlah" =>  "required|numeric",
+            "harga_beli" =>  "required|numeric",
         ]);
         if ($validator->fails()) {
             return $this->sendError($validator->errors()->first(), null, 400);

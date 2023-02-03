@@ -14,6 +14,7 @@ use App\Http\Controllers\JadwalDokterController;
 use App\Http\Controllers\KategoriObatController;
 use App\Http\Controllers\KunjunganController;
 use App\Http\Controllers\LaravoltController;
+use App\Http\Controllers\MesinAntrianController;
 use App\Http\Controllers\NotaPembelianController;
 use App\Http\Controllers\NotaPenjualanController;
 use App\Http\Controllers\ObatController;
@@ -46,6 +47,8 @@ Route::get('/', function () {
 Auth::routes(['verfiy' => true]);
 Route::get('verifikasi_akun', [VerificationController::class, 'verifikasi_akun'])->name('verifikasi_akun');
 Route::post('verifikasi_kirim', [VerificationController::class, 'verifikasi_kirim'])->name('verifikasi_kirim');
+Route::get('mesinantrian', [MesinAntrianController::class, 'mesinantrian'])->name('mesinantrian');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
