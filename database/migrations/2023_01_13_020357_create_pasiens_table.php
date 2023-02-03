@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('pasiens', function (Blueprint $table) {
             $table->id();
             $table->string('nik')->nullable()->unique();
+            $table->string('no_kk')->nullable()->unique();
             $table->string('no_rm')->unique();
             $table->string('no_bpjs')->nullable()->unique();
             $table->string('no_ihs')->nullable()->unique();
@@ -31,6 +32,8 @@ return new class extends Migration
             $table->string('kabupaten')->nullable();
             $table->string('kecamatan')->nullable();
             $table->string('desa')->nullable();
+            $table->string('rt')->nullable();
+            $table->string('rw')->nullable();
 
             $table->string('menikah')->nullable();
             $table->string('agama')->nullable();

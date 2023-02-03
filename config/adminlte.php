@@ -306,6 +306,21 @@ return [
 
 
         ['header' => 'MENU UTAMA'],
+        // MENU ANTRIAN
+        [
+            'text' => 'Menu Antrian',
+            'icon' => 'fas fa-user-plus',
+            // 'can'  => 'antrian',
+            'submenu' => [
+                [
+                    'text'        => 'Mesin Antrian',
+                    'url'         => 'mesinantrian',
+                    'icon'        => 'fas fa-user-plus',
+                    'shift'   => 'ml-2',
+                    // 'can'  => 'antrian',
+                ],
+            ]
+        ],
         // MENU PENDAFTARAN
         [
             'text' => 'Menu Pendaftaran',
@@ -410,6 +425,13 @@ return [
                 [
                     'text' => 'Barang',
                     'url'  => 'farmasi/barang',
+                    'icon' => 'fas fa-pills',
+                    'shift'   => 'ml-2',
+                    'can'  => 'farmasi',
+                ],
+                [
+                    'text' => 'Kartu Stok Barang',
+                    'url'  => 'farmasi/stok',
                     'icon' => 'fas fa-pills',
                     'shift'   => 'ml-2',
                     'can'  => 'farmasi',
@@ -641,26 +663,6 @@ return [
                     'type' => 'css',
                     'asset' => true,
                     'location' => 'vendor/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css',
-                ],
-            ],
-        ],
-        'Datatables' => [
-            'active' => false,
-            'files' => [
-                [
-                    'type' => 'js',
-                    'asset' => true,
-                    'location' => 'vendor/datatables/js/jquery.dataTables.min.js',
-                ],
-                [
-                    'type' => 'js',
-                    'asset' => true,
-                    'location' => 'vendor/datatables/js/dataTables.bootstrap4.min.js',
-                ],
-                [
-                    'type' => 'css',
-                    'asset' => true,
-                    'location' => 'vendor/datatables/css/dataTables.bootstrap4.min.css',
                 ],
             ],
         ],

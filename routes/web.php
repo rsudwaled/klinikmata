@@ -14,6 +14,7 @@ use App\Http\Controllers\JadwalDokterController;
 use App\Http\Controllers\KategoriObatController;
 use App\Http\Controllers\KunjunganController;
 use App\Http\Controllers\LaravoltController;
+use App\Http\Controllers\MesinAntrianController;
 use App\Http\Controllers\NotaPembelianController;
 use App\Http\Controllers\NotaPenjualanController;
 use App\Http\Controllers\ObatController;
@@ -22,7 +23,7 @@ use App\Http\Controllers\Pendaftaran\PendaftaranController;
 use App\Http\Controllers\PoliklinikController;
 use App\Http\Controllers\RuanganController;
 use App\Http\Controllers\SatuanObatController;
-use App\Http\Controllers\StokObatController;
+use App\Http\Controllers\StokController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\TarifController;
 use App\Http\Controllers\TransaksiController;
@@ -47,6 +48,8 @@ Route::get('/', function () {
 Auth::routes(['verfiy' => true]);
 Route::get('verifikasi_akun', [VerificationController::class, 'verifikasi_akun'])->name('verifikasi_akun');
 Route::post('verifikasi_kirim', [VerificationController::class, 'verifikasi_kirim'])->name('verifikasi_kirim');
+Route::get('mesinantrian', [MesinAntrianController::class, 'mesinantrian'])->name('mesinantrian');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -81,12 +84,10 @@ Route::middleware('auth')->group(function () {
         Route::post('barang/import',  [BarangController::class, 'import'])->name('barang.import');
         Route::resource('notapembelian', NotaPembelianController::class);
         Route::resource('notapenjualan', NotaPenjualanController::class);
-
-
+        Route::resource('stok', StokController::class);
         Route::resource('satuanobat', SatuanObatController::class);
         Route::resource('kategoriobat', KategoriObatController::class);
         Route::resource('supplier', SupplierController::class);
-        Route::resource('stokobat', StokObatController::class);
         Route::resource('transaksi', TransaksiController::class);
     });
     Route::middleware('permission:pendaftaran')->group(function () {

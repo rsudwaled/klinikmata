@@ -33,7 +33,7 @@
                             <td>{{ $item->nama }}</td>
                             <td>{{ $item->satuan ? $item->satuan->nama : '-' }}</td>
                             <td>{{ $item->jenis }}</td>
-                            <td>{{ $item->stok }}</td>
+                            <td>{{ $item->stok_current }}</td>
                             <td>
                                 @if ($item->status)
                                     <span class="badge badge-success">Aktif</span>
@@ -41,7 +41,7 @@
                                     <span class="badge badge-danger">Non-Aktif</span>
                                 @endif
                             </td>
-                            <td>{{ $item->updated_at }} ({{ $item->user_entry }})</td>
+                            <td>{{ $item->updated_at }} ({{ $item->user->name }})</td>
                         </tr>
                     @endforeach
                 </x-adminlte-datatable>
