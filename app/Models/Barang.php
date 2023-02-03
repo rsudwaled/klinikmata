@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Barang extends Model
 {
@@ -13,19 +14,17 @@ class Barang extends Model
     ];
 
     protected $appends = [
-        'user_entry',
         'stok',
     ];
-    public function getUserEntryAttribute()
-    {
-        $item = User::find($this->pic);
-        return  $item->name ?? '-';
-    }
     public function getStokAttribute()
     {
         $stok_in = NotaPembelian::where('barang_id', $this->id)->get('jumlah')->sum('jumlah');
         $stok_out = NotaPenjualan::where('barang_id', $this->id)->get('jumlah')->sum('jumlah');
         $stok = $stok_in - $stok_out;
-        return  $stok;
+        return $stok;
+    }
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'pic', 'id');
     }
 }

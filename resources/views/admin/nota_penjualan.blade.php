@@ -45,7 +45,7 @@
                             <td>{{ $item->barang->nama }}</td>
                             <td>{{ $item->pasien->nama }}</td>
                             <td>{{ $item->jumlah }}</td>
-                            <td class="text-right">{{ money($item->harga_beli, 'IDR2') }}</td>
+                            <td class="text-right">{{ money($item->harga_jual, 'IDR2') }}</td>
                             <td>{{ $item->created_at }}</td>
                         </tr>
                     @endforeach
@@ -81,7 +81,7 @@
                         @endforeach
                     </x-adminlte-select2>
                     <x-adminlte-input name="jumlah" label="Jumlah Kuantitas" igroup-size="sm" required />
-                    <x-adminlte-input name="harga_beli" label="Harga Beli" igroup-size="sm" required />
+                    <x-adminlte-input name="harga_jual" label="Harga Jual" igroup-size="sm" required />
                 </div>
             </div>
         </form>

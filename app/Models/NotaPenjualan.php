@@ -19,4 +19,8 @@ class NotaPenjualan extends Model
     {
         return $this->belongsTo(Pasien::class);
     }
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'pic', 'id');
+    }
 }

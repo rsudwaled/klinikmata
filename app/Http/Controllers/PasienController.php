@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\API\APIController;
 use App\Models\Pasien;
+use App\Models\Transaksi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -68,15 +69,15 @@ class PasienController extends APIController
         }
         Pasien::create($request->except('_token'));
 
-        $request['transaksi_id'] = 'DAFTAR' . now()->format('dm') . Transaksi::whereDate('created_at', now()->today())->count() + 1;
-        Transaksi::create([
-            'kode' => $request->transaksi_id,
-            'nama' => "Daftar Pasien Baru",
-            'debit' => 60000,
-            'keterangan' => "Daftar Pasien Baru " . $request->nama,
-            'pic' => $request->pic,
-            'status' => 0,
-        ]);
+        // $request['transaksi_id'] = 'DAFTAR' . now()->format('dm') . Transaksi::whereDate('created_at', now()->today())->count() + 1;
+        // Transaksi::create([
+        //     'kode' => $request->transaksi_id,
+        //     'nama' => "Daftar Pasien Baru",
+        //     'debit' => 60000,
+        //     'keterangan' => "Daftar Pasien Baru " . $request->nama,
+        //     'pic' => $request->pic,
+        //     'status' => 0,
+        // ]);
         return response()->json($request->all());
     }
     public function update(Request $request)

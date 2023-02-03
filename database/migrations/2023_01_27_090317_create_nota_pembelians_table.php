@@ -27,7 +27,8 @@ return new class extends Migration
             $table->string('ppn')->nullable();
             $table->string('pph')->nullable();
             $table->string('diskon')->nullable();
-            $table->bigInteger('pic');
+
+            $table->string('pic');
             $table->boolean('status')->default(1);
             $table->timestamps();
         });

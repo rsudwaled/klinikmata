@@ -23,7 +23,7 @@ use App\Http\Controllers\Pendaftaran\PendaftaranController;
 use App\Http\Controllers\PoliklinikController;
 use App\Http\Controllers\RuanganController;
 use App\Http\Controllers\SatuanObatController;
-use App\Http\Controllers\StokObatController;
+use App\Http\Controllers\StokController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\TarifController;
 use App\Http\Controllers\TransaksiController;
@@ -83,12 +83,10 @@ Route::middleware('auth')->group(function () {
         Route::post('barang/import',  [BarangController::class, 'import'])->name('barang.import');
         Route::resource('notapembelian', NotaPembelianController::class);
         Route::resource('notapenjualan', NotaPenjualanController::class);
-
-
+        Route::resource('stok', StokController::class);
         Route::resource('satuanobat', SatuanObatController::class);
         Route::resource('kategoriobat', KategoriObatController::class);
         Route::resource('supplier', SupplierController::class);
-        Route::resource('stokobat', StokObatController::class);
         Route::resource('transaksi', TransaksiController::class);
     });
     Route::middleware('permission:pendaftaran')->group(function () {

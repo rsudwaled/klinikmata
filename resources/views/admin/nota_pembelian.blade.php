@@ -46,7 +46,7 @@
                             <td>{{ $item->supplier->nama }}</td>
                             <td>{{ $item->jumlah }}</td>
                             <td class="text-right">{{ money($item->harga_beli, 'IDR2') }}</td>
-                            <td>{{ $item->created_at }}</td>
+                            <td>{{ $item->created_at }} {{ $item->user->name }}</td>
                         </tr>
                     @endforeach
                 </x-adminlte-datatable>

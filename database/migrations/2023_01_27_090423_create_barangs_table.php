@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('nama');
             $table->string('barcode')->nullable()->unique();
 
+            $table->bigInteger('stok_current')->default(0);
+
             $table->string('satuan_id')->nullable();
             $table->string('jenis_id')->nullable();
             $table->string('tipe_id')->nullable();
@@ -32,7 +34,7 @@ return new class extends Migration
             $table->string('diskon')->nullable();
             $table->string('margin_jual')->nullable();
 
-            $table->bigInteger('pic');
+            $table->string('pic');
             $table->boolean('status')->default(1);
             $table->timestamps();
         });

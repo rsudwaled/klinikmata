@@ -16,7 +16,7 @@ class NotaPenjualanController extends APIController
 {
     public function index(Request $request)
     {
-        $nota = NotaPenjualan::get();
+        $nota = NotaPenjualan::with(['pasien', 'barang'])->get();
         $barang = Barang::pluck('nama', 'id');
         $pasien = Pasien::pluck('nama', 'id');
         $unit = Unit::pluck('nama', 'id');
@@ -37,17 +37,17 @@ class NotaPenjualanController extends APIController
     public function store(Request $request)
     {
         $validator = Validator::make(request()->all(), [
-            "tanggal_faktur" =>  "required|date",
-            "nomor_faktur" =>  "required",
-            "barang_id" =>  "required",
-            "jumlah" =>  "required|numeric",
-            "harga_beli" =>  "required|numeric",
+            "tanggal_faktur" => "required|date",
+            "nomor_faktur" => "required",
+            "barang_id" => "required",
+            "jumlah" => "required|numeric",
+            "harga_jual" => "required|numeric",
         ]);
         if ($validator->fails()) {
             return $this->sendError($validator->errors()->first(), null, 400);
         }
         $request['pic'] = Auth::user()->id;
-        $request['kode'] = "NPJ" . now()->format('dm') . NotaPenjualan::whereDate('created_at', now()->today())->count() + 1;
+        $request['kode'] = "NPJ" . now()->format('dm') . str_pad(NotaPenjualan::whereDate('created_at', now()->today())->count() + 1, 4, '0', STR_PAD_LEFT);
         NotaPenjualan::create($request->except('_token'));
         return response()->json($request);
     }
