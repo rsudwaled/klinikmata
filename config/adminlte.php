@@ -372,6 +372,13 @@ return [
             'can'  => 'kasir',
             'submenu' => [
                 [
+                    'text'        => 'Pembayaran',
+                    'url'         => '/pembayaran',
+                    'icon'        => 'fas fa-money-bill',
+                    'shift'   => 'ml-2',
+                    'can'  => 'kasir',
+                ],
+                [
                     'text'        => 'Pendaftaran Pasien',
                     'url'         => '/as',
                     'icon'        => 'fas fa-money-bill',

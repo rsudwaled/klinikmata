@@ -22,6 +22,8 @@ use App\Models\Tarif;
 use App\Models\LayananHeader;
 use App\Models\LayananDetail;
 use App\Models\Barang;
+use App\Models\NotaPembelian;
+use App\Models\NotaPenjualan;
 
 class DokterController extends Controller
 {
@@ -45,7 +47,7 @@ class DokterController extends Controller
         // $Icd9 = Icd9::get();
         $now = $this->get_now();
         $kunjungan = Kunjungan::where('id', $request->idkunjungan)->get();
-        $asskep = AssesmenPerawat::where('id_kunjungan', $request->idkunjungan)->get();
+        $asskep = AssesmenPerawat::where('id_kunjungan', $request->idkunjungan)->where('status',1)->get();
         $assdok = AssesmenDokter::where('id_kunjungan', $request->idkunjungan)->get();
         if (count($asskep) > 0) {
             if (count($assdok) > 0) {
@@ -546,9 +548,10 @@ class DokterController extends Controller
             }
         }
         $kodeheader = $this->createKodeHeader('KMF');
+        $tglheader = $this->get_now();
         $dataheader = [
             'kode_layanan_header' => $kodeheader,
-            'tgl_entry' => $this->get_now(),
+            'tgl_entry' => $tglheader,
             'id_kunjungan' => $request->idkunjungan,
             'kode_kunjungan' => $request->kodekunjungan,
             'kode_tipe_transaksi' => 1,
@@ -581,8 +584,8 @@ class DokterController extends Controller
                 'total_layanan' => $total_layanan,
                 'diskon_layanan' => $arr['disc'],
                 'grand_total_tarif' => $grand_total_tarif,
-                'dokter' => auth()->user()->kode_dpjp,
-                'pic' => auth()->user()->kode_dpjp,
+                'dokter' => auth()->user()->id,
+                'pic' => auth()->user()->id,
                 'signa' => $arr['signa'],
                 'satuan' => $arr['satuan'],
                 'matakanan' => $arr['matakanan'],
@@ -597,6 +600,18 @@ class DokterController extends Controller
             LayananDetail::create($save_detail);
             $total_layanan_header2 = $grand_total_tarif;
             $total_layanan_header = $total_layanan_header2 + $total_layanan_header;
+            // $datastok = [
+            //     'kode' => $id_detail,
+            //     'barang_id' => $arr['idlayanan'],
+            //     'pasien_id' => $request->idpasien,
+            //     'nomor_faktur' => $kodeheader,
+            //     'tanggal_faktur' => $tglheader,
+            //     'jumlah' => $arr['qty'],
+            //     'harga_jual' => $total_layanan,
+            //     'pic' => auth()->user()->id,
+            //     'status' => 0,
+            // ];
+            // NotaPenjualan::create($datastok);
         }
         LayananHeader::whereRaw('id = ?', array($idheader->id))->update(['total_layanan' => $total_layanan_header, 'tagihan_pribadi' => $total_layanan_header]);
         $assdok = DB::table('assesmen_dokters')

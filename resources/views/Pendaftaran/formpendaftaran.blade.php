@@ -67,7 +67,8 @@
                                             <div class="form-group">
                                                 <select class="form-control" name="tujuan"
                                                     id="exampleFormControlSelect1">
-                                                    <option value="MAT">Klinik Mata</option>
+                                                    <option value="POLIKLINIK">Klinik Mata</option>
+                                                    <option value="FARMASI">Farmasi / Optik</option>
                                                 </select>
                                             </div>
                                         </div>

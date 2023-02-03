@@ -24,8 +24,8 @@ class Barang extends Model
     public function getStokAttribute()
     {
         $stok_in = NotaPembelian::where('barang_id', $this->id)->get('jumlah')->sum('jumlah');
-        // $stok_out = NotaPembelian::where('barang_id', $this->id)->get('jumlah')->sum('jumlah');
-        $stok = $stok_in;
+        $stok_out = NotaPenjualan::where('barang_id', $this->id)->get('jumlah')->sum('jumlah');
+        $stok = $stok_in - $stok_out;
         return  $stok;
     }
 }
