@@ -12,6 +12,7 @@
                         <th>Harga</th>
                         <th>Jenis</th>
                         <th>Nama</th>
+                        <th>stok</th>
                         <th>Action</th>
                     </thead>
                     <tbody>
@@ -20,7 +21,8 @@
                             <td>{{ $b->nama}}</td>
                             <td>{{ $b->jenis_id}}</td>
                             <td>{{ $b->harga_jual}}</td>
-                            <td><button class="badge badge-danger badge-sm pilihbarang" nama="{{ $b->nama}}" harga="{{ $b->harga_jual}}" kode="{{ $b->kode}}" satuan="{{ $b->statuan_id }}">Pilih</button></td>
+                            <td>{{ $b->stok}}</td>
+                            <td><button class="badge badge-danger badge-sm pilihbarang" nama="{{ $b->nama}}" harga="{{ $b->harga_jual}}" kode="{{ $b->kode}}" satuan="{{ $b->statuan_id }}" id="{{ $b->id }}">Pilih</button></td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -98,6 +100,7 @@
         var max_fields = 10; //maximum input boxes allowed
         var wrapper = $(".input_fields_wrap"); //Fields wrapper
         var x = 1; //initlal text box count
+        id = $(this).attr('id')
         kode = $(this).attr('kode')
         namatindakan = $(this).attr('nama')
         tarif = $(this).attr('harga')
@@ -110,6 +113,8 @@
                 namatindakan +
                 '"><input hidden readonly type="" class="form-control form-control-sm" id="" name="kodelayanan" value="' +
                 kode +
+                '"></div><div hidden class="form-group col-md-2"><label for="inputPassword4">Harga</label><input  type="" class="form-control form-control-sm" id="" name="idlayanan" value="' +
+                id +
                 '"></div><div class="form-group col-md-2"><label for="inputPassword4">Harga</label><input  type="" class="form-control form-control-sm" id="" name="tarif" value="' +
                 tarif +
                 '"></div><div class="form-group col-md-1"><label for="inputPassword4">Jumlah</label><input type="" class="form-control form-control-sm" id="" name="qty" value="1"></div><div class="form-group col-md-1"><label for="inputPassword4">Disc</label><input type="" class="form-control form-control-sm" id="" name="disc" value="0"></div><div class="form-group col-md-1"><label for="inputPassword4">Satuan</label><input type="" class="form-control form-control-sm" id="" name="satuan" value="'+ satuan +'"></div><div class="form-group col-md-2"><label for="inputPassword4">Mata Kanan</label><input type="" class="form-control form-control-sm" id="" name="matakanan" value="0"></div><div class="form-group col-md-2"><label for="inputPassword4">Mata Kiri</label><input type="" class="form-control form-control-sm" id="" name="matakiri" value="0"></div><div class="form-group col-md-2"><label for="inputPassword4">Signa</label><input type="" class="form-control form-control-sm" id="" name="signa" value="0"></div><i class="bi bi-x-square remove_field form-group col-md-1 text-danger">X</i></div>'
@@ -132,6 +137,7 @@
                     data: JSON.stringify(data),
                     idkunjungan  : $('#idkunjungan').val(),
                     kodekunjungan : $('#kodekunjungan').val(),
+                    idpasien : $('#idpasien').val(),
                 },
                 url: '<?= route('simpanorderfarmasi') ?>',
                 error: function(data) {

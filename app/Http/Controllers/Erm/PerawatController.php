@@ -150,7 +150,7 @@ class PerawatController extends Controller
         try {
             $cek = AssesmenPerawat::where('id_kunjungan', $request->idkunjungan)->get();
             if(count($cek) > 0){
-                $cek_assdok = AssesmenDokter::where('id_kunjungan', $request->idkunjungan)->get();
+                $cek_assdok = AssesmenDokter::where('id_kunjungan', $request->idkunjungan)->where('status',1)->get();
                 if(count($cek_assdok) > 0 ){
                     $data = [
                         'kode' => 502,

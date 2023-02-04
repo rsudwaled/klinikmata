@@ -29,6 +29,7 @@ use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\TarifController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\UnitController;
+use App\Http\Controllers\KasirController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -130,5 +131,12 @@ Route::middleware('auth')->group(function () {
         Route::post('resumeperawat', [PerawatController::class, 'resumePerawat'])->name('resumeperawat');
         Route::post('simpanttdperawat', [PerawatController::class, 'simpanTtdPerawat'])->name('simpanttdperawat');
         Route::post('detailriwayatorder', [DokterController::class, 'detailriwayatorder'])->name('detailriwayatorder');
+    });
+    Route::middleware('permission:kasir')->group(function(){
+        Route::get('pembayaran', [KasirController::class, 'index'])->name('pembayaran');
+        Route::post('ambildatakunjungan', [KasirController::class, 'ambildatakunjungan'])->name('ambildatakunjungan');
+        Route::post('detailbayar', [KasirController::class, 'detailbayar'])->name('detailbayar');
+        Route::post('bayarlayanan', [KasirController::class, 'bayarlayanan'])->name('bayarlayanan');
+        Route::post('simpanpembayaran', [KasirController::class, 'simpanpembayaran'])->name('simpanpembayaran');
     });
 });

@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Pasien;
 use App\Models\Dokter;
 use App\Models\Kunjungan;
+use App\Models\LayananHeader;
+use App\Models\LayananDetail;
 use Laravolt\Indonesia\Models\Provinsi;
 
 class PendaftaranController extends Controller
@@ -83,8 +85,9 @@ class PendaftaranController extends Controller
             echo json_encode($data);
             die;
         }
+        $kodekunjungan = $this->kodeRegistrasi();
         $arr = [
-            'kode' => $this->kodeRegistrasi(),
+            'kode' => $kodekunjungan,
             'tgl_masuk' => $now,
             'pasien_id' => $dataSet['idpasien'],
             'dokter_id' => $dataSet['dokter'],
@@ -92,10 +95,10 @@ class PendaftaranController extends Controller
             'status' => 1,
             'pic' => auth()->user()->id,
             'poliklinik' => $dataSet['tujuan'],
-            'tujuan' => 'POLIKLINIK',
+            'tujuan' => $dataSet['tujuan'],
             'keluhan' => $dataSet['keluhan']
         ];
-        try {
+
             $kunjungans = Kunjungan::create($arr);
             $data = [
                 'kode' => 200,
@@ -103,14 +106,6 @@ class PendaftaranController extends Controller
             ];
             echo json_encode($data);
             die;
-        } catch (\Exception $e) {
-            $data = [
-                'kode' => 502,
-                'message' => $e->getMessage()
-            ];
-            echo json_encode($data);
-            die;
-        }
         echo json_encode($data);
     }
     public function kodeRegistrasi()
@@ -131,5 +126,50 @@ class PendaftaranController extends Controller
         }
         date_default_timezone_set('Asia/Jakarta');
         return 'MAT' . date('ymd') . $kd;
+    }
+    public function createKodeHeader($kode)
+    {
+        $date = date('Y-m-d');
+        $q = DB::select('SELECT id,kode_layanan_header,RIGHT(kode_layanan_header,6) AS kd_max  FROM layanan_headers
+        WHERE DATE(tgl_entry) = ?
+        ORDER BY id DESC
+        LIMIT 1', [$date]);
+        $kd = "";
+        if (count($q) > 0) {
+            foreach ($q as $k) {
+                $tmp = ((int) $k->kd_max) + 1;
+                $kd = sprintf("%06s", $tmp);
+            }
+        } else {
+            $kd = "000001";
+        }
+        date_default_timezone_set('Asia/Jakarta');
+        return $kode . date('ymd') . $kd;
+    }
+    public function createLayanandetail()
+    {
+        $q = DB::select('SELECT id,id_layanan_detail,RIGHT(id_layanan_detail,6) AS kd_max  FROM layanan_details
+        WHERE DATE(tgl_layanan_detail) = CURDATE()
+        ORDER BY id DESC
+        LIMIT 1');
+        $kd = "";
+        if (count($q) > 0) {
+            foreach ($q as $k) {
+                $tmp = ((int) $k->kd_max) + 1;
+                $kd = sprintf("%06s", $tmp);
+            }
+        } else {
+            $kd = "000001";
+        }
+        date_default_timezone_set('Asia/Jakarta');
+        return 'DET' . date('ymd') . $kd;
+    }
+    public function get_now()
+    {
+        $dt = Carbon::now()->timezone('Asia/Jakarta');
+        $date = $dt->toDateString();
+        $time = $dt->toTimeString();
+        $now = $date . ' ' . $time;
+        return $now;
     }
 }

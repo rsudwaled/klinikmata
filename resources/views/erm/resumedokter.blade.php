@@ -285,6 +285,7 @@
                         <th>satuan</th>
                         <th>Mata Kanan</th>
                         <th>Mata Kiri</th>
+                        <th>Discount</th>
                     </thead>
                     <tbody>
                         @if(count($detail_tindakan) > 0)
