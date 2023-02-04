@@ -26,8 +26,10 @@ class Barang extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'pic', 'id');
-        $stok_out = NotaPenjualan::where('barang_id', $this->id)->get('jumlah')->sum('jumlah');
-        $stok = $stok_in - $stok_out;
-        return  $stok;
     }
+    public function kartustok()
+    {
+        return $this->hasMany(Stok::class);
+    }
+
 }

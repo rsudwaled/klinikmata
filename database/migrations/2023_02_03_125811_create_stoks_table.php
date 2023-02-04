@@ -28,6 +28,10 @@ return new class extends Migration
             $table->double('harga_jual')->nullable();
             $table->double('harga_beli')->nullable();
 
+            $table->double('stok_in')->nullable();
+            $table->double('stok_out')->nullable();
+            $table->double('stok_current')->nullable();
+
             $table->string('pic');
             $table->boolean('status')->default(1);
             $table->timestamps();

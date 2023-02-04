@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Barang;
 use App\Models\Stok;
 use Illuminate\Http\Request;
 
@@ -50,7 +51,10 @@ class StokController extends Controller
      */
     public function show($id)
     {
-        //
+        $item = Barang::with(['kartustok'])->find($id);
+        // $stok = Stok::where('barang_id',17)->get();
+        // dd($item);
+        return $item;
     }
 
     /**

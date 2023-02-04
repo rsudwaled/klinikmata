@@ -42,8 +42,8 @@
                                 @endif
                                 <x-adminlte-button label="Edit" class="btn-xs btnEdit" data-id="{{ $item->id }}"
                                     theme="warning" title="Edit Barang" icon="fas fa-edit" />
-                                <x-adminlte-button label="Stok" class="btn-xs btnStok" theme="primary"
-                                    title="Kartu Stok Barang" icon="fas fa-pallet" />
+                                <x-adminlte-button label="Stok" class="btn-xs btnStok" data-id="{{ $item->id }}"
+                                    theme="primary" title="Kartu Stok Barang" icon="fas fa-pallet" />
                             </td>
                             <td>{{ $item->updated_at }} ({{ $item->user->name }})</td>
                         </tr>
@@ -99,7 +99,16 @@
             <x-adminlte-button theme="secondary" icon="fas fa-arrow-left" label="Kembali" data-dismiss="modal" />
         </x-slot>
     </x-adminlte-modal>
-    <x-adminlte-modal id="modalStok" title="Kartu Barang" theme="success"  size="xl" v-centered>
+    <x-adminlte-modal id="modalStok" title="Kartu Barang" theme="success" size="xl" v-centered>
+        <dl>
+            <dt>Nama Barang</dt>
+            <dd><span id="namaBarang"></span></dd>
+        </dl>
+        @php
+            $heads = ['No', 'Tanggal', 'Masuk', 'Keluar', 'Sisa', 'Keterangan'];
+        @endphp
+        <x-adminlte-datatable id="table2" class="text-xs" :heads="$heads" hoverable bordered compressed>
+        </x-adminlte-datatable>
         <x-slot name="footerSlot">
             <x-adminlte-button theme="secondary" icon="fas fa-arrow-left" label="Kembali" data-dismiss="modal" />
         </x-slot>
@@ -143,9 +152,21 @@
             $('.btnStok').click(function() {
                 var id = $(this).data('id');
                 $.LoadingOverlay("show");
-                $.get("{{ route('barang.index') }}" + '/' + id, function(data) {
+                $.get("{{ route('stok.index') }}" + '/' + id, function(data) {
                     console.log(data);
-                    // $('#id').val(data.id);
+                    $('#namaBarang').html(data.nama);
+                    var table = $('#table2').DataTable();
+                    table.rows().remove().draw();
+                    $.each(data.kartustok, function(key, value) {
+                        table.row.add([
+                            key + 1,
+                            value.tanggal_faktur,
+                            value.stok_in,
+                            value.stok_out,
+                            value.stok_current,
+                            value.kode,
+                        ]).draw(false);
+                    })
                     // $('#kode').val(data.kode);
                     // $('#barcode').val(data.barcode);
                     // $('#nama').val(data.nama);
