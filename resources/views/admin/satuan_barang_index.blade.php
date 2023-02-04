@@ -11,7 +11,7 @@
                     $heads = ['No', 'Kode', 'Nama Satuan', 'Deskripsi', 'Status', 'Upadted at'];
                 @endphp
                 <x-adminlte-datatable id="table1" class="text-xs" :heads="$heads" hoverable bordered compressed>
-                    @foreach ($satuan as $item)
+                    @foreach ($satuans as $item)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $item->kode }}</td>

@@ -26,7 +26,7 @@
                 <x-adminlte-datatable id="table1" class="text-xs" :heads="$heads" :config="$config" hoverable bordered
                     compressed>
                     @foreach ($barangs as $item)
-                        <tr class="btnEdit" data-id="{{ $item->id }}">
+                        <tr>
                             <td>{{ $item->id }}</td>
                             <td>{{ $item->kode }}</td>
                             <td></td>
@@ -40,6 +40,10 @@
                                 @else
                                     <span class="badge badge-danger">Non-Aktif</span>
                                 @endif
+                                <x-adminlte-button label="Edit" class="btn-xs btnEdit" data-id="{{ $item->id }}"
+                                    theme="warning" title="Edit Barang" icon="fas fa-edit" />
+                                <x-adminlte-button label="Stok" class="btn-xs btnStok" theme="primary"
+                                    title="Kartu Stok Barang" icon="fas fa-pallet" />
                             </td>
                             <td>{{ $item->updated_at }} ({{ $item->user->name }})</td>
                         </tr>
@@ -85,7 +89,6 @@
                         <option value="Tetes">Tetes</option>
                         <option value="Oles">Oles</option>
                     </x-adminlte-select> --}}
-
                 </div>
             </div>
         </form>
@@ -93,6 +96,11 @@
             <x-adminlte-button class="mr-auto " id="btnStore" theme="success" icon="fas fa-save" label="Simpan" />
             <x-adminlte-button class="mr-auto" id="btnUpdate" theme="warning" icon="fas fa-edit" label="Update" />
             <x-adminlte-button id="btnDelete" theme="danger" icon="fas fa-trash-alt" label="Delete" />
+            <x-adminlte-button theme="secondary" icon="fas fa-arrow-left" label="Kembali" data-dismiss="modal" />
+        </x-slot>
+    </x-adminlte-modal>
+    <x-adminlte-modal id="modalStok" title="Kartu Barang" theme="success"  size="xl" v-centered>
+        <x-slot name="footerSlot">
             <x-adminlte-button theme="secondary" icon="fas fa-arrow-left" label="Kembali" data-dismiss="modal" />
         </x-slot>
     </x-adminlte-modal>
@@ -129,6 +137,25 @@
                     $('#btnUpdate').show();
                     $('#btnStore').hide();
                     $('#modal').modal('show');
+                })
+
+            });
+            $('.btnStok').click(function() {
+                var id = $(this).data('id');
+                $.LoadingOverlay("show");
+                $.get("{{ route('barang.index') }}" + '/' + id, function(data) {
+                    console.log(data);
+                    // $('#id').val(data.id);
+                    // $('#kode').val(data.kode);
+                    // $('#barcode').val(data.barcode);
+                    // $('#nama').val(data.nama);
+                    // $('#satuan_id').val(data.satuan_id).trigger('change');
+                    // $('#jenis').val(data.jenis).trigger('change');
+                    // if (data.status == 1) {
+                    //     $('#status').prop('checked', true).trigger('change');
+                    // }
+                    $.LoadingOverlay("hide", true);
+                    $('#modalStok').modal('show');
                 })
 
             });

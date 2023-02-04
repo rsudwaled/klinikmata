@@ -29,7 +29,9 @@
                                 <td>{{ $item->created_at }}</td>
                                 <td>{{ $item->kode }}</td>
                                 <td>{{ $item->jumlah }}</td>
-                                <td></td>
+                                <td>{{ $item->harga_beli }}</td>
+                                <td>{{ $item->harga_jual }}</td>
+                                <td>{{ $item->jumlah }}</td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
